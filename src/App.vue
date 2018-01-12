@@ -10,7 +10,7 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to the new Farmlink App'
+      msg: 'Welcome to the new Farmlink Site'
     }
   }
 }
