@@ -2,7 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import { routes } from './routes'
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 
+Vue.component('farm-header', Header)
+Vue.component('farm-footer', Footer)
 Vue.use(VueRouter);
 
 const router = new VueRouter({
