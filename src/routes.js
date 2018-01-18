@@ -16,4 +16,5 @@ export const routes = [
 	{ path:'/', component: Home, props: true },
 	{ path:'/blog/:slug', component: Post, props: true },
 	{ path:'/:slug', component: Page, props: true },
+	{ path:'/:slug/:slug', component: Page, props: true },
 ]
