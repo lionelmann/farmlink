@@ -1,8 +1,8 @@
 <template>
 <div>
-    <farm-header></farm-header>
+    
 Welcome
-  <farm-footer></farm-footer>
+ 
 </div>
 </template>
 
