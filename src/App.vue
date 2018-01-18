@@ -1,8 +1,10 @@
 <template>
     <div>
+        <farm-header></farm-header>
         <transition name="fade">
             <router-view></router-view>
         </transition>
+        <farm-footer></farm-footer>
     </div>
 </template>
 
