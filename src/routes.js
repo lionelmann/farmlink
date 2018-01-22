@@ -1,22 +1,13 @@
-/* need to import the components for the 
-route*/
-
 import Home from './views/Home.vue';
 import Post from './views/Post.vue';
 import Page from './views/Page.vue';
 import Resources from './views/Resources.vue';
-
-/* export a const names routes with will 
-hold my routes. Holding routes means it has 
-an array which has objects which represent a route.
-*/
+import Blog from './views/Blog.vue';
 
 export const routes = [
-	/*path will be appended to URL,
-	then need the component to load*/
 	{ path:'/', component: Home, props: true },
+	{ path:'/blog', component: Blog, props: true },
 	{ path:'/blog/:slug', component: Post, props: true },
 	{ path:'/:slug', component: Page, props: true },
-	//{ path:'/:slug/:title', component: Page, props: true },
-	{ path:'/resources/resource-database', component: Resources, props: true },
+	{ path:'/resources/resource-database', component: Resources, props: true }
 ]

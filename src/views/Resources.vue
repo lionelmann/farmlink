@@ -17,7 +17,6 @@ export default {
 	data() {
 		return {
 			errors: [],
-			//slug: this.$route.params.slug,
             resources: null,
             title: '',
             content: '',
