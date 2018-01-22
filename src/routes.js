@@ -4,6 +4,7 @@ route*/
 import Home from './views/Home.vue';
 import Post from './views/Post.vue';
 import Page from './views/Page.vue';
+import Resources from './views/Resources.vue';
 
 /* export a const names routes with will 
 hold my routes. Holding routes means it has 
@@ -16,5 +17,6 @@ export const routes = [
 	{ path:'/', component: Home, props: true },
 	{ path:'/blog/:slug', component: Post, props: true },
 	{ path:'/:slug', component: Page, props: true },
-	{ path:'/:slug/:title', component: Page, props: true },
+	//{ path:'/:slug/:title', component: Page, props: true },
+	{ path:'/resources/resource-database', component: Resources, props: true },
 ]

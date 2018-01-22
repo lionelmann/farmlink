@@ -29,7 +29,7 @@ export default {
             this.menuLinks = response.data.items;
 
             for(let i = 0; i < this.menuLinks.length; i++){
-                console.log(this.menuLinks[i].children)
+                //console.log(this.menuLinks[i].children)
             }
 
 

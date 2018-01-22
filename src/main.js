@@ -4,10 +4,13 @@ import VueRouter from 'vue-router'
 import { routes } from './routes'
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
+import VuePaginate from 'vue-paginate'
 
 Vue.component('farm-header', Header)
 Vue.component('farm-footer', Footer)
+
 Vue.use(VueRouter);
+Vue.use(VuePaginate);
 
 const router = new VueRouter({
 	routes,
