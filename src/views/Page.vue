@@ -2,8 +2,10 @@
     <div v-if="page != null">
         <img :src="banner">
         <h1 v-html="title"></h1>
+        <a>test</a>
         <div v-html="content"></div>
     </div>
+
 </template>
 
 <script>
@@ -40,5 +42,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 
 </style>

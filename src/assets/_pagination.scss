@@ -1,0 +1,38 @@
+.paginate-container {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.paginate-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    justify-self: center;
+    margin: 20px 0 10px 0;
+}
+
+.paginate-links li {
+    float: left;
+}
+
+.paginate-links li a {
+    color: black;
+    float: left;
+    padding: 6px 14px;
+    text-decoration: none;
+}
+
+.paginate-links li.number.active {
+    color: white;
+}
+
+.paginate-links .active {
+    background-color: #91bbfc;
+    color: white;
+    border-radius: 5px;
+}
+
+.paginate-links a:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+}

@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500,700');
+
+$sans-serif: 'Rubik', sans-serif;
+$light: 300;
+
+html {
+    font-family: $sans-serif;
+    font-size: 16px;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.5em;
+}
+
+.light {
+    font-weight: $light;
+}
+
+ul, ol {
+    li {
+        line-height: 1.5;
+        margin-bottom: 1em;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 5.063rem;
+    font-weight: 500;
+}
+
+h2 {
+    font-size: 4.125rem;
+}
+
+h3 {
+    font-size: 3.375rem;
+    font-weight: 400;
+}
+
+h4 {
+    font-size: 2.25rem;
+    font-weight: 400;
+}
+
+h5 {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+h6 {
+    font-size: 1.222rem;
+    font-weight: 400;
+}
+
+small {
+    font-size: 0.815rem;
+}
+
+time {
+    font-size: 0.815rem;
+    opacity: 0.5;
+}
+
+.wf-loading {
+    visibility: hidden;
+}
+
+.wf-active, .wf-inactive {
+    visibility: visible;
+}
