@@ -17,7 +17,9 @@ export default {
 <style lang="scss">
 
 @import './assets/styles.scss';
-
+* {
+    box-sizing: border-box;
+}
 
 .fade-enter-active, .fade-leave-active {
     transition: opacity .2s
@@ -29,9 +31,5 @@ export default {
 body {
     background-color: rgba(230,230,230,0.4);
 }
-
-
-
-
 
 </style>

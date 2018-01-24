@@ -12,6 +12,13 @@ Vue.component('farm-footer', Footer)
 Vue.use(VueRouter);
 Vue.use(VuePaginate);
 
+// Global Filters
+Vue.filter('readMore', function(value, length, suffix) {
+    if (value.length < length)
+    return value;	
+    return value.substring(0, length) + suffix;
+});
+
 const router = new VueRouter({
 	routes,
   mode: 'history',
