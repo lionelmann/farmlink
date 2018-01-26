@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        <farm-header></farm-header>
+    <div>
+        <farm-navbar></farm-navbar>
         <transition name="fade">
             <router-view :key="$route.fullPath"></router-view>
         </transition>
@@ -17,8 +17,17 @@ export default {
 <style lang="scss">
 
 @import './assets/styles.scss';
+
+body {
+    margin: 0;
+}
+
 * {
     box-sizing: border-box;
+}
+
+img {
+    width: 100%;
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -31,5 +40,19 @@ export default {
 body {
     background-color: rgba(230,230,230,0.4);
 }
+
+.post {
+    display: grid;
+    max-width: 800px;
+    margin: 50px auto;
+    grid-gap: 20px;
+    grid-template-columns: 5fr 12fr 5fr;
+}
+
+ .post > *  {
+    grid-column: 2 / -2;
+}
+
+
 
 </style>

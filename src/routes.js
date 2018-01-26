@@ -5,8 +5,6 @@ import Resources from './views/Resources.vue';
 
 export const routes = [
 	{ path:'/', component: Home, props: true },
-	
-	
-	//{ path:'/:slug', component: Page, props: true },
-	{ path:'/resources', component: Resources, props: true }
+	{ path:'/resources', component: Resources, props: true },
+	{ path:'/:slug', component: Page, props: true },
 ]

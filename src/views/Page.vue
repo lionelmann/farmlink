@@ -1,11 +1,12 @@
 <template>
     <div v-if="page != null">
-        <img :src="banner">
-        <h1 v-html="title"></h1>
-        <a>test</a>
-        <div v-html="content"></div>
+        <div class="top">
+            <div class="hero" :style="{ 'background-image': 'url(' + bannerSrc + ')' }">
+                <h1 v-html="title"></h1>
+            </div>
+        </div>
+        <article class="post" v-html="content"></article>
     </div>
-
 </template>
 
 <script>
@@ -18,7 +19,8 @@ export default {
             page: null,
             title: '',
             content: '',
-            banner: ''
+            bannerSrc: ''
+            
 		}
     },
     created() {
@@ -28,7 +30,7 @@ export default {
             this.page       = response.data[0]
             this.title      = this.page.title.rendered
             this.content    = this.page.content.rendered
-            this.banner     = this.page._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url
+            this.bannerSrc     = this.page._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url
 
             //console.log(this.page)
 		})
@@ -42,6 +44,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.top {
+    display:grid;
+    grid-template-areas: 
+    "hero"
+}
+
+.hero {
+    grid-area: hero;
+    display: grid;
+    min-height: 450px;
+    background-size: cover;
+    background-position: 50% 50%;
+    justify-content: center;
+    align-content: center;
+    color: white;
+}
+
+
+
+
+
+
 
 
 </style>

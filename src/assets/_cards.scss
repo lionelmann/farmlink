@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
     grid-gap: 30px;
+    padding-top: 50px;
     img {
         display: block;
         width: 100%;
