@@ -5,11 +5,15 @@
 		</div>
 		<nav>
 			<ul>
-				<li v-for="link in menuLinks" :key="link.title">
-					<router-link :to="`/${link.object_slug}`">
-				 		{{ link.title }}
+				<li v-for="parent in menuLinks">
+					<router-link :to="`/${parent.object_slug}`">
+				 		{{ parent.title }}
 				 	</router-link>
+                    <li v-for="child in parent">
+                        {{ child.childred.title }}
+                    </li>
 				</li>
+               
 			</ul>
 		</nav>
 	</div>
@@ -23,12 +27,13 @@ export default {
             menuLinks: [] 
         }
     },
+    
     beforeCreate() {
         axios.get('http://dev.hypenotic.com/flink/wp-json/wp-api-menus/v2/menus/2')
        .then(response => {
             this.menuLinks = response.data.items;
 
-           // const nav = [];
+            const nav = [];
             console.log(this.menuLinks)
             //console.log(nav)
 
@@ -36,12 +41,16 @@ export default {
                 let parent = this.menuLinks[i].title
                 let parentslug = this.menuLinks[i].object_slug
 
+                nav.push([{title: parent}, {slug: parentslug}])
+
                 console.log(parent + '/' + parentslug)
                
                 if(typeof(this.menuLinks[i].children) != 'undefined') {
                     for(let j = 0; j < this.menuLinks[i].children.length; j++) {
                         let child = this.menuLinks[i].children[j].title
                         let childslug = this.menuLinks[i].children[j].object_slug
+
+                        nav.push([{title: child}, {slug: childslug}])
 
                         console.log("--" + child + '/' + childslug)
                     }
