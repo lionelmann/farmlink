@@ -5,15 +5,18 @@
 		</div>
 		<nav>
 			<ul>
-				<li v-for="parent in menuLinks">
+				<li v-for="parent in menuLinks" :key="parent.title">
 					<router-link :to="`/${parent.object_slug}`">
 				 		{{ parent.title }}
 				 	</router-link>
-                    <li v-for="child in parent">
-                        {{ child.childred.title }}
-                    </li>
+                    <ul>
+                        <li v-for="child in parent.children" :key="child.title">
+                           
+                            {{ child.title }}
+                            
+                        </li>
+                    </ul>
 				</li>
-               
 			</ul>
 		</nav>
 	</div>
@@ -107,6 +110,14 @@ nav ul {
             &:hover {
                 background: black;
             }
+        }
+        ul li {
+            color: white;
+            display: block;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 15px;
+            font-size: .815rem;
         }
     }
 }
