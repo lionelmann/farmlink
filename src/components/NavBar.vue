@@ -11,8 +11,9 @@
 				 	</router-link>
                     <ul>
                         <li v-for="child in parent.children" :key="child.title">
-                           
-                            {{ child.title }}
+                          <router-link :to="`/${child.object_slug}`">
+				 		{{ child.title }}
+				 	</router-link>
                             
                         </li>
                     </ul>
@@ -35,30 +36,6 @@ export default {
         axios.get('http://dev.hypenotic.com/flink/wp-json/wp-api-menus/v2/menus/2')
        .then(response => {
             this.menuLinks = response.data.items;
-
-            const nav = [];
-            console.log(this.menuLinks)
-            //console.log(nav)
-
-            for(let i = 0; i < this.menuLinks.length; i++){
-                let parent = this.menuLinks[i].title
-                let parentslug = this.menuLinks[i].object_slug
-
-                nav.push([{title: parent}, {slug: parentslug}])
-
-                console.log(parent + '/' + parentslug)
-               
-                if(typeof(this.menuLinks[i].children) != 'undefined') {
-                    for(let j = 0; j < this.menuLinks[i].children.length; j++) {
-                        let child = this.menuLinks[i].children[j].title
-                        let childslug = this.menuLinks[i].children[j].object_slug
-
-                        nav.push([{title: child}, {slug: childslug}])
-
-                        console.log("--" + child + '/' + childslug)
-                    }
-                }
-            }
         })
         .catch(function (error) {
             console.log(error)
@@ -111,13 +88,16 @@ nav ul {
                 background: black;
             }
         }
-        ul li {
+        ul li a {
             color: white;
             display: block;
             text-transform: uppercase;
             text-align: center;
             padding: 15px;
             font-size: .815rem;
+            &:hover {
+                background: black;
+            }
         }
     }
 }
