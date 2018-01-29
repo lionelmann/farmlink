@@ -5,7 +5,7 @@
 		</div>
 		<nav>
 			<ul>
-				<li v-for="link in menuLinks">
+				<li v-for="link in menuLinks" :key="link.title">
 					<router-link :to="`/${link.object_slug}`">
 				 		{{ link.title }}
 				 	</router-link>
@@ -28,12 +28,25 @@ export default {
        .then(response => {
             this.menuLinks = response.data.items;
 
+           // const nav = [];
+            console.log(this.menuLinks)
+            //console.log(nav)
+
             for(let i = 0; i < this.menuLinks.length; i++){
-                //console.log(this.menuLinks[i].children)
+                let parent = this.menuLinks[i].title
+                let parentslug = this.menuLinks[i].object_slug
+
+                console.log(parent + '/' + parentslug)
+               
+                if(typeof(this.menuLinks[i].children) != 'undefined') {
+                    for(let j = 0; j < this.menuLinks[i].children.length; j++) {
+                        let child = this.menuLinks[i].children[j].title
+                        let childslug = this.menuLinks[i].children[j].object_slug
+
+                        console.log("--" + child + '/' + childslug)
+                    }
+                }
             }
-
-
-            //console.log(response.data.items);
         })
         .catch(function (error) {
             console.log(error)
