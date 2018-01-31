@@ -43,7 +43,7 @@ body {
 
 .post {
     display: grid;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 50px auto;
     grid-gap: 20px;
     grid-template-columns: 5fr 12fr 5fr;

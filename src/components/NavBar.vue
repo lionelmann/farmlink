@@ -6,18 +6,15 @@
 		<nav>
 			<ul>
 				<li v-for="parent in menuLinks" :key="parent.title">
-					<router-link :to="`/${parent.object_slug}`">
-				 		{{ parent.title }}
-				 	</router-link>
+					<router-link :to="`/${parent.object_slug}`">{{ parent.title }}</router-link>
                     <ul>
                         <li v-for="child in parent.children" :key="child.title">
-                          <router-link :to="`/${child.object_slug}`">
-				 		{{ child.title }}
-				 	</router-link>
-                            
+                            <router-link :to="`/${child.object_slug}`">{{ child.title }}</router-link>
                         </li>
                     </ul>
 				</li>
+                <li><a href="#">Get Started</a></li>
+                <li><a href="#">Sign In</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -46,13 +43,13 @@ export default {
 
 <style lang="scss">
 
-.header {
-    background-color: rgba(0,0,0,0.4);
+.header{
+    background-color: #517057;
     display:grid;
-    grid-template-areas: 
-    "logo menu";
+    grid-template-columns: 7fr 12fr;
+    grid-template-areas:  "logo nav";
     grid-gap: 20px;
-    min-height: 40px;
+    max-height: 50px;
     position: fixed;
     width: 100%;
     z-index: 1500;
@@ -61,10 +58,11 @@ export default {
 .logo {
     display:grid;
     grid-area: logo;
+    margin: 1em;
 }
 
 nav {
-    grid-area: menu;   
+    grid-area: nav;  
 }
 
 nav ul {
@@ -73,8 +71,10 @@ nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    white-space: nowrap;
     li {
         margin: 0;
+        position: relative;
         a {
             background: ccc;
             color: white;
@@ -90,16 +90,38 @@ nav ul {
         }
         ul li a {
             color: white;
-            display: block;
-            text-transform: uppercase;
-            text-align: center;
-            padding: 15px;
-            font-size: .815rem;
+            background: black;
+            white-space: nowrap;
             &:hover {
                 background: black;
             }
         }
     }
+}
+
+nav ul li ul {
+    display:grid;
+    grid-template-columns: 1fr;
+    position: absolute;
+    left:-9999px;
+    margin: 0;
+    width: 100%;
+    li {
+        border-top: 1px solid #ccc;
+        a:hover {
+            background-color: black;
+        }
+    }
+}
+
+nav ul li:hover ul{ 
+    left: 0;
+    
+}
+
+nav ul li:hover a {
+    background-color: #333;
+    color: #fff;
 }
 
 </style>

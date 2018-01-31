@@ -1,4 +1,12 @@
 <template>
+
+<div>
+    <div class="filter">
+        <button>Webinars</button>
+        <button>Articles</button>
+        <button>Publications</button>
+        <button>More Filters</button>
+    </div>
     <div v-if="posts != null" >
         <paginate name="data" :list="posts" :per="12" tag="div">
             <div class="cards">
@@ -12,6 +20,7 @@
             <paginate-links for="data" :limit="5" :show-step-links="true" :async="true" @change="onPageChange"></paginate-links>
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -54,4 +63,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.filter {
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    position: fixed; 
+    grid-gap: 20px;
+    top: 50px;
+    height: 60px; 
+    background-color: white; 
+    width: 100%;
+    align-content: center;
+    padding: 20px;
+    
+}
+
+
+.filter button {
+    border: 1px solid #ccc;
+    max-height: 35px;
+    color: #484848;
+    padding: 6px;
+    font-size: 15px;
+    border-radius: 4px;
+    
+    cursor: pointer;
+    &:hover {
+        background: #F2F2F2 !important;
+        border-color: #F2F2F2 !important;
+    }
+
+}
 </style>
