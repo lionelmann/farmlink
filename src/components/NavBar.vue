@@ -27,7 +27,7 @@
 		</nav>
         <div class="cta">
             <ul>
-                <li><a href="#">Get Started</a></li>
+                <li><a class="btn-small" href="#">Get Started</a></li>
                 <li><a href="#">Sign In</a></li>
             </ul>
         </div>
@@ -88,29 +88,25 @@ nav {
     grid-area: nav;  
 }
 
-nav ul, .cta ul {
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+nav ul {
+    //display:grid;
+    //grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     list-style: none;
     margin: 0;
     padding: 0;
     white-space: nowrap;
-    //height: 60px;
-    align-content: center;
-    justify-content: center;
+    //align-content: center;
+    //justify-content: center;
     li {
-        margin: 0;
+        float: left;
+        margin:0;
         position: relative;
         a {
-            font-weight: 400;
             color: black;
             display: block;
             font-size: .9rem;
-            //text-transform: uppercase;
-            text-align: center;
             text-decoration: none;
-            //height: 60px;
-            padding: 20px 0 19px 0;
+            padding: 20px 20px 19px 20px;
             white-space: nowrap;
             &:hover {
                 background: rgba(230,230,230,0.4)
@@ -119,7 +115,30 @@ nav ul, .cta ul {
     }
 }
 
+.cta ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: right;
+    li {
+        float: left;
+        margin: 10px 20px 0 0;
+        a {
+            color: black;
+            display: block;
+            font-size: .9rem;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .btn-small {
+            background: #8bb6f9;
+            color: white;
+        }
+    }
+}
 
+// SUBNAV
 nav ul li ul {
     display:grid;
     grid-template-columns: 1fr;
