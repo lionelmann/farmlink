@@ -12,7 +12,7 @@
             <div class="cards">
                 <div class="card" v-for="posts in paginated('data')" :key="posts.id">
                     <h6 v-html="posts.title.rendered"></h6>
-                    <div class="light" v-html="$options.filters.readMore(posts.content.rendered, 600, '...')"></div>
+                    <div class="light" v-html="$options.filters.readMore(posts.content.rendered, 700, '...')"></div>
                 </div>
             </div>
         </paginate>
@@ -66,31 +66,30 @@ export default {
 
 .filter {
     display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     position: fixed; 
     grid-gap: 20px;
-    top: 50px;
+    top: 60px;
     height: 60px; 
     background-color: white; 
     width: 100%;
     align-content: center;
     padding: 20px;
-    
+    border-bottom: 1px solid  rgba(230,230,230,0.4);
+    border-top: 1px solid  rgba(230,230,230,0.4)
 }
 
-
 .filter button {
-    border: 1px solid #ccc;
+    border: 1px solid rgba(230,230,230,1);
     max-height: 35px;
     color: #484848;
     padding: 6px;
     font-size: 15px;
     border-radius: 4px;
-    
     cursor: pointer;
     &:hover {
-        background: #F2F2F2 !important;
-        border-color: #F2F2F2 !important;
+        background: rgba(230,230,230,1);
+        border-color: rgba(230,230,230,1);
     }
 
 }

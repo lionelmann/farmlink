@@ -1,10 +1,16 @@
 <template>
 	<div class="header">
 		<div class="logo">
-			<router-link to="/">Farmlink</router-link>
+			<router-link to="/" class="navbar-brand"><span class="farmlinklogo"></span></router-link>
 		</div>
 		<nav>
 			<ul>
+                <li><a href="/about">About</a></li>
+                <li><a href="/resources">Resources</a></li>
+                <li><a href="">Farm Seekers</a></li>
+                <li><a href="">Farm Opportunities</a></li>
+                <li><a href="/field-partners">Field Partners</a></li>
+                <!--
 				<li v-for="parent in menuLinks" :key="parent.title">
 					<router-link :to="`/${parent.object_slug}`">{{ parent.title }}</router-link>
                     <ul>
@@ -15,8 +21,16 @@
 				</li>
                 <li><a href="#">Get Started</a></li>
                 <li><a href="#">Sign In</a></li>
+                -->
 			</ul>
+            
 		</nav>
+        <div class="cta">
+            <ul>
+                <li><a href="#">Get Started</a></li>
+                <li><a href="#">Sign In</a></li>
+            </ul>
+        </div>
 	</div>
 </template>
 
@@ -44,12 +58,12 @@ export default {
 <style lang="scss">
 
 .header{
-    background-color: #517057;
+    background-color: white;
     display:grid;
-    grid-template-columns: 7fr 12fr;
-    grid-template-areas:  "logo nav";
+    grid-template-columns: 1fr 10fr 6fr;
+    grid-template-areas:  "logo nav cta";
     grid-gap: 20px;
-    max-height: 50px;
+    height: 60px;
     position: fixed;
     width: 100%;
     z-index: 1500;
@@ -58,46 +72,53 @@ export default {
 .logo {
     display:grid;
     grid-area: logo;
-    margin: 1em;
+}
+
+.navbar-brand {
+    display: inline-block;
+    margin-left: 1em;
+    margin-top: 1px;
+    height: 58px;
+    width: 58px;
+    background: url(https://farmlink.net/custom/themes/farmlink/dist/images/farmlinklogo_greenwhite.png) no-repeat;
+    background-size: 100% auto;
 }
 
 nav {
     grid-area: nav;  
 }
 
-nav ul {
+nav ul, .cta ul {
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     list-style: none;
     margin: 0;
     padding: 0;
     white-space: nowrap;
+    //height: 60px;
+    align-content: center;
+    justify-content: center;
     li {
         margin: 0;
         position: relative;
         a {
-            background: ccc;
-            color: white;
+            font-weight: 400;
+            color: black;
             display: block;
-            font-size: .815rem;
-            text-transform: uppercase;
+            font-size: .9rem;
+            //text-transform: uppercase;
             text-align: center;
             text-decoration: none;
-            padding: 15px;
-            &:hover {
-                background: black;
-            }
-        }
-        ul li a {
-            color: white;
-            background: black;
+            //height: 60px;
+            padding: 20px 0 19px 0;
             white-space: nowrap;
             &:hover {
-                background: black;
+                background: rgba(230,230,230,0.4)
             }
         }
     }
 }
+
 
 nav ul li ul {
     display:grid;
@@ -116,12 +137,11 @@ nav ul li ul {
 
 nav ul li:hover ul{ 
     left: 0;
-    
 }
 
 nav ul li:hover a {
-    background-color: #333;
-    color: #fff;
+    background-color: rgba(230,230,230,0.4);
+    //color: #fff;
 }
 
 </style>

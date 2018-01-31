@@ -1,8 +1,10 @@
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-    grid-gap: 30px;
-    padding-top: 120px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+    padding-top: 140px;
+    padding-bottom: 30px;
+    margin: auto 20px;
     img {
         display: block;
         width: 100%;
