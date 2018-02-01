@@ -46,34 +46,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.filter {
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    position: fixed; 
-    grid-gap: 20px;
-    top: 60px;
-    height: 60px; 
-    background-color: white; 
-    width: 100%;
-    align-content: center;
-    padding: 20px;
-    border-bottom: 1px solid  rgba(230,230,230,0.4);
-    border-top: 1px solid  rgba(230,230,230,0.4)
-}
-
-.filter button {
-    border: 1px solid rgba(230,230,230,1);
-    max-height: 35px;
-    color: #484848;
-    padding: 6px;
-    font-size: 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    &:hover {
-        background: rgba(230,230,230,1);
-        border-color: rgba(230,230,230,1);
-    }
-
-}
 </style>
