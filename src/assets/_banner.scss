@@ -1,0 +1,14 @@
+.banner-container {
+    display:grid;
+}
+
+.banner {
+    color: white;
+    background-size: cover;
+    background-position: 50% 50%;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    margin-top: 60px;
+    height: 400px;
+}

@@ -20,6 +20,7 @@ export default {
 
 body {
     margin: 0;
+    background-color: rgba(230,230,230,0.4);
 }
 
 * {
@@ -35,10 +36,6 @@ img {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0
-}
-
-body {
-    background-color: rgba(230,230,230,0.4);
 }
 
 .post {

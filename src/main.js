@@ -5,6 +5,7 @@ import { routes } from './routes'
 import NavBar from './components/NavBar.vue'
 import Footer from './components/Footer.vue'
 import VuePaginate from 'vue-paginate'
+import { store } from './store/store.js'
 
 Vue.component('farm-navbar', NavBar)
 Vue.component('farm-footer', Footer)
@@ -30,5 +31,6 @@ const router = new VueRouter({
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 })
