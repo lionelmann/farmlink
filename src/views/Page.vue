@@ -1,11 +1,11 @@
 <template>
     <div v-if="page != null">
         <div class="banner-container">
-            <div class="banner" :style="{ 'background-image': 'url(' + banner + ')' }">
-                <h1 v-html="title"></h1>
+            <div class="banner" :style="{ 'background-image': 'url(' + pageBanner + ')' }">
+                <h1 v-html="pageTitle"></h1>
             </div>
         </div>
-        <article class="post" v-html="content"></article>
+        <article class="post" v-html="pageContent"></article>
     </div>
 </template>
 
@@ -19,9 +19,9 @@
         },
         computed: {
             ...mapGetters([
-                'title',
-                'content',
-                'banner',
+                'pageTitle',
+                'pageContent',
+                'pageBanner',
                 'page'
             ])
         },
