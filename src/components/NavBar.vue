@@ -9,7 +9,7 @@
                 <li><a href="/resources">Resources</a></li>
                 <li><a href="">Farm Seekers</a></li>
                 <li><a href="/farm-opportunities">Farm Opportunities</a></li>
-                <li><a href="/field-partners">Field Partners</a></li>
+                <li><a href="/field-partners">Featured Regions</a></li>
                 <!--
 				<li v-for="parent in menuLinks" :key="parent.title">
 					<router-link :to="`/${parent.object_slug}`">{{ parent.title }}</router-link>
@@ -122,18 +122,21 @@ nav ul {
     float: right;
     li {
         float: left;
-        margin: 10px 20px 0 0;
+        margin: 5px 20px 0 0;
+        
         a {
             color: black;
             display: block;
             font-size: .9rem;
             text-decoration: none;
-            padding: 10px;
+            padding: 14px 24px;
             border-radius: 4px;
+            font-weight: 400px;
         }
         .btn-small {
             background: #8bb6f9;
             color: white;
+            font-weight: 400;
         }
     }
 }
