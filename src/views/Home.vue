@@ -1,16 +1,17 @@
 <template>
 <div class="container">
     <div class="banner-container">
-        <div class="banner-text" style="width: 75%;">
-            <h2 style="color: #517058; font-weight: 500;">Farmlink.net</h2>
-            <h3>Connecting <span style="min-width: 110px; display:inline-block;"> <ICountUp
+        <div class="banner-text" style="width: 75%; text-shadow: 0 0 1px #333; background:rgba(0,0,0,0.4); padding: 20px;">
+            <h2 style="color: white; font-weight: 500;">Farmlink.net</h2>
+             <h3>Connecting <span style="min-width: 110px; display:inline-block;"> <ICountUp
             :startVal="startVal"
             :endVal="endVal"
             :decimals="decimals"
             :duration="duration"
             :options="options"
             @ready="onReady"
-            /> </span>Farmer Owners and Farm Seekers everyday.</h3>
+            /> </span>Farmers and Farm Seekers everyday.</h3>
+            <h5>( psst...your tracker is waiting )</h5>
         </div>
     </div>
 
@@ -280,14 +281,15 @@
 }
 
 .banner-container {
-    background-image: url('/assets/farmlink_background.png');
-    color: black;
+    background-image: url('/src/assets/tracker.jpg');
+    color: white;
     display: grid;
     align-content: center;
     justify-content: left;
     padding-left: 15%;
     margin-top: 0px;
-    height: 540px;
+    margin-bottom: 60px;
+    height: 85vh;
 }
 
 .grid-wrapper {
