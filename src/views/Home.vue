@@ -11,7 +11,8 @@
             :options="options"
             @ready="onReady"
             /> </span>Farmers and Farm Seekers everyday.</h3>
-            <h5>( psst...your tracker is waiting )</h5>
+            <h5>( psst...your tractor is waiting )</h5>
+            
         </div>
     </div>
 
