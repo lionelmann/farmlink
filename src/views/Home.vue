@@ -1,7 +1,7 @@
 <template>
 <div class="container">
     <div class="banner-container">
-        <div class="banner-text" style="width: 75%; text-shadow: 0 0 1px #333; background:rgba(0,0,0,0.4); padding: 20px;">
+        <div class="banner-text" style="width: 75%; text-shadow: 0 0 1px #333;">
             <h2 style="color: white; font-weight: 500;">Farmlink.net</h2>
              <h3>Connecting <span style="min-width: 110px; display:inline-block;"> <ICountUp
             :startVal="startVal"
@@ -282,7 +282,10 @@
 }
 
 .banner-container {
-    background-image: url('/src/assets/tracker.jpg');
+    background: linear-gradient(
+  rgba(0, 0, 0, 0.2), 
+  rgba(0, 0, 0, 0.2)
+  ), url('/src/assets/tracker.jpg');
     color: white;
     display: grid;
     align-content: center;
@@ -294,27 +297,21 @@
 }
 
 .grid-wrapper {
-    margin: auto 100px;
+    margin: auto 30px;
 }
 
 .grid-container {
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  grid-gap: 30px;
-  margin-bottom: 40px;
-  a {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-gap: 30px;
+    margin-bottom: 40px;
+    a {
       text-decoration: none;
       color: black;
-      :hover {
-          background: rgba(238, 233, 233, 0.4);
-          border-radius: 4px;
-      }
-  }
+      background-color: none;
+    }
 }
 
-a .grid-items li {
-    text-decoration: none;
-}
 
 .grid-items {
   img {
@@ -333,15 +330,10 @@ a .grid-items li {
         margin: 0;
         padding: 0;
         font-weight: 200;
-        a:hover {
-        background: none;
-    }
         li {
             margin-bottom: 5px;
         }
     }
-    
-
 }
 
 </style>
