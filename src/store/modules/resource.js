@@ -13,6 +13,13 @@ const getters = {
 const mutations = {
     getResource: (state, resource) => {
         state.resource = resource;  
+    },
+    removeType: (state) => {
+        for (let i = state[resource].length - 1; i >= 0; --i) {
+            if (state[resource][i].type == "resource") {
+                state[resource].splice(i,1);
+            }
+        }
     }
 }
 

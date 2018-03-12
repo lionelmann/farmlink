@@ -7,7 +7,7 @@
 			<ul>
                 <li><a href="/about">About</a></li>
                 <li><a href="/resources">Resources</a></li>
-                <li><a href="">Farm Seekers</a></li>
+                <li><a href="/farm-seekers">Farm Seekers</a></li>
                 <li><a href="/farm-opportunities">Farm Opportunities</a></li>
                 <li><a href="/field-partners">Featured Regions</a></li>
                 <!--
