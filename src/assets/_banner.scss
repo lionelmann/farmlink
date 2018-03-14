@@ -1,5 +1,14 @@
 .banner-container {
-    display:grid;
+    display: grid;
+    align-content: center;
+    justify-content: left;
+    padding-left: 10%;
+    margin-top: 0px;
+    margin-bottom: 60px;
+    height: 90vh;
+    background: url('/src/assets/images/home_banner-01.png') no-repeat;
+    background-position: 100% 100%;
+    background-size: contain;
 }
 
 .banner {
@@ -12,3 +21,4 @@
     margin-top: 60px;
     height: 400px;
 }
+

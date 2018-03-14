@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
 
-$sans-serif: 'Rubik', sans-serif;
+$sans-serif: 'Roboto', sans-serif;
+$serif: 'Roboto Slab', serif;
 $light: 300;
 
 html {
@@ -12,6 +13,11 @@ p {
     font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 1.5em;
+}
+
+.grid-items p {
+    font-family: $serif;
+    font-weight: 100;
 }
 
 .light {
@@ -32,32 +38,40 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 5.063rem;
-    font-weight: 500;
+    font-size: 4.125rem;
+    &.headline {
+      color: rgba(74,74,74,1);
+    }
 }
 
 h2 {
-    font-size: 4.125rem;
+    font-size: 3.375rem;
 }
 
 h3 {
-    font-size: 3.375rem;
-    font-weight: 400;
+    font-size: 2.25rem;
+    &.subhead {
+        color: rgba(74,74,74,1);
+        font-family: $serif;
+        font-weight: 300;
+    }
 }
 
 h4 {
-    font-size: 2.25rem;
-    font-weight: 400;
+    font-size: 1.5rem;
 }
 
 h5 {
-    font-size: 1.5rem;
-    font-weight: 400;
+    font-size: 1.222rem;
 }
 
 h6 {
-    font-size: 1.222rem;
-    font-weight: 400;
+    font-size: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: rgba(73, 140, 7, 1);
 }
 
 small {

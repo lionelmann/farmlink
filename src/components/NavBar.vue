@@ -9,7 +9,7 @@
                 <li><a href="/resources">Resources</a></li>
                 <li><a href="/farm-seekers">Farm Seekers</a></li>
                 <li><a href="/farm-opportunities">Farm Opportunities</a></li>
-                <li><a href="/field-partners">Featured Regions</a></li>
+                <li><a href="/field-partners">Regions</a></li>
                 <!--
 				<li v-for="parent in menuLinks" :key="parent.title">
 					<router-link :to="`/${parent.object_slug}`">{{ parent.title }}</router-link>
@@ -27,8 +27,9 @@
 		</nav>
         <div class="cta">
             <ul>
-                <li><a class="btn-small" href="#">Get Started</a></li>
-                <li><a href="#">Sign In</a></li>
+                <li><a href="#">Log In</a></li>
+                <li><a class="btn btn__cta " href="#">Become a member</a></li>
+                
             </ul>
         </div>
 	</div>
@@ -122,22 +123,7 @@ nav ul {
     float: right;
     li {
         float: left;
-        margin: 5px 20px 0 0;
-        
-        a {
-            color: black;
-            display: block;
-            font-size: .9rem;
-            text-decoration: none;
-            padding: 14px 24px;
-            border-radius: 4px;
-            font-weight: 400px;
-        }
-        .btn-small {
-            background: #8bb6f9;
-            color: white;
-            font-weight: 400;
-        }
+        margin: 5px 20px 0 0; 
     }
 }
 

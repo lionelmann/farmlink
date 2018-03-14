@@ -1,0 +1,26 @@
+/* This contains the 3 main button types and styles
+
+1. btn (base style)
+2. btn__cta (cta)
+3. btn__ghost (card button)
+
+*/
+
+.btn {
+    border-radius: 4px;
+    padding: 1rem;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 0.815rem;
+}
+
+.btn__cta {
+    background: rgba(245,142,27, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+.btn__ghost {
+    border: 1px solid rgba(245,142,27, 1);
+    color: rgba(245,142,27, 1);
+    width: 100%;
+}
