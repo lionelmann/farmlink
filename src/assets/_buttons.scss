@@ -12,6 +12,7 @@
     display: inline-block;
     text-decoration: none;
     font-size: 0.815rem;
+    text-align: center;
 }
 
 .btn__cta {
@@ -20,7 +21,7 @@
 }
 
 .btn__ghost {
-    border: 1px solid rgba(245,142,27, 1);
+    border: 2px solid rgba(245,142,27, 1);
     color: rgba(245,142,27, 1);
     width: 100%;
 }

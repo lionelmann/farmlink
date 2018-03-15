@@ -18,24 +18,24 @@
         </div>
     </div>
 
-    <div class="grid-wrapper">
-        <h5>Recent Farms <a href="#"><small> See All Farms > </small></a></h5>
-        <div class="grid-container">
-            <div class="grid-items">
-                <img src="https://source.unsplash.com/1600x900/?farm">
-                <div class="grid-card-content">
-                    <h6>Hot So Hollow Farm</h6>
-                    <ul>
-                        <li>Mentoring, Internship</li>
-                        <li>Manitoba</li>
-                        <li>2-5 Acres</li>
-                    </ul>
-                    <a href="#" class="btn btn__ghost">View partnership opportunity</a>
+    <!-- LISTINGS -->
+    <div v-if="listings != null" >
+        <div class="grid-wrapper">
+            <h5>Recent Farms <a href="#"><small> See All Farms > </small></a></h5>
+            <div class="grid-container">
+                <div class="grid-items card-1" v-for="listing in filteredListings">
+                    <img src="https://source.unsplash.com/1600x900/?farm">
+                    <div class="grid-card-content">
+                        <p v-html="listing.meta_box._address_province"></p>
+                        <h6 v-html="listing.title.rendered"></h6>
+                        <a href="#" class="btn btn__ghost">View partnership opportunity</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- SEEKERS -->
     <div v-if="seekers != null" >
         <div class="grid-wrapper">
             <h5>Recent Farm Seekers <a href="#"><small> See All Farm Seekers ></small></a></h5>
@@ -107,14 +107,19 @@ export default {
     },
     computed: {
         ...mapGetters([
-        'seekers'
+        'seekers',
+        'listings'
         ]),    
         filteredSeekers: function () {
             return this.seekers.slice(0, 3)
+        },
+        filteredListings: function () {
+            return this.listings.slice(0, 3)
         }
     },
     created() {
         this.$store.dispatch('getSeekers');
+        this.$store.dispatch('getListings');
     }
 };
 </script>

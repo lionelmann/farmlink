@@ -1,3 +1,11 @@
+/* This contains the 4 main card types and styles
+
+1. card (base style)
+2. card__seeker
+3. card__listings
+4. card__resources
+*/
+
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
