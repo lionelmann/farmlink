@@ -1,29 +1,67 @@
-/* This contains the 4 main card types and styles
+/* This contains the 5 main card types and styles
 
-1. card (base style)
-2. card__seeker
-3. card__listings
-4. card__resources
+1. cards (cards row base style)
+2. card (individual card base style)
+3. card__seeker (card for seekers)
+4. card__full (card for listings and regions)
+5. card__resource (card for resources)
+
 */
 
 .cards {
-    display: grid;
+    display:grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 20px;
-    padding-top: 140px;
-    padding-bottom: 30px;
-    margin: auto 20px;
-    img {
-        display: block;
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-    }
-} 
+    grid-gap: 30px;  
+}
 
 .card {
     background-color: white;
     border-radius: 4px;
-    padding: 30px;
-    
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.20);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    &:hover {
+        box-shadow: 0 10px 24px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.17);
+    }
+}
+
+.card__full {
+    img {
+        border-radius: 4px 4px 0 0;
+        object-fit: cover;
+        object-position: 100 0;
+        height: 100px;
+    }
+    .card-content {
+        min-height: 190px;
+        position: relative;
+        text-align: center;
+        margin: 15px;
+        .btn {
+            position: absolute;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        p {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.card__seeker {
+    img {
+        margin: 10px 20px 10px 10px;
+        border-radius: 4px;
+        height: 96px;
+        width: 96px;
+        object-fit: cover;
+        object-position: 0 0;
+        float: left;
+    }
+    .card-content {
+       margin: 15px;
+    }
 }

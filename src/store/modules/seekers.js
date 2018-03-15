@@ -16,7 +16,7 @@ const mutations = {
     },
     /*removeType: (state) => {
         for (let i = state[seekers].length - 1; i >= 0; --i) {
-            if (state[seekers][i].type == "seekers") {
+            if (state[seekers][i].name == "seekers") {
                 state[seekers].splice(i,1);
             }
         }
