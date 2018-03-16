@@ -21,17 +21,10 @@
     <!-- LISTINGS -->
     <div v-if="listings != null" >
         <div class="grid-wrapper">
-            <h4>Recent farms opportunities <a href="#"><small> See all farms > </small></a></h4>
+            <h4>Recent farms opportunities <a href="/farm-opportunities"><small> See all farms > </small></a></h4>
             <div class="cards">
                 <div class="card card__full" v-for="listing in filteredListings">
-                    <img v-if="listing.meta_box._imagebanner_image[0]" :src="listing.meta_box._imagebanner_image[0]['full_url']">
-                    <img v-else src="https://farmlink.net/custom/themes/farmlink/dist/images/listing_placehold_banner.jpg">
-                    <div class="card-content">
-                        <small v-html="listing.meta_box._address_province"></small><br><br>
-                        <h6 v-html="listing.title.rendered"></h6>
-                        <p v-html="listing.meta_box._acre_farmland[0]"></p>
-                        <a href="#" class="btn btn__ghost">View farm opportunity</a>
-                    </div>
+                    <farm-listing :farmCard="listing"></farm-listing>
                 </div>
             </div>
         </div>
@@ -40,14 +33,10 @@
     <!-- SEEKERS -->
     <div v-if="seekers != null" >
         <div class="grid-wrapper">
-            <h4>Recent farm seekers <a href="#"><small> See all farm seekers ></small></a></h4>
+            <h4>Recent farm seekers <a href="/farm-seekers"><small> See all farm seekers ></small></a></h4>
             <div class="cards">
                 <div class="card card__seeker" v-for="seeker in filteredSeekers">
-                    <img :src="seeker.avatar_urls['96']">
-                    <div class="card-content">
-                        <h6 v-html="seeker.first_name"></h6>
-                        <p>Seeking a farm in Prince Edward Island</p>
-                    </div>
+                    <farm-seeker :farmCard="seeker"></farm-seeker>
                 </div>
             </div>
         </div>
@@ -60,37 +49,10 @@
     </div>
     </div>
 
+    <!-- REGION -->
     <div class="grid-wrapper">
-        <h5>Featured Regions <a href="#"><small> See all regions > </small></a></h5>
-        <div class="cards">
-            <div class="card card__full">
-                <img src="https://farmlink.net/custom/themes/farmlink/dist/images/listing_placehold_banner.jpg">
-                <div class="card-content">
-                    <small>Ontario</small><br><br>
-                    <h6>Wellington County</h6>
-                    <p>4 farm opportunities</p>
-                    <a href="#" class="btn btn__ghost">See our stats</a>
-                </div>
-            </div>
-            <div class="card card__full">
-                <img src="https://farmlink.net/custom/themes/farmlink/dist/images/listing_placehold_banner.jpg">
-                <div class="card-content">
-                    <small>Manitoba</small><br><br>
-                    <h6>Ingersoll County</h6>
-                    <p>10 farm opportunities</p>
-                    <a href="#" class="btn btn__ghost">See our stats</a>
-                </div>
-            </div>
-            <div class="card card__full">
-                <img src="https://farmlink.net/custom/themes/farmlink/dist/images/listing_placehold_banner.jpg">
-                <div class="card-content">
-                    <small>Nova Scotia</small><br><br>
-                    <h6>Oxford County</h6>
-                    <p>8 farm opportunities</p>
-                    <a href="#" class="btn btn__ghost">See our stats</a>
-                </div>
-            </div>
-        </div>
+        <h5>Featured Regions <a href="/farm-regions"><small> See all regions > </small></a></h5>
+        <farm-region></farm-region>
     </div>
 </div>
 </template>

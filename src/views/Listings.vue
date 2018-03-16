@@ -11,16 +11,7 @@
                 <paginate name="data" :list="listings" :per="18" tag="div">
                     <div class="cards">
                         <div class="card card__full" v-for="listing in paginated('data')">
-                            <img v-if="listing.meta_box._imagebanner_image[0]" :src="listing.meta_box._imagebanner_image[0]['full_url']">
-                            <img v-else src="https://farmlink.net/custom/themes/farmlink/dist/images/listing_placehold_banner.jpg">
-                            <div class="card-content">
-                                <small v-html="listing.meta_box._address_province"></small><br><br>
-                                <h6 v-html="listing.title.rendered"></h6>
-                                <p v-html="listing.meta_box._acre_farmland[0]"></p>
-
-                                <router-link :to="'/farm-opportunity/' + listing.slug" class="btn btn__ghost">View farm opportunity</router-link>
-                               
-                            </div>
+                            <farm-listing :farmCard="listing"></farm-listing>
                         </div>
                     </div>
                 </paginate>
@@ -28,12 +19,12 @@
             <div class="paginate-container">
                 <paginate-links for="data" :limit="5" :show-step-links="true" :async="true" @change="onPageChange"></paginate-links>
             </div>
-            <!--
+        </div>
+        <!--
             <div class="map-container" style="padding-top: 120px; position: relative; z-index: 0;">
                 <div class="google-map" :id="mapName"></div>
             </div>
-            -->
-        </div>
+        -->
     </div>
 </template>
 

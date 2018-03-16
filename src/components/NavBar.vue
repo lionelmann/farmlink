@@ -9,7 +9,7 @@
                 <li><a href="/resources">Resources</a></li>
                 <li><a href="/farm-seekers">Farm Seekers</a></li>
                 <li><a href="/farm-opportunities">Farm Opportunities</a></li>
-                <li><a href="/field-partners">Regions</a></li>
+                <li><a href="/farm-regions">Regions</a></li>
                 <!--
 				<li v-for="parent in menuLinks" :key="parent.title">
 					<router-link :to="`/${parent.object_slug}`">{{ parent.title }}</router-link>

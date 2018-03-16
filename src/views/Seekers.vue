@@ -11,11 +11,7 @@
                 <paginate name="data" :list="seekers" :per="51" tag="div">
                     <div class="cards">
                         <div class="card card__seeker" v-for="seeker in paginated('data')">
-                            <img :src="seeker.avatar_urls['96']">
-                            <div class="card-content">
-                                <h6 v-html="seeker.first_name"></h6>
-                                <p>Seeking a farm in Prince Edward Island</p>
-                            </div>
+                           <farm-seeker :farmCard="seeker"></farm-seeker>
                         </div>
                     </div>
                 </paginate>

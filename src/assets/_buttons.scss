@@ -11,8 +11,13 @@
     padding: 1rem;
     display: inline-block;
     text-decoration: none;
-    font-size: 0.815rem;
+    font-size: 1rem;
     text-align: center;
+    display: inline-block;
+    transition: border-radius .3s,background .3s,border-color .3s,color .3s;
+    &:hover {
+        border-radius: 2.5em;
+    }
 }
 
 .btn__cta {
@@ -23,5 +28,7 @@
 .btn__ghost {
     border: 2px solid rgba(245,142,27, 1);
     color: rgba(245,142,27, 1);
-    //width: 100%;
+    &:hover {
+        background: rgba(245,142,27,0.1);
+    }
 }
