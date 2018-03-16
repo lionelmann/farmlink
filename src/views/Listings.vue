@@ -7,7 +7,7 @@
             <button>More Filters</button>
         </div>
         <div v-if="listings != null">
-            <div class="grid-wrapper" style="padding-top: 150px;">
+            <div class="grid-wrapper grid__spacer">
                 <paginate name="data" :list="listings" :per="18" tag="div">
                     <div class="cards">
                         <div class="card card__full" v-for="listing in paginated('data')">
