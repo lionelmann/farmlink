@@ -8,15 +8,11 @@ const getters = {
     page: state => {
         return state.page;
     },
-    pageTitle: state => {
-        return state.page.title.rendered;
-    },
-    pageContent: state => {
-        return state.page.content.rendered;
-    },
+    /*
     pageBanner: state => {
         return state.page._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url;
     }
+    */
 }
 
 const mutations = {

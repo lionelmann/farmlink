@@ -2,10 +2,10 @@
     <div v-if="page != null">
         <div class="banner-container">
             <div class="banner" :style="{ 'background-image': 'url(' + pageBanner + ')' }">
-                <h1 v-html="pageTitle"></h1>
+                <h1 v-html="page.title.rendered"></h1>
             </div>
         </div>
-        <article class="post" v-html="pageContent"></article>
+        <article class="post" v-html="page.content.rendered"></article>
     </div>
 </template>
 
@@ -19,9 +19,6 @@
         },
         computed: {
             ...mapGetters([
-                'pageTitle',
-                'pageContent',
-                'pageBanner',
                 'page'
             ])
         },
@@ -30,6 +27,3 @@
         },
     };
 </script>
-
-<style lang="scss" scoped>
-</style>
