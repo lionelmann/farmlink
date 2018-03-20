@@ -83,6 +83,15 @@ time {
     opacity: 0.5;
 }
 
+.pin:before {
+    content: '';
+    padding-right: 20px;
+    margin-right: 8px;
+    background-image: url('/src/assets/images/map_pin.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
 .wf-loading {
     visibility: hidden;
 }

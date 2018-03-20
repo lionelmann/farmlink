@@ -6,14 +6,14 @@
                  <span style="min-width: 120px; display:inline-block;"> 
                      <ICountUp
                         :startVal="startVal"
-                        :endVal="endVal"
+                        :endVal=count()
                         :decimals="decimals"
                         :duration="duration"
                         :options="options"
                         @ready="onReady"/> 
                 </span>
                 farmers & farm seekers</h1>
-            <h3 class="subhead"><a href="#">Find</a> or <a href="#">share</a> farm opportunities and <a href="#">resources</a></h3>
+            <h3 class="subhead"><a href="/farm-opportunities">Find</a> or <a href="/farm-opportunities">share</a> farm opportunities and <a href="/resources">resources</a></h3>
             <a href="#" class="btn btn__cta">Create an Account</a>
         </div>
     </div>
@@ -21,7 +21,7 @@
     <!-- LISTINGS -->
     <div v-if="listings != null" >
         <div class="grid-wrapper">
-            <h4>Recent farms opportunities <a href="/farm-opportunities"><small> See all farms > </small></a></h4>
+            <h4 class="pin">Recent farms opportunities <a href="/farm-opportunities"><small> See all farms > </small></a></h4>
             <div class="cards">
                 <div class="card card__full" v-for="listing in filteredListings">
                     <farm-listing :farmCard="listing"></farm-listing>
@@ -33,26 +33,61 @@
     <!-- SEEKERS -->
     <div v-if="seekers != null" >
         <div class="grid-wrapper">
-            <h4>Recent farm seekers <a href="/farm-seekers"><small> See all farm seekers ></small></a></h4>
+            <h4 class="pin">Recent farm seekers <a href="/farm-seekers"><small> See all farm seekers ></small></a></h4>
             <div class="cards">
                 <div class="card card__seeker" v-for="seeker in filteredSeekers">
                     <farm-seeker :farmCard="seeker"></farm-seeker>
                 </div>
+
             </div>
         </div>
     </div>
 
-   <div class="grid-wrapper">
-    <div class="ad-container" style="border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;
-    padding: 40px; margin: 20px 0 60px 0;">
-        <h5>Register for $5/month and connect with farmers and seekers.</h5>
-    </div>
+    <!-- REGISTER CTA -->
+   <div class="grid-wrapper" style="margin: 30px 0 30px 0;">
+       <div class="ad-container" style="border-top: 2px dashed rgba(245,142,27, 1); border-radius: 50%; text-align: center; padding-top: 40px;">
+            <h4>Register for $5/month and connect <br>with farmers and seekers.</h4>
+            <a href="#" class="btn btn__cta">Find your match</a>
+            <img style="object-fit: cover;" src="/src/assets/images/bg-register.png">      
+        </div>
     </div>
 
     <!-- REGION -->
     <div class="grid-wrapper">
-        <h5>Featured Regions <a href="/farm-regions"><small> See all regions > </small></a></h5>
+        <h4 class="pin">Featured Regions <a href="/farm-regions"><small> See all regions > </small></a></h4>
         <farm-region></farm-region>
+    </div>
+
+    <!--FOOTER -->
+    <div class="container">
+        <div class="grid-wrapper">
+            <div>
+                <h6>Get in touch</h6>
+                <a href="mailto:info@farmlink.net">info@farmlink.net</a>
+            </div>
+            <div>
+                <h6>Get started</h6>
+                <ul>
+                    <li><a href="#">Link 1</a></li>
+                    <li><a href="#">Link 1</a></li>
+                    <li><a href="#">Link 1</a></li>
+                    <li><a href="#">Link 1</a></li>
+                    <li><a href="#">Link 1</a></li>
+                </ul>
+            </div>
+            <div>
+            <h6>About</h6>
+                <ul>
+                    <li><a href="#">Media</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Conditions</a></li>
+                    <li><a href="#">Price</a></li>
+                </ul>
+            </div>
+        </div>
+        <img src="/src/assets/images/bg-footer.png">
+        <div style="height: 80px;">
+        </div>
     </div>
 </div>
 </template>
@@ -67,7 +102,7 @@ export default {
     data() {
         return {
             startVal: 0,
-            endVal: 815,
+            //endVal: 815,
             decimals: 0,
             duration: 3,
             options: {
@@ -84,6 +119,9 @@ export default {
         onReady: function(instance, CountUp) {
             const that = this;
             instance.update(that.endVal);
+        },
+        count: function() {
+            return this.seekers.length;
         }
     },
     computed: {
@@ -96,7 +134,7 @@ export default {
         },
         filteredListings: function () {
             return this.listings.slice(0, 3)
-        }
+        },
     },
     created() {
         this.$store.dispatch('getSeekers');
