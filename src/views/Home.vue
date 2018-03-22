@@ -6,7 +6,7 @@
                  <span style="min-width: 120px; display:inline-block;"> 
                      <ICountUp
                         :startVal="startVal"
-                        :endVal=count()
+                        :endVal="800"
                         :decimals="decimals"
                         :duration="duration"
                         :options="options"
