@@ -1,12 +1,14 @@
 <template>
     <div>
+    <div v-if="seekers != null" >
        <div class="filter">
             <button>Province</button>
             <button>Opportunity</button>
             <button>Acreage</button>
             <button>More Filters</button>
+            {{ seekers.length }} Active Seekers
         </div>
-        <div v-if="seekers != null" >
+        
             <div class="grid-wrapper grid__spacer">
                 <paginate name="data" :list="seekers" :per="51" tag="div">
                     <div class="cards">
