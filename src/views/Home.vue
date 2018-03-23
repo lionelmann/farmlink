@@ -36,6 +36,7 @@
             <h4 class="pin">Recent farm seekers <a href="/farm-seekers"><small> See all farm seekers ></small></a></h4>
             <div class="cards">
                 <div class="card card__seeker" v-for="seeker in filteredSeekers">
+                    
                     <farm-seeker :farmCard="seeker"></farm-seeker>
                 </div>
 
@@ -130,6 +131,17 @@ export default {
         'listings'
         ]),    
         filteredSeekers: function () {
+            /* This should be a reverse for loop like this:
+            'for (let i = this.seekers.length - 1; i >= 0; --i)'
+            But it's too slow to go through all seekers. 
+            Better to just get the first 15 and hope they 
+            have a profile image. */
+            for(let i = 0; i < 15; i++) {
+                if(this.seekers[i].user_avatar_custom == '' ){
+                    this.seekers.splice(i,1)
+                }
+            }
+            // Then only show the first 3 with a profile image.
             return this.seekers.slice(0, 3)
         },
         filteredListings: function () {
