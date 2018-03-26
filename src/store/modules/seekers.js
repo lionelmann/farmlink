@@ -16,13 +16,13 @@ const mutations = {
         // Let's do a reverse forloop so that we don't run off the end of the array
         for (let i = seekers.length - 1; i >= 0; --i) {
             // Remove any non active users and those that don't have the seeker role
-            if(seekers[i].status != "active" || seekers[i].role.seeker != true ){
+            if(seekers[i].meta._user_account_status != "active" || seekers[i].role.seeker != true ){
                 seekers.splice(i,1)
             }
         }
         // Let's sort the array by user_mod_date in descending order
         seekers.sort(function (a, b) {
-            return b.user_mod_date - a.user_mod_date;
+            return b.meta.user_mod_date - a.meta.user_mod_date;
         });
         state.seekers = seekers;  
     },

@@ -60,17 +60,16 @@
         object-fit: cover;
         object-position: 0 0;
         float: left;
-        background-image:url('http://via.placeholder.com/96x96');
+    }
+    &:hover {
+        background: rgba(245,142,27,0.1);
+       
     }
     a .card-content {
-        position: relative;
         color: black;
         padding: 10px 15px 0px 0px;
-        &:hover {
-            background: rgba(245,142,27,0.1);
-            height:100%;
-            z-index: 1;
-        }
+        height: 115px;
+        
     }
 }
 

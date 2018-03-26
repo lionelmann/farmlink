@@ -36,7 +36,6 @@
             <h4 class="pin">Recent farm seekers <a href="/farm-seekers"><small> See all farm seekers ></small></a></h4>
             <div class="cards">
                 <div class="card card__seeker" v-for="seeker in filteredSeekers">
-                    
                     <farm-seeker :farmCard="seeker"></farm-seeker>
                 </div>
 
@@ -137,13 +136,14 @@ export default {
             Better to just get the first 15 and hope they 
             have a profile image. */
             for(let i = 0; i < 15; i++) {
-                if(this.seekers[i].user_avatar_custom == '' ){
+                if(!this.seekers[i].meta.hasOwnProperty('user_avatar_custom')){
                     this.seekers.splice(i,1)
                 }
             }
-            // Then only show the first 3 with a profile image.
+            // Only show 3 profiles.
             return this.seekers.slice(0, 3)
         },
+         // Only show 3 listing.
         filteredListings: function () {
             return this.listings.slice(0, 3)
         },

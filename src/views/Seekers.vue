@@ -13,6 +13,7 @@
                 <paginate name="data" :list="seekers" :per="51" tag="div">
                     <div class="cards">
                         <div class="card card__seeker" v-for="seeker in paginated('data')">
+                            <!-- See cards/Seeker.vue -->
                            <farm-seeker :farmCard="seeker"></farm-seeker>
                         </div>
                     </div>
