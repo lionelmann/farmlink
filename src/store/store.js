@@ -5,6 +5,7 @@ import resource from './modules/resource';
 import seekers from './modules/seekers';
 import listings from './modules/listings';
 import listingSingle from './modules/singleListing';
+import singleSeeker from './modules/singleSeeker';
 
 Vue.use(Vuex);
 
@@ -15,6 +16,6 @@ export const store = new Vuex.Store({
         seekers,
         listings,
         listingSingle,
-
+        singleSeeker
     }
 });

@@ -26,6 +26,7 @@ const mutations = {
         });
         state.seekers = seekers;  
     },
+
 }
 
 const actions = {

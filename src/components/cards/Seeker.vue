@@ -21,8 +21,8 @@ export default {
             errors: [],
             avatarID: this.farmCard.meta.user_avatar_custom,
             avatarURL: [],
-        }
-    },
+            }
+        },
     created() {
         // If there is no avatarID then lets use a default image assigned to avatarURL
         if(this.avatarID == undefined ) {

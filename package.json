@@ -12,7 +12,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "countup.js": "^1.9.3",
-    "moment": "^2.20.1",
+    "moment": "^2.21.0",
     "normalize.css": "^7.0.0",
     "vue": "^2.5.11",
     "vue-countup-v2": "^1.0.2",
