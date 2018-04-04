@@ -1,12 +1,16 @@
 <template>
-    <div>
-        <div class="filter">
-            <button>Province</button>
-            <button>Opportunity</button>
-            <button>Acreage</button>
-            <button>More Filters</button>
+     <div v-if="listings != null">
+         <div class="filter-wrapper">
+            <div class="filter">
+                <button>Province</button>
+                <button>Opportunity</button>
+                <button>Acreage</button>
+                <button>More Filters</button>
+            </div>
+            <div class="filter-number">
+                <div><span>{{ listings.length }}</span> Active Farm Listings</div>
+            </div>
         </div>
-        <div v-if="listings != null">
             <div class="grid-wrapper grid__spacer">
                 <paginate name="data" :list="listings" :per="18" tag="div">
                     <div class="cards">
@@ -25,7 +29,7 @@
                 <div class="google-map" :id="mapName"></div>
             </div>
         -->
-    </div>
+    
 </template>
 
 <script>

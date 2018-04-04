@@ -1,27 +1,29 @@
 <template>
-    <div>
     <div v-if="seekers != null" >
-       <div class="filter">
-            <button>Province</button>
-            <button>Opportunity</button>
-            <button>Acreage</button>
-            <button>More Filters</button>
-            {{ seekers.length }} Active Seekers
+        <div class="filter-wrapper">
+            <div class="filter">
+                <button>Province</button>
+                <button>Opportunity</button>
+                <button>Acreage</button>
+                <button>More Filters</button>
+            </div>
+            <div class="filter-number">
+                <div><span>{{ seekers.length }}</span> Active Farm Seekers</div>
+            </div>
         </div>
-        
-            <div class="grid-wrapper grid__spacer">
-                <paginate name="data" :list="seekers" :per="51" tag="div">
-                    <div class="cards">
-                        <div class="card card__seeker" v-for="seeker in paginated('data')">
-                            <!-- See cards/Seeker.vue -->
-                           <farm-seeker :farmCard="seeker"></farm-seeker>
-                        </div>
+            
+        <div class="grid-wrapper grid__spacer">
+            <paginate name="data" :list="seekers" :per="51" tag="div">
+                <div class="cards">
+                    <div class="card card__seeker" v-for="seeker in paginated('data')">
+                        <!-- See cards/Seeker.vue -->
+                        <farm-seeker :farmCard="seeker"></farm-seeker>
                     </div>
-                </paginate>
-            </div>
-            <div class="paginate-container">
-                <paginate-links for="data" :limit="5" :show-step-links="true" :async="true" @change="onPageChange"></paginate-links>
-            </div>
+                </div>
+            </paginate>
+        </div>
+        <div class="paginate-container">
+            <paginate-links for="data" :limit="5" :show-step-links="true" :async="true" @change="onPageChange"></paginate-links>
         </div>
     </div>
 </template>

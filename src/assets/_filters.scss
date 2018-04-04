@@ -1,17 +1,30 @@
-.filter {
+.filter-wrapper {
     display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    position: fixed; 
-    grid-gap: 20px;
-    top: 60px;
-    height: 60px; 
-    background-color: white; 
+    grid-template-columns: 6fr 3fr;
     width: 100%;
-    align-content: center;
-    padding: 20px;
+    top: 60px;
+    position: fixed;
+    background-color: white;
     border-bottom: 1px solid  rgba(230,230,230,0.4);
     border-top: 1px solid  rgba(230,230,230,0.4);
     z-index: 20;
+}
+
+.filter {
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-gap: 20px;
+    align-content: center;
+    padding: 0 20px;   
+}
+
+.filter-number {
+    display:grid;
+    align-content: center;
+    justify-content: end;
+    padding: 20px;
+    text-transform: uppercase;
+    font-size: 1.2rem;
 }
 
 .filter button {

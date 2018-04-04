@@ -90,14 +90,10 @@ nav {
 }
 
 nav ul {
-    //display:grid;
-    //grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     list-style: none;
     margin: 0;
     padding: 0;
     white-space: nowrap;
-    //align-content: center;
-    //justify-content: center;
     li {
         float: left;
         margin:0;
