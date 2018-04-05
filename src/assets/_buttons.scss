@@ -18,6 +18,9 @@
     &:hover {
         border-radius: 2.5em;
     }
+    &:focus {
+        outline:0;
+    }
 }
 
 .btn__cta {
@@ -30,5 +33,14 @@
     color: rgba(245,142,27, 1);
     &:hover {
         background: rgba(245,142,27,0.1);
+    }
+}
+
+.btn__ghostoverimage {
+    border: 2px solid rgba(255,255,255, 1);
+    background-color:transparent;
+    color: rgba(255,255,255, 1);
+    &:hover {
+        background: rgba(245,142,27,0.4);
     }
 }

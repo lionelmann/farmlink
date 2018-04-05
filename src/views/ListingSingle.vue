@@ -2,7 +2,12 @@
     <div class="container">
         <div v-if="listing != null">
             <section v-if="listing.meta_box._imagebanner_image[0]" class="hero" :style="'background-image:url('+listing.meta_box._imagebanner_image[0]['full_url']+');'">
-                <h2 v-html="listing.title.rendered"></h2>
+                <div>
+                    <h2 v-html="listing.title.rendered"></h2>
+                    <h4>{{listing.meta_box._address_city}}, {{ listing.meta_box._address_province }}, Canada</h4>
+                    <br>
+                    <button class="btn btn__ghostoverimage">View Photos</button>
+                </div>
             </section>
              <section v-else class="hero" style="background-image:url('https://farmlink.net/custom/themes/farmlink/dist/images/listing_placehold_banner.jpg');">
                 <h2 v-html="listing.title.rendered"></h2>
@@ -25,6 +30,11 @@
                     </div>
                 </article>
                 <aside>
+                    <div style="margin: 0em 0 1.5em 0;">
+                    
+                        <a class="btn btn__cta " href="#">Login to Contact Farm</a>
+                        </div>
+                    
                     <time>Last Modified: {{ moment(listing.modified) }}</time>
                     <ul v-if="listing.meta_box.hasOwnProperty('_use_farmland')">
                         <li class="title">Farmland available for:</li>
@@ -95,10 +105,6 @@ export default {
 
 
 <style lang="scss" scoped>
-
-h2 {
-    font-weight: 100;
-}
 
 .hero {
     position: relative;

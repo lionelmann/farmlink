@@ -1,9 +1,7 @@
 <template>
-	<div class="header">
-		<div class="logo">
-			<router-link to="/" class="navbar-brand"><span class="farmlinklogo"></span></router-link>
-		</div>
-		<nav>
+	<header>
+		<router-link to="/" class="logo"></router-link>	
+		<nav class="menu">
 			<ul>
                 <li><a href="/about">About</a></li>
                 <li><a href="/resources">Resources</a></li>
@@ -23,16 +21,14 @@
                 <li><a href="#">Sign In</a></li>
                 -->
 			</ul>
-            
 		</nav>
-        <div class="cta">
+        <nav class="cta">
             <ul>
                 <li><a href="#">Log In</a></li>
-                <li><a class="btn btn__cta " href="#">Become a member</a></li>
-                
+                <li><a href="#">Become a member</a></li>
             </ul>
-        </div>
-	</div>
+        </nav>
+	</header>
 </template>
 
 <script>
@@ -43,7 +39,6 @@ export default {
             menuLinks: [] 
         }
     },
-    
     beforeCreate() {
         axios.get('http://dev.hypenotic.com/flink/wp-json/wp-api-menus/v2/menus/2')
        .then(response => {
@@ -58,11 +53,11 @@ export default {
 
 <style lang="scss">
 
-.header{
+header{
     background-color: white;
     display:grid;
     grid-template-columns: 1fr 10fr 6fr;
-    grid-template-areas:  "logo nav cta";
+    grid-template-areas:  "logo menu cta";
     grid-gap: 20px;
     height: 60px;
     position: fixed;
@@ -70,26 +65,30 @@ export default {
     z-index: 1500;
 }
 
+.menu {
+    grid-area: menu;  
+}
+
 .logo {
-    display:grid;
     grid-area: logo;
 }
 
-.navbar-brand {
-    display: inline-block;
+.cta {
+    grid-area: cta; 
+}
+
+.logo {
+    display:grid;
     margin-left: 1em;
     margin-top: 1px;
     height: 58px;
     width: 58px;
     background: url(https://farmlink.net/custom/themes/farmlink/dist/images/farmlinklogo_greenwhite.png) no-repeat;
     background-size: 100% auto;
+    z-index: 2000;
 }
 
-nav {
-    grid-area: nav;  
-}
-
-nav ul {
+.menu ul, .cta ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -113,17 +112,10 @@ nav ul {
 }
 
 .cta ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
     float: right;
-    li {
-        float: left;
-        margin: 5px 20px 0 0; 
-    }
 }
 
-// SUBNAV
+// SUBNAV NOT BEING USED AT THE MOMENT
 nav ul li ul {
     display:grid;
     grid-template-columns: 1fr;
