@@ -1,21 +1,21 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import page from './modules/page';
-import resource from './modules/resource';
-import seekers from './modules/seekers';
-import listings from './modules/listings';
-import listingSingle from './modules/singleListing';
-import singleSeeker from './modules/singleSeeker';
+import modulePage from './modules/page';
+import moduleResource from './modules/resource';
+import moduleSeekers from './modules/seekers';
+import moduleListings from './modules/listings';
+import moduleSingleListing from './modules/singleListing';
+import moduleSingleSeeker from './modules/singleSeeker';
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     modules: {
-        page,
-        resource,
-        seekers,
-        listings,
-        listingSingle,
-        singleSeeker
+        modulePage,
+        moduleResource,
+        moduleSeekers,
+        moduleListings,
+        moduleSingleListing,
+        moduleSingleSeeker
     }
 });

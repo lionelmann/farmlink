@@ -1,23 +1,26 @@
 <template>
-    <div>
-        <div class="filter">
-            <button>Webinars</button>
-            <button>Articles</button>
-            <button>Publications</button>
-            <button>More Filters</button>
+    <div v-if="resource != null" >
+        <div class="filter-wrapper">
+            <div class="filter">
+                <button>Business</button>
+                <button>Marketing</button>
+                <button>Farm Access</button>
+                <button>Filter</button>
+            </div> 
+            <div class="filter-number">
+                <div><span>{{ resource.length }}</span> Resources</div>
+            </div>
         </div>
-        <div v-if="resource != null" >
-            <div class="grid-wrapper grid__spacer">
-                <paginate name="data" :list="resource" :per="18" tag="div">
-                    <div class="cards">
-                        <div class="card card__resource" v-for="resource in paginated('data')">
-                            <farm-resource :farmCard="resource"></farm-resource>
-                        </div>
+        <div class="grid-wrapper grid__spacer">
+            <paginate name="data" :list="resource" :per="18" tag="div">
+                <div class="cards">
+                    <div class="card card__resource" v-for="resource in paginated('data')">
+                        <farm-resource :farmCard="resource"></farm-resource>
                     </div>
-                </paginate>
-                <div class="paginate-container">
-                    <paginate-links for="data" :limit="5" :show-step-links="true" :async="true" @change="onPageChange"></paginate-links>
                 </div>
+            </paginate>
+            <div class="paginate-container">
+                <paginate-links for="data" :limit="5" :show-step-links="true" :async="true" @change="onPageChange"></paginate-links>
             </div>
         </div>
     </div>

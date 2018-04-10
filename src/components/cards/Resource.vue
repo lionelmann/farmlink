@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="card-content">
-            <h6 v-html="farmCard.title.rendered"></h6>
+            <h5 v-html="farmCard.title.rendered"></h5>
             <div class="light" v-html="$options.filters.readMore(farmCard.content.rendered, 200, '...')"></div>               
         </div>
     </div>

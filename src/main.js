@@ -9,6 +9,7 @@ import ResourceCard from './components/cards/Resource.vue'
 import RegionCard from './components/cards/Region.vue'
 import Footer from './components/Footer.vue'
 import VuePaginate from 'vue-paginate'
+import * as VueGoogleMaps from 'vue2-google-maps'
 import { store } from './store/store.js'
 
 Vue.component('farm-navbar', NavBar)
@@ -20,6 +21,15 @@ Vue.component('farm-region', RegionCard)
 
 Vue.use(VueRouter);
 Vue.use(VuePaginate);
+Vue.use(VueGoogleMaps, {
+	load: {
+		key: 'AIzaSyCxtswDnxeYifr6Z-TloAmQioK2THF35F4',
+		//libraries: 'places', // This is required if you use the Autocomplete plugin
+		// OR: libraries: 'places,drawing'
+		// OR: libraries: 'places,drawing,visualization'
+		// (as you require)
+	}
+})
 
 // Global Filters
 Vue.filter('readMore', function(value, length, suffix) {
