@@ -3,79 +3,63 @@
         <div class="filter-wrapper">
             <div class="filter">
                 <div class="filter-item">
-                    <button>Opportunity</button>
-                </div>
-                
-                
-                <div class="filter-item">
-                    <button v-on:click="isProvince = !isProvince">Province</button>
-                    <div v-if="!isProvince" style="position: absolute; top: 40px; left: 0px; text-align:left;" >
-                        <div style="padding: 1em; height: auto; width: 300px;  background: white; border-radius: 4px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.2);">
-                            <h6>Select Provinces to Filter</h6>
-                            <form action="#">
-                                <label class="container">Alberta
-                                    <input type="checkbox" name="provinces" value="Alberta" checked="checked">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="container">British Columbia
-                                    <input type="checkbox" name="provinces" value="British Columbia">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="container">Manitoba
-                                    <input type="checkbox" name="provinces" value="Manitoba">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="container">New Brunswick
-                                    <input type="checkbox" name="provinces" value="New Brunswick">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="container">Newfoundland
-                                    <input type="checkbox" name="provinces" value="Newfoundland">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="container">Nova Scotia
-                                    <input type="checkbox" name="provinces" value="Nova Scotia">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="container">Northwest Territories
-                                    <input type="checkbox" name="provinces" value="Northwest Territories">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="container">Nunavut
-                                    <input type="checkbox" name="provinces" value="Nunavut">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="container">Ontario
-                                    <input type="checkbox" name="provinces" value="Ontario">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="container">Prince Edward Island
-                                    <input type="checkbox" name="provinces" value="Prince Edward Island">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="container">Quebec
-                                    <input type="checkbox" name="provinces" value="Quebec">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="container">Saskatchewan
-                                    <input type="checkbox" name="provinces" value="Saskatchewan">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="container">Yukon
-                                    <input type="checkbox" name="provinces" value="Yukon">
-                                    <span class="checkmark"></span>
-                                </label>
-
-                                <div style="padding: 1em 0 1.5em 0">
-                                    <span style="float: left"><a href="#">Clear</a></span>
-                                    <span style="float: right"><a href="#">Apply</a></span> 
-                                </div>
-                            </form>
-                        </div>
+                    <button v-on:click="isOpportunity = !isOpportunity">Opportunity</button>
+                    <div v-if="!isOpportunity" class="filter-form">
+                        <filter-opportunity></filter-opportunity>
                     </div>
                 </div>
-                <button class="filter-item">Acreage</button>
-                <button class="filter-item">More Filters<span class="marker">2</span></button>
+                 <div class="filter-item">
+                    <button v-on:click="isProvince = !isProvince">Province</button>
+                    <div v-if="!isProvince" class="filter-form">
+                        <filter-province></filter-province>
+                    </div>
+                </div>
+                
+                <div class="filter-item">
+                <button v-on:click="isAcreage = !isAcreage">Acreage</button>
+                    <div v-if="!isAcreage" class="filter-form">
+                        <h6>Available Acreage</h6>
+                        <form action="#">
+                            <label class="container">1 acre or less
+                                <input type="checkbox" name="acreage" value="1 acre or less" checked="checked">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">2-5 acres
+                                <input type="checkbox" name="acreage" value="1 acre or less">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">5-10 acres
+                                <input type="checkbox" name="acreage" value="5-10 acres">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">10-25 acres
+                                <input type="checkbox" name="acreage" value="10-25 acres">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">25-50 acres
+                                <input type="checkbox" name="acreage" value="25-50 acres">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="container">50 acres or more
+                                <input type="checkbox" name="acreage" value="50 acres or more">
+                                <span class="checkmark"></span>
+                            </label>
+                            <div class="filter-apply-container">
+                                <span style="float: left"><a href="#">Clear</a></span>
+                                <span style="float: right"><a href="#">Apply</a></span> 
+                            </div>
+                        </form>
+                    </div>
+               </div>
+
+                <div class="filter-item">
+                <button v-on:click="isAllFilters = !isAllFilters">All Filters<span class="marker">2</span></button>
+                    
+                    <div v-if="!isAllFilters" class="filter-form-wide">
+                        <filter-opportunity></filter-opportunity>
+                        <filter-province></filter-province>
+                    </div>
+               </div>
                 <button class="filter-item" v-if="isMap"  v-on:click="isMap = !isMap"><i class="fas fa-list-ul"></i>  List View</button>
                 <button class="filter-item" v-if="!isMap" v-on:click="isMap = !isMap"><i class="fas fa-map-marker-alt"></i> Map View</button>
             </div> 
@@ -119,6 +103,8 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex';
+import FilterOpportunity from '../components/filters/farmer/Opportunity.vue';
+import FilterProvince from '../components/filters/farmer/Province.vue';
 export default {
     data() {
 		return {
@@ -140,8 +126,15 @@ export default {
             markers: [{ position: {lat: 43.66627899999999, lng: -80.78653369999997}, infoText: 'Marker 1'},],
             isMap: true,
             isProvince: true,
+            isAcreage: true,
+            isOpportunity: true,
+            isAllFilters: true,
             paginate: ['data'],
 		}
+    },
+    components: {
+        FilterOpportunity,
+        FilterProvince
     },
     methods: {
 		onPageChange: () => {
