@@ -66,24 +66,6 @@
                                     <span class="checkmark"></span>
                                 </label>
 
-
-                                <!--
-                                <ul>
-                                <li><input type="checkbox" name="provinces" value="Alberta"><label>Alberta</label></li>
-                                <li><input type="checkbox" name="provinces" value="British Columbia"><label>British Columbia</label></li>
-                                <li><input type="checkbox" name="provinces" value="Manitoba"><label>Manitoba</label></li>
-                                <li><input type="checkbox" name="provinces" value="New Brunswick"><label>New Brunswick</label></li>
-                                <li><input type="checkbox" name="provinces" value="Newfoundland"><label>Newfoundland</label></li>
-                                <li><input type="checkbox" name="provinces" value="Nova Scotia"><label>Nova Scotia</label></li>
-                                <li><input type="checkbox" name="provinces" value="Northwest Territories"><label>Northwest Territories</label></li>
-                                <li><input type="checkbox" name="provinces" value="Nunavut"><label>Nunavut</label></li>
-                                <li><input type="checkbox" name="provinces" value="Ontario"><label>Ontario</label></li>
-                                <li><input type="checkbox" name="provinces" value="Prince Edward Island"><label>Prince Edward Island</label></li>
-                                <li><input type="checkbox" name="provinces" value="Quebec"><label>Quebec</label></li>
-                                <li><input type="checkbox" name="provinces" value="Saskatchewan"><label>Saskatchewan</label></li>
-                                <li><input type="checkbox" name="provinces" value="Yukon"><label>Yukon</label></li>
-                                </ul>
-                                -->
                                 <div style="padding: 1em 0 1.5em 0">
                                     <span style="float: left"><a href="#">Clear</a></span>
                                     <span style="float: right"><a href="#">Apply</a></span> 
