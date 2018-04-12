@@ -30,10 +30,6 @@
                 <input type="checkbox" name="opportunity" value="Lease-to-own">
                 <span class="checkmark"></span>
             </label>
-            <div class="filter-apply-container">
-                <span style="float: left"><a href="#">Clear</a></span>
-                <span style="float: right"><a href="#">Apply</a></span> 
-            </div>
         </form>
     </div>
 </template>

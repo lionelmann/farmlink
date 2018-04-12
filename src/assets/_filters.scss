@@ -148,11 +148,14 @@
     left: -310px; 
     right: 0px;
     text-align:left; 
-    padding: 4em; 
+    padding: 1em 2em 10em 2em;
     height: 100vh; 
     width: 100vw;
     background: white;
     overflow: scroll;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-gap: 30px;  
 }
 
 .filter-apply-container {

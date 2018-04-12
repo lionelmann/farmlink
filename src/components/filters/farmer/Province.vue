@@ -1,6 +1,6 @@
 <template>
    <div>
-        <h6>Select Provinces to Filter</h6>
+        <h6>Select Provinces</h6>
         <form action="#">
             <label class="container">Alberta
                 <input type="checkbox" name="provinces" value="Alberta" checked="checked">
@@ -54,10 +54,6 @@
                 <input type="checkbox" name="provinces" value="Yukon">
                 <span class="checkmark"></span>
             </label>
-            <div class="filter-apply-container">
-                <span style="float: left"><a href="#">Clear</a></span>
-                <span style="float: right"><a href="#">Apply</a></span> 
-            </div>
         </form>
     </div>
 </template>

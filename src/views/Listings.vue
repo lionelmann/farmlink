@@ -6,51 +6,32 @@
                     <button v-on:click="isOpportunity = !isOpportunity">Opportunity</button>
                     <div v-if="!isOpportunity" class="filter-form">
                         <filter-opportunity></filter-opportunity>
+                         <div class="filter-apply-container">
+                            <span style="float: left"><a href="#">Clear</a></span>
+                            <span style="float: right"><a href="#">Apply</a></span> 
+                        </div>
                     </div>
                 </div>
                  <div class="filter-item">
                     <button v-on:click="isProvince = !isProvince">Province</button>
                     <div v-if="!isProvince" class="filter-form">
                         <filter-province></filter-province>
+                         <div class="filter-apply-container">
+                            <span style="float: left"><a href="#">Clear</a></span>
+                            <span style="float: right"><a href="#">Apply</a></span> 
+                        </div>
                     </div>
                 </div>
-                
                 <div class="filter-item">
-                <button v-on:click="isAcreage = !isAcreage">Acreage</button>
+                    <button v-on:click="isAcreage = !isAcreage">Acreage</button>
                     <div v-if="!isAcreage" class="filter-form">
-                        <h6>Available Acreage</h6>
-                        <form action="#">
-                            <label class="container">1 acre or less
-                                <input type="checkbox" name="acreage" value="1 acre or less" checked="checked">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">2-5 acres
-                                <input type="checkbox" name="acreage" value="1 acre or less">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">5-10 acres
-                                <input type="checkbox" name="acreage" value="5-10 acres">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">10-25 acres
-                                <input type="checkbox" name="acreage" value="10-25 acres">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">25-50 acres
-                                <input type="checkbox" name="acreage" value="25-50 acres">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="container">50 acres or more
-                                <input type="checkbox" name="acreage" value="50 acres or more">
-                                <span class="checkmark"></span>
-                            </label>
-                            <div class="filter-apply-container">
-                                <span style="float: left"><a href="#">Clear</a></span>
-                                <span style="float: right"><a href="#">Apply</a></span> 
-                            </div>
-                        </form>
+                        <filter-acreage></filter-acreage>
+                         <div class="filter-apply-container">
+                            <span style="float: left"><a href="#">Clear</a></span>
+                            <span style="float: right"><a href="#">Apply</a></span> 
+                        </div>
                     </div>
-               </div>
+                </div>
 
                 <div class="filter-item">
                 <button v-on:click="isAllFilters = !isAllFilters">All Filters<span class="marker">2</span></button>
@@ -58,6 +39,14 @@
                     <div v-if="!isAllFilters" class="filter-form-wide">
                         <filter-opportunity></filter-opportunity>
                         <filter-province></filter-province>
+                        <filter-acreage></filter-acreage>
+                        <filter-acreage></filter-acreage>
+                        <filter-acreage></filter-acreage>
+                        <filter-acreage></filter-acreage>
+                        <div class="filter-apply-container">
+                            <span style="float: left"><a href="#">Clear</a></span>
+                            <span style="float: right"><a href="#">Apply</a></span> 
+                        </div>
                     </div>
                </div>
                 <button class="filter-item" v-if="isMap"  v-on:click="isMap = !isMap"><i class="fas fa-list-ul"></i>  List View</button>
@@ -104,6 +93,7 @@
 <script>
 import { mapGetters, mapState } from 'vuex';
 import FilterOpportunity from '../components/filters/farmer/Opportunity.vue';
+import FilterAcreage from '../components/filters/farmer/Acreage.vue';
 import FilterProvince from '../components/filters/farmer/Province.vue';
 export default {
     data() {
@@ -134,7 +124,8 @@ export default {
     },
     components: {
         FilterOpportunity,
-        FilterProvince
+        FilterProvince,
+        FilterAcreage
     },
     methods: {
 		onPageChange: () => {
