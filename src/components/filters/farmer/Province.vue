@@ -85,6 +85,7 @@ export default {
         filterClear() {
             // Clear activeProvince in store
             console.log('clear clicked');
+            this.checked = [];
 			this.$store.dispatch("provinceChange", []);
 		}
     }
