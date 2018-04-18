@@ -159,5 +159,13 @@
 }
 
 .filter-apply-container {
-    padding: 1em 0 1.5em 0
+    padding: 1em 1em 1.5em;
+}
+
+.filter-form-wide .filter-apply-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
 }

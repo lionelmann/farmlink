@@ -15,11 +15,13 @@
                  <div class="filter-item">
                     <button v-on:click="isProvince = !isProvince">Province</button>
                     <div v-if="!isProvince" class="filter-form">
-                        <filter-province></filter-province>
-                         <div class="filter-apply-container">
-                            <span style="float: left"><a href="#">Clear</a></span>
-                            <span style="float: right"><a href="#">Apply</a></span> 
-                        </div>
+                        <filter-province buttons="true"></filter-province>
+                        <!-- WE NEED TO PUT THIS IN THE filter-province -->
+                        <!-- You can put a prop on filter-province like "type", which controls whether the filter-apply-container shows up -->
+                         <!-- <div class="filter-apply-container">
+                            <span style="float: left"><button @click="filterClear">Clear</button></span>
+                            <span style="float: right"><button @click="filterChange">Apply</button></span> 
+                        </div> -->
                     </div>
                 </div>
                 <div class="filter-item">
@@ -34,11 +36,11 @@
                 </div>
 
                 <div class="filter-item">
-                <button v-on:click="isAllFilters = !isAllFilters">All Filters<span class="marker">2</span></button>
+                <button v-on:click="isAllFilters = !isAllFilters">All Filters<span class="marker" v-html="checkedCount"></span></button>
                     
                     <div v-if="!isAllFilters" class="filter-form-wide">
                         <filter-opportunity></filter-opportunity>
-                        <filter-province></filter-province>
+                        <filter-province buttons="false"></filter-province>
                         <filter-acreage></filter-acreage>
                         <filter-acreage></filter-acreage>
                         <filter-acreage></filter-acreage>
@@ -60,9 +62,9 @@
         <!-- isMap = False -->
         <transition name="fade">
         <div v-if="!isMap" class="grid-wrapper grid__spacer">
-            <paginate name="data" :list="listings" :per="21" tag="div">
+            <paginate name="data" :list="this.$store.state.moduleListings.filterMatches" :per="21" tag="div">
                 <div class="cards">
-                    <div class="card card__full" v-for="listing in paginated('data')">
+                    <div class="card card__full" v-for="listing in paginated('data')" :key="listing.id">
                         <farm-listing :farmCard="listing"></farm-listing>
                     </div>
                 </div>
@@ -120,6 +122,7 @@ export default {
             isOpportunity: true,
             isAllFilters: true,
             paginate: ['data'],
+            checkedProvince: []
 		}
     },
     components: {
@@ -143,12 +146,13 @@ export default {
               this.infoWinOpen = true;
               this.currentMidx = idx;
             }
-        },
+        }
     },
     computed: {
         ...mapGetters([
-            'listings'
-        ]),
+            'listings',
+            'checkedCount'
+        ])
     },
     created() {
         this.$store.dispatch('getListings');
