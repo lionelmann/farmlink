@@ -64,6 +64,7 @@ const actions = {
     provinceChange({commit, dispatch, context, state}, provinceList) {
         console.log('provinceCheck', provinceList);
         commit(SET_PROVINCE_LIST, provinceList);
+        dispatch("filterChange", {'type': 'filter-change', 'list': state.listings, 'checked': provinceList});
     },
     filterChange({commit, dispatch, context, state}, checkedProvince) {
         dispatch("renderList", {'type': 'filter-change', 'list': state.listings, 'checked': state.activeProvince});
