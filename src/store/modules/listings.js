@@ -62,9 +62,14 @@ const actions = {
         }))
     },
     provinceChange({commit, dispatch, context, state}, provinceList) {
-        console.log('provinceCheck', provinceList);
+        console.log('provinceChange', provinceList);
         commit(SET_PROVINCE_LIST, provinceList);
-        dispatch("filterChange", {'type': 'filter-change', 'list': state.listings, 'checked': provinceList});
+        // If you don't do a length check, and just dispatch filterChange everytime, 
+        //it's like live filtering, without having to press the Apply button
+        if (provinceList.length == 0) {
+            dispatch("filterChange", {'type': 'filter-change', 'list': state.listings, 'checked': provinceList});
+        }
+        
     },
     filterChange({commit, dispatch, context, state}, checkedProvince) {
         dispatch("renderList", {'type': 'filter-change', 'list': state.listings, 'checked': state.activeProvince});
