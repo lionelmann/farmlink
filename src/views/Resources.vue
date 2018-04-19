@@ -3,38 +3,7 @@
         <div class="filter-wrapper">
             <div class="filter">
                 <div class="filter-item">
-                    <button v-on:click="isOpportunity = !isOpportunity">Business</button>
-                    <div v-if="!isOpportunity" class="filter-form">
-                        <filter-opportunity></filter-opportunity>
-                         <div class="filter-apply-container">
-                            <span style="float: left"><a href="#">Clear</a></span>
-                            <span style="float: right"><a href="#">Apply</a></span> 
-                        </div>
-                    </div>
-                </div>
-                 <div class="filter-item">
-                    <button v-on:click="isProvince = !isProvince">Marketing</button>
-                    <div v-if="!isProvince" class="filter-form">
-                        <filter-province></filter-province>
-                         <div class="filter-apply-container">
-                            <span style="float: left"><a href="#">Clear</a></span>
-                            <span style="float: right"><a href="#">Apply</a></span> 
-                        </div>
-                    </div>
-                </div>
-                <div class="filter-item">
-                    <button v-on:click="isAcreage = !isAcreage">Farm Access</button>
-                    <div v-if="!isAcreage" class="filter-form">
-                        <filter-acreage></filter-acreage>
-                         <div class="filter-apply-container">
-                            <span style="float: left"><a href="#">Clear</a></span>
-                            <span style="float: right"><a href="#">Apply</a></span> 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="filter-item">
-                <button v-on:click="isAllFilters = !isAllFilters">All Filters<span class="marker">9</span></button>
+                <button v-on:click="isAllFilters = !isAllFilters"><i class="fas fa-filter"></i> Filter Resources<span class="marker">9</span></button>
                     
                     <div v-if="!isAllFilters" class="filter-form-wide">
                         <filter-opportunity></filter-opportunity>
