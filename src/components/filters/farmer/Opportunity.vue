@@ -14,14 +14,14 @@
                 <input type="checkbox" name="opportunity" value="Internship" v-model="checked" @change="checkboxChange">
                 <span class="checkmark"></span>
             </label>
-            <label class="container">Business partnership with existing farmer
-                <input type="checkbox" name="opportunity" value="Business partnership with existing farmer" v-model="checked" @change="checkboxChange">
+            <label class="container">Business partnership
+                <input type="checkbox" name="opportunity" value="Business partnership" v-model="checked" @change="checkboxChange">
                 <span class="checkmark"></span>
             </label>
-            <label class="container">Business partnership with new farmer
+            <!-- <label class="container">Business partnership with new farmer
                 <input type="checkbox" name="opportunity" value="Business partnership with new farmer" v-model="checked" @change="checkboxChange">
                 <span class="checkmark"></span>
-            </label>
+            </label> -->
             <label class="container">Lease
                 <input type="checkbox" name="opportunity" value="Lease" v-model="checked" @change="checkboxChange">
                 <span class="checkmark"></span>
@@ -46,7 +46,7 @@ export default {
     methods: {
         checkboxChange() {
 			// Set active provinces
-            this.$store.dispatch("opportunityChange", this.checked);
+            this.$store.dispatch("checkboxChange", {'type': 'opportunity', 'checked': this.checked});
         }
     }
 }

@@ -42,7 +42,7 @@ export default {
     methods: {
         checkboxChange() {
 			// Set active provinces
-            this.$store.dispatch("acreageChange", this.checked);
+            this.$store.dispatch("checkboxChange", {'type': 'acreage', 'checked': this.checked});
         }
     }
 }

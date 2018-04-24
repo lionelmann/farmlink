@@ -22,6 +22,9 @@ const getters = {
             state.activeAcreage. length
         )
         return sum;
+    },
+    filterMatchCount: state => {
+        return state.filterMatches.length;
     }
 }
 
@@ -71,58 +74,83 @@ const actions = {
             commit('getListings', allListings);
         }))
     },
-    provinceChange({commit, dispatch, context, state}, provinceList) {
-        console.log('provinceChange', provinceList);
-        commit(SET_PROVINCE_LIST, provinceList);
-        // If you don't do a length check, and just dispatch filterChange everytime, 
-        //it's like live filtering, without having to press the Apply button
-        // if (provinceList.length == 0) {
-        //     dispatch("filterChange", {'type': 'filter-change', 'list': state.listings, 'checked': provinceList});
-        // }
+    checkboxChange({commit, dispatch, context, state}, info) {
+        console.log('checkboxChange', info);
+        if (info.type == 'province') {
+            commit(SET_PROVINCE_LIST, info.checked);
+        } else if (info.type == 'opportunity') {
+            commit(SET_OPPORTUNITY_LIST, info.checked);
+        } else {
+            commit(SET_ACREAGE_LIST, info.checked);
+        }
     },
-    opportunityChange({commit, dispatch, context, state}, oppList) {
-        console.log('opportunityChange', oppList);
-        commit(SET_OPPORTUNITY_LIST, oppList);
-        // if (oppList.length == 0) {
-        //     dispatch("filterChange", {'type': 'filter-change', 'list': state.listings, 'checked': oppList});
-        // }
+    oppFilter({commit, dispatch, context, state}, info) {
+        console.log('oppFilter', info);
+        let filterMatches = [];
+        let checked = info.checked;
+
+        if (checked.length > 0) {
+            for(let i = 0; i < info.list.length; i++) {
+                let found = checked.some(r=> info.list[i].meta_box._use_farmland.indexOf(r) >= 0);
+                if (found == true){
+                    console.log(i);
+                    filterMatches.push(info.list[i]);
+                }
+            }
+            dispatch("acreFilter", {'type': 'filter-change', 'list': filterMatches, 'checked': state.activeAcreage});
+        } else {
+            dispatch("acreFilter", {'type': 'filter-change', 'list': info.list, 'checked': state.activeAcreage});
+        }  
     },
-    acreageChange({commit, dispatch, context, state}, acreList) {
-        console.log('acreageChange', acreList);
-        commit(SET_ACREAGE_LIST, acreList);
-        // if (acreList.length == 0) {
-        //     dispatch("filterChange", {'type': 'filter-change', 'list': state.listings, 'checked': acreList});
-        // }
+    provFilter({commit, dispatch, context, state}, info) {
+        console.log('provFilter', info);
+        let filterMatches = [];
+        let checked = info.checked;
+        
+        if (checked.length > 0) {
+            for(let i = 0; i < info.list.length; i++) {
+                if (checked.includes(info.list[i].meta_box._address_province)){
+                    console.log(i);
+                    filterMatches.push(info.list[i]);
+                }
+            }
+            dispatch("oppFilter", {'type': 'filter-change', 'list': filterMatches, 'checked': state.activeOppotunity});
+        } else {
+            dispatch("oppFilter", {'type': 'filter-change', 'list': state.listings, 'checked': state.activeOppotunity});
+        }  
     },
-    oppFilter({commit, dispatch, context, state}, oppList) {
-        console.log('oppFilter', oppList);
-    },
-    provFilter({commit, dispatch, context, state}, provList) {
-        console.log('provFilter', provList);
-    },
-    acreFilter({commit, dispatch, context, state}, acreList) {
-        console.log('acreFilter', acreList);
+    acreFilter({commit, dispatch, context, state}, info) {
+        console.log('acreFilter', info);
+        let filterMatches = [];
+        let checked = info.checked;
+
+        if (checked.length > 0) {
+            for(let i = 0; i < info.list.length; i++) {
+                let found = checked.some(r=> info.list[i].meta_box._acre_farmland.indexOf(r) >= 0);
+                if (found == true){
+                    console.log(i);
+                    filterMatches.push(info.list[i]);
+                }
+            }
+            dispatch("acreFilter", {'type': 'filter-change', 'list': filterMatches, 'checked': ''});
+        } else {
+            dispatch("createFilteredList", {'type': 'filter-change', 'list': info.list, 'checked': ''});
+        }  
     },
     filterChange({commit, dispatch, context, state}, checkedProvince) {
-        dispatch("renderList", {'type': 'filter-change', 'list': state.listings, 'checked': state.activeProvince});
         console.log('filterChange', state.activeProvince);
+        dispatch("provFilter", {'type': 'filter-change', 'list': state.listings, 'checked': state.activeProvince});
     },
     createFilteredList({commit, dispatch, context, state}, info) {
         console.log('createFilteredList dispatched',info);
-        let filterMatches = [];
-        let checked = info.checked;
-        for(let i = 0; i < info.list.length; i++) {
-            if (checked.includes(info.list[i].meta_box._address_province)){
-                console.log(i);
-                filterMatches.push(info.list[i]);
-            }
-        }
-        if (filterMatches.length > 0) {
-            commit(SET_FILTERED_LIST, filterMatches)
+        let matches = info.list;
+        if (matches.length > 0) {
+            commit(SET_FILTERED_LIST, matches)
         } else {
             // Else just return all the results
             // Will have to change this...need an empty view
-            commit(SET_FILTERED_LIST, info.list)
+            console.log('NO MATCHES!!!');
+            commit(SET_FILTERED_LIST, state.listings)
         }  
     },
     renderList({commit, dispatch, context, state}, info) {

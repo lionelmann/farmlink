@@ -75,7 +75,7 @@ export default {
     methods: {
         checkboxChange() {
 			// Set active provinces
-            this.$store.dispatch("provinceChange", this.checked);
+            this.$store.dispatch("checkboxChange", {'type': 'province', 'checked': this.checked});
         }
     }
 }
