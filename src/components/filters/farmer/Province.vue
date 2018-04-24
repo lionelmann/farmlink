@@ -1,7 +1,7 @@
 <template>
    <div>
         <h6>Select Provinces</h6>
-        <form action="#">
+        <form>
             <label class="container">Alberta
                 <input type="checkbox" name="provinces" value="Alberta" v-model="checked" @change="checkboxChange">
                 <span class="checkmark"></span>
@@ -76,18 +76,7 @@ export default {
         checkboxChange() {
 			// Set active provinces
             this.$store.dispatch("provinceChange", this.checked);
-        },
-        filterChange() {
-            // Check if apply buttons are clicked
-            console.log('apply clicked');
-			this.$store.dispatch("filterChange", this.checkedProvince); 
-        },
-        filterClear() {
-            // Clear activeProvince in store
-            console.log('clear clicked');
-            this.checked = [];
-			this.$store.dispatch("provinceChange", []);
-		}
+        }
     }
 }
 </script>

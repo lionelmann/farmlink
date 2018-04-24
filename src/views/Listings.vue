@@ -3,51 +3,15 @@
         <div class="filter-wrapper">
             <div class="filter">
                 <div class="filter-item">
-                    <button v-on:click="isOpportunity = !isOpportunity">Opportunity</button>
-                    <div v-if="!isOpportunity" class="filter-form">
-                        <filter-opportunity></filter-opportunity>
-                         <div class="filter-apply-container">
-                            <span style="float: left"><a href="#">Clear</a></span>
-                            <span style="float: right"><a href="#">Apply</a></span> 
-                        </div>
-                    </div>
-                </div>
-                 <div class="filter-item">
-                    <button v-on:click="isProvince = !isProvince">Province</button>
-                    <div v-if="!isProvince" class="filter-form">
-                        <filter-province buttons="true"></filter-province>
-                        <!-- WE NEED TO PUT THIS IN THE filter-province -->
-                        <!-- You can put a prop on filter-province like "type", which controls whether the filter-apply-container shows up -->
-                         <!-- <div class="filter-apply-container">
-                            <span style="float: left"><button @click="filterClear">Clear</button></span>
-                            <span style="float: right"><button @click="filterChange">Apply</button></span> 
-                        </div> -->
-                    </div>
-                </div>
-                <div class="filter-item">
-                    <button v-on:click="isAcreage = !isAcreage">Acreage</button>
-                    <div v-if="!isAcreage" class="filter-form">
-                        <filter-acreage></filter-acreage>
-                         <div class="filter-apply-container">
-                            <span style="float: left"><a href="#">Clear</a></span>
-                            <span style="float: right"><a href="#">Apply</a></span> 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="filter-item">
                 <button v-on:click="isAllFilters = !isAllFilters">All Filters<span class="marker" v-html="checkedCount"></span></button>
                     
-                    <div v-if="!isAllFilters" class="filter-form-wide">
+                    <div class="filter-form-wide" v-bind:class="{ 'open-filter': isAllFilters }">
                         <filter-opportunity></filter-opportunity>
                         <filter-province buttons="false"></filter-province>
                         <filter-acreage></filter-acreage>
-                        <filter-acreage></filter-acreage>
-                        <filter-acreage></filter-acreage>
-                        <filter-acreage></filter-acreage>
                         <div class="filter-apply-container">
-                            <span style="float: left"><a href="#">Clear</a></span>
-                            <span style="float: right"><a href="#">Apply</a></span> 
+                            <span style="float: left"><button @click="filterClear">Clear</button></span>
+                            <span style="float: right"><button @click="filterChange">Apply</button></span> 
                         </div>
                     </div>
                </div>
@@ -120,9 +84,9 @@ export default {
             isProvince: true,
             isAcreage: true,
             isOpportunity: true,
-            isAllFilters: true,
+            isAllFilters: false,
             paginate: ['data'],
-            checkedProvince: []
+            // checkedProvince: []
 		}
     },
     components: {
@@ -146,7 +110,25 @@ export default {
               this.infoWinOpen = true;
               this.currentMidx = idx;
             }
-        }
+        },
+        filterChange() {
+            // Check if apply buttons are clicked
+            console.log('apply clicked');
+			this.$store.dispatch("filterChange", this.checkedProvince); 
+        },
+        filterClear() {
+            // Clear activeProvince in store
+            console.log('clear clicked');
+            this.checked = [];
+            // Might have to pass an object
+            // So that in provinceChange the check doesn't fire filterChange
+            // if someone just unchecks all the filters
+            // ie. {'checked': this.checked, 'type': 'clear'}
+            // Then in provinceChange check becomes
+            // (info.checked == 0 && info.type != 'clear')
+            // Note: 'provinceList' argument becomes 'info' in provinceChange
+			this.$store.dispatch("provinceChange", []);
+		}
     },
     computed: {
         ...mapGetters([
@@ -171,6 +153,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .filter-form-wide {
+        display: none;
+    }
+
+    .filter-form-wide.open-filter {
+        display: grid;
+    }
+
     .fade-enter-active, .fade-leave-active {
     transition: opacity .2s;
     }
