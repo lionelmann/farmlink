@@ -6,8 +6,8 @@ const state = {
     activeOppotunity: [],
     activeProvince: [],
     activeAcreage: [],
-    activeFour: [],
-    activeFive: [],
+    activeFacilityEquipt: [],
+    activePractice: [],
     activeSix: []
 }
 
@@ -19,7 +19,9 @@ const getters = {
         let sum = (
             state.activeProvince.length +
             state.activeOppotunity.length +
-            state.activeAcreage. length
+            state.activeAcreage. length +
+            state.activeFacilityEquipt. length +
+            state.activePractice. length
         )
         return sum;
     },
@@ -28,10 +30,12 @@ const getters = {
     }
 }
 
-const SET_FILTERED_LIST = 'SET_FILTERED_LIST';
-const SET_PROVINCE_LIST = 'SET_PROVINCE_LIST';
-const SET_OPPORTUNITY_LIST = 'SET_OPPORTUNITY_LIST';
-const SET_ACREAGE_LIST = 'SET_ACREAGE_LIST';
+const SET_FILTERED_LIST     = 'SET_FILTERED_LIST';
+const SET_PROVINCE_LIST     = 'SET_PROVINCE_LIST';
+const SET_OPPORTUNITY_LIST  = 'SET_OPPORTUNITY_LIST';
+const SET_ACREAGE_LIST      = 'SET_ACREAGE_LIST';
+const SET_FE_LIST      = 'SET_FE_LIST';
+const SET_PRACTICE_LIST      = 'SET_PRACTICE_LIST';
 
 const mutations = {
     getListings: (state, listings) => {
@@ -53,10 +57,18 @@ const mutations = {
         console.log('SET_ACREAGE_LIST')
         state.activeAcreage = list
     },
+    SET_FE_LIST(state, list) {
+        console.log('SET_FE_LIST')
+        state.activeFacilityEquipt = list
+    },
+    SET_PRACTICE_LIST(state, list) {
+        console.log('SET_PRACTICE_LIST')
+        state.activePractice = list
+    },
 }
 
 const actions = {
-    getListings: ({ commit }) => {
+    getListings: ({ commit, dispatch }) => {
         axios.all([
             axios.get('https://farmlink.net/wp-json/wp/v2/listing?per_page=50'),
             axios.get('https://farmlink.net/wp-json/wp/v2/listing?per_page=100&offset=50'),
@@ -72,6 +84,7 @@ const actions = {
             )
             
             commit('getListings', allListings);
+            dispatch('renderList');
         }))
     },
     checkboxChange({commit, dispatch, context, state}, info) {
@@ -80,8 +93,12 @@ const actions = {
             commit(SET_PROVINCE_LIST, info.checked);
         } else if (info.type == 'opportunity') {
             commit(SET_OPPORTUNITY_LIST, info.checked);
-        } else {
+        } else if (info.type == 'acreage') {
             commit(SET_ACREAGE_LIST, info.checked);
+        } else if (info.type == 'facequipt') {
+            commit(SET_FE_LIST, info.checked);
+        } else {
+            commit(SET_PRACTICE_LIST, info.checked);
         }
     },
     oppFilter({commit, dispatch, context, state}, info) {
@@ -154,19 +171,7 @@ const actions = {
         }  
     },
     renderList({commit, dispatch, context, state}, info) {
-        console.log('renderList dispatched');
-        if (info.type == 'filter-change') {
-            // When secondary filters are clicked
-            dispatch('createFilteredList', {'checked': info.checked, 'list': info.list});
-        } else if (info.type == 'back-button') {
-            // If user presses back button and a tab either than the first one was active
-            console.log('back button'); 
-            dispatch('createActiveList', info.list);
-        } else {
-             // Initial load
-            console.log('Initial load');
-            dispatch('createActiveList', info.list);
-        }
+        commit(SET_FILTERED_LIST, state.listings);
     },
 }
 

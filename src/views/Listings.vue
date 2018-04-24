@@ -9,6 +9,8 @@
                         <filter-opportunity></filter-opportunity>
                         <filter-province buttons="false"></filter-province>
                         <filter-acreage></filter-acreage>
+                        <filter-facility-equipt></filter-facility-equipt>
+                        <filter-practices></filter-practices>
                         <div class="filter-apply-container">
                             <span style="float: left"><button @click="filterClear">Clear</button></span>
                             <span style="float: right"><button @click="filterChange">Apply</button></span> 
@@ -62,6 +64,8 @@ import { mapGetters, mapState } from 'vuex';
 import FilterOpportunity from '../components/filters/farmer/Opportunity.vue';
 import FilterAcreage from '../components/filters/farmer/Acreage.vue';
 import FilterProvince from '../components/filters/farmer/Province.vue';
+import FilterFacilityEquipt from '../components/filters/farmer/FacilitiesEquiptment.vue';
+import FilterPractices from '../components/filters/farmer/Practices.vue';
 export default {
     data() {
 		return {
@@ -93,7 +97,9 @@ export default {
     components: {
         FilterOpportunity,
         FilterProvince,
-        FilterAcreage
+        FilterAcreage,
+        FilterFacilityEquipt,
+        FilterPractices
     },
     methods: {
 		onPageChange: () => {
@@ -149,6 +155,9 @@ export default {
             //console.log(this.$store.state.moduleListings['listings'][i].meta_box.lat);
             //console.log(this.$store.state.moduleListings['listings'][i].meta_box.lng);
         }*/
+        
+    },
+    mounted() {
         
     }
 };
