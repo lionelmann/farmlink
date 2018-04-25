@@ -3,37 +3,6 @@
        <div class="filter-wrapper">
             <div class="filter">
                 <div class="filter-item">
-                    <button v-on:click="isOpportunity = !isOpportunity">Opportunity</button>
-                    <div v-if="!isOpportunity" class="filter-form">
-                        <filter-opportunity></filter-opportunity>
-                         <div class="filter-apply-container">
-                            <span style="float: left"><a href="#">Clear</a></span>
-                            <span style="float: right"><a href="#">Apply</a></span> 
-                        </div>
-                    </div>
-                </div>
-                 <div class="filter-item">
-                    <button v-on:click="isProvince = !isProvince">Province</button>
-                    <div v-if="!isProvince" class="filter-form">
-                        <filter-province></filter-province>
-                         <div class="filter-apply-container">
-                            <span style="float: left"><a href="#">Clear</a></span>
-                            <span style="float: right"><a href="#">Apply</a></span> 
-                        </div>
-                    </div>
-                </div>
-                <div class="filter-item">
-                    <button v-on:click="isAcreage = !isAcreage">Acreage</button>
-                    <div v-if="!isAcreage" class="filter-form">
-                        <filter-acreage></filter-acreage>
-                         <div class="filter-apply-container">
-                            <span style="float: left"><a href="#">Clear</a></span>
-                            <span style="float: right"><a href="#">Apply</a></span> 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="filter-item">
                 <button v-on:click="isAllFilters = !isAllFilters">All Filters<span class="marker">5</span></button>
                     
                     <div v-if="!isAllFilters" class="filter-form-wide">

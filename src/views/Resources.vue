@@ -6,12 +6,8 @@
                 <button v-on:click="isAllFilters = !isAllFilters"><i class="fas fa-filter"></i> Filter Resources<span class="marker">9</span></button>
                     
                     <div v-if="!isAllFilters" class="filter-form-wide">
-                        <filter-opportunity></filter-opportunity>
-                        <filter-province></filter-province>
-                        <filter-acreage></filter-acreage>
-                        <filter-acreage></filter-acreage>
-                        <filter-acreage></filter-acreage>
-                        <filter-acreage></filter-acreage>
+                        <filter-viability></filter-viability>
+                        <filter-assessment></filter-assessment>
                         <div class="filter-apply-container">
                             <span style="float: left"><a href="#">Clear</a></span>
                             <span style="float: right"><a href="#">Apply</a></span> 
@@ -40,23 +36,19 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import FilterOpportunity from '../components/filters/farmer/Opportunity.vue';
-import FilterAcreage from '../components/filters/farmer/Acreage.vue';
-import FilterProvince from '../components/filters/farmer/Province.vue';
+import FilterViability from '../components/filters/resource/Viability.vue';
+import FilterAssessment from '../components/filters/resource/Assessment.vue';
+
 export default {
 	data() {
 		return {
-            isProvince: true,
-            isAcreage: true,
-            isOpportunity: true,
             isAllFilters: true,
             paginate: ['data']
 		}
     },
     components: {
-        FilterOpportunity,
-        FilterProvince,
-        FilterAcreage
+        FilterViability,
+         FilterAssessment,
     },
     methods: {
 		onPageChange: () => {

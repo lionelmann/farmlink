@@ -4,6 +4,7 @@
             <div class="top">
                 <div class="hero">
                     <h3 v-html="seeker.meta.first_name[0]"></h3>
+                    
                 </div>
             </div>
             <div class="grid-wrapper">
