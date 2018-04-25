@@ -4,7 +4,7 @@
         <form action="#">
             <div v-for="checkbox in checkboxList" :key="checkbox.name">
                 <label class="container">{{ checkbox.name }} ({{checkbox.count}})
-                    <input type="checkbox" :name="checkbox.slug" :value="checkbox.slug" v-model="selectedTax">
+                    <input type="checkbox" :name="checkbox.slug" :value="checkbox.slug" v-model="checkedValues" >
                     <span class="checkmark"></span>
                 </label>
             </div>
@@ -14,6 +14,7 @@
 
 <script>
 import axios from 'axios';
+import { mapGetters } from 'vuex';
 export default {
     data() {
         return {
@@ -23,10 +24,16 @@ export default {
             selectedTax: [],
         }
     },
-    watch: {
-        selectedTax: function (newVal, oldVal) {
-        // We will update store here
-        console.log(newVal)
+    computed: {
+        checkedValues: {
+            // getter
+            get: function () {
+                return this.selectedTax
+            },
+            // setter
+            set: function (newValue) {
+                console.log(newValue)
+            }
         }
     },
     created() {
