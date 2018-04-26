@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const state = {
     resource: null,
+    assessmentChecked: []
 }
 
 const getters = {
@@ -13,6 +14,10 @@ const getters = {
 const mutations = {
     getResource: (state, resource) => {
         state.resource = resource;  
+    },
+    setAssessment: (state, list) => {
+        state.assessmentChecked = list;  
+        console.log(state.assessmentChecked);
     }
 }
 

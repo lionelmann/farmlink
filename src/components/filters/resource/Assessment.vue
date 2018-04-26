@@ -28,11 +28,11 @@ export default {
         checkedValues: {
             // getter
             get: function () {
-                return this.selectedTax
+                return this.$store.state.moduleResource.assessmentChecked;
             },
             // setter
             set: function (newValue) {
-                console.log(newValue)
+                this.$store.commit('setAssessment', newValue);
             }
         }
     },
