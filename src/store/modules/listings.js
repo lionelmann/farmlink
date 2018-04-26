@@ -19,9 +19,9 @@ const getters = {
         let sum = (
             state.activeProvince.length +
             state.activeOppotunity.length +
-            state.activeAcreage. length +
-            state.activeFacilityEquipt. length +
-            state.activePractice. length
+            state.activeAcreage.length +
+            state.activeFacilityEquipt.length +
+            state.activePractice.length
         )
         return sum;
     },

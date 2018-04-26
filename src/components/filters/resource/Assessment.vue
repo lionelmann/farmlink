@@ -1,36 +1,30 @@
 <template>
-    <div>
+    <form>
         <h6>{{ taxName }}</h6>
-        <form action="#">
-            <div v-for="checkbox in checkboxList" :key="checkbox.name">
-                <label class="container">{{ checkbox.name }} ({{checkbox.count}})
-                    <input type="checkbox" :name="checkbox.slug" :value="checkbox.slug" v-model="checkedValues" >
-                    <span class="checkmark"></span>
-                </label>
-            </div>
-         </form>
-    </div>
+        <div v-for="checkbox in checkboxList" :key="checkbox.id">
+            <label class="container">{{ checkbox.name }} ({{checkbox.count}})
+                <input type="checkbox" :value="checkbox.slug" v-model="checkedValues">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </form>
 </template>
 
 <script>
 import axios from 'axios';
-import { mapGetters } from 'vuex';
 export default {
     data() {
         return {
             errors: [],
             checkboxList: [],
             taxName: 'Assessment',
-            selectedTax: [],
         }
     },
     computed: {
         checkedValues: {
-            // getter
             get: function () {
                 return this.$store.state.moduleResource.assessmentChecked;
             },
-            // setter
             set: function (newValue) {
                 this.$store.commit('setAssessment', newValue);
             }

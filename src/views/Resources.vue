@@ -3,11 +3,13 @@
         <div class="filter-wrapper">
             <div class="filter">
                 <div class="filter-item">
-                <button v-on:click="isAllFilters = !isAllFilters"><i class="fas fa-filter"></i> Filter Resources<span class="marker">9</span></button>
-                    
+                <button v-on:click="isAllFilters = !isAllFilters"><i class="fas fa-filter"></i> Filter Resources<span class="marker" v-html="checkedCount"></span></button>
                     <div v-if="!isAllFilters" class="filter-form-wide">
                         <filter-viability></filter-viability>
                         <filter-assessment></filter-assessment>
+                        <filter-succession></filter-succession>
+                        <filter-agreement></filter-agreement>
+                        <filter-farm-stage></filter-farm-stage>
                         <div class="filter-apply-container">
                             <span style="float: left"><a href="#">Clear</a></span>
                             <span style="float: right"><a href="#">Apply</a></span> 
@@ -38,6 +40,9 @@
 import { mapGetters } from 'vuex';
 import FilterViability from '../components/filters/resource/Viability.vue';
 import FilterAssessment from '../components/filters/resource/Assessment.vue';
+import FilterSuccession from '../components/filters/resource/Succession.vue';
+import FilterAgreement from '../components/filters/resource/Agreement.vue';
+import FilterFarmStage from '../components/filters/resource/FarmStage.vue';
 
 export default {
 	data() {
@@ -48,7 +53,10 @@ export default {
     },
     components: {
         FilterViability,
-         FilterAssessment,
+        FilterAssessment,
+        FilterSuccession,
+        FilterAgreement,
+        FilterFarmStage,
     },
     methods: {
 		onPageChange: () => {
@@ -57,7 +65,8 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'resource'
+            'resource',
+            'checkedCount',
         ])
     },
     created() {

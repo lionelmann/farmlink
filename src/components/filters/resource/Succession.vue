@@ -17,16 +17,16 @@ export default {
         return {
             errors: [],
             checkboxList: [],
-            taxName: 'Viability',
+            taxName: 'Succession',
         }
     },
     computed: {
         checkedValues: {
             get: function () {
-                return this.$store.state.moduleResource.viabilityChecked;
+                return this.$store.state.moduleResource.successionChecked;
             },
             set: function (newValue) {
-                this.$store.commit('setViability', newValue);
+                this.$store.commit('setSuccession', newValue);
             }
         }
     },

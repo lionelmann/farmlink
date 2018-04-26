@@ -1,6 +1,6 @@
 <template>
     <form>
-        <h6>{{ taxName }}</h6>
+        <h6>Farm Stage</h6>
         <div v-for="checkbox in checkboxList" :key="checkbox.id">
             <label class="container">{{ checkbox.name }} ({{checkbox.count}})
                 <input type="checkbox" :value="checkbox.slug" v-model="checkedValues">
@@ -17,16 +17,16 @@ export default {
         return {
             errors: [],
             checkboxList: [],
-            taxName: 'Viability',
+            taxName: 'farm_stage',
         }
     },
     computed: {
         checkedValues: {
             get: function () {
-                return this.$store.state.moduleResource.viabilityChecked;
+                return this.$store.state.moduleResource.farmstageChecked;
             },
             set: function (newValue) {
-                this.$store.commit('setViability', newValue);
+                this.$store.commit('setFarmStage', newValue);
             }
         }
     },
