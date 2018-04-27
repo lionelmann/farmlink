@@ -168,7 +168,9 @@ export default {
         filterChange() {
             // Check if apply button is clicked
             console.log('apply clicked');
-			this.$store.dispatch("filterChange", this.checkedProvince); 
+            this.$store.dispatch("filterChange", this.checkedProvince); 
+            this.isMap = true;
+            this.isAllFilters = false;
         },
         filterClear() {
             // Clear activeProvince in store
@@ -189,44 +191,48 @@ export default {
                 Iterate over all of the events
             */
             for( var i = 0; i < app.locations.length; i++ ){
-                /*
-                    Set marker position
-                */
-                let theposition = new google.maps.LatLng(app.locations[i].meta_box.lat, app.locations[i].meta_box.lng);
+                if (app.locations[i].meta_box.lat != "") {
+                    /*
+                        Set marker position
+                    */
+                    let theposition = new google.maps.LatLng(app.locations[i].meta_box.lat, app.locations[i].meta_box.lng);
 
-                /*
-                    Create the marker for each of the locations and set the
-                    latitude and longitude to the latitude and longitude
-                    of the location. Also set the map to be the local map.
-                */
-                
-                let marker = new google.maps.Marker({
-                    position: theposition,
-                    map: app.map,
-                    title: app.locations[i].title.rendered,
-                });
+                    /*
+                        Create the marker for each of the locations and set the
+                        latitude and longitude to the latitude and longitude
+                        of the location. Also set the map to be the local map.
+                    */
+                    
+                    let marker = new google.maps.Marker({
+                        position: theposition,
+                        map: app.map,
+                        title: app.locations[i].title.rendered,
+                    });
 
-                /*
-                    Create the info window and add it to the local
-                    array.
-                */
-                // console.log(app.locations[i].listing);
-                let windowString = app.infoWindowString(app.locations[i].slug,app.locations[i].id,app.locations[i].title.rendered);
+                    /*
+                        Create the info window and add it to the local
+                        array.
+                    */
+                    // console.log(app.locations[i].listing);
+                    let windowString = app.infoWindowString(app.locations[i].slug,app.locations[i].id,app.locations[i].title.rendered);
 
-                let infoWindow = new google.maps.InfoWindow({
-                    content: windowString
-                });
+                    let infoWindow = new google.maps.InfoWindow({
+                        content: windowString
+                    });
 
-                marker.addListener('click', function() {
-                    infoWindow.open(app.map, marker);
-                });
+                    marker.addListener('click', function() {
+                        infoWindow.open(app.map, marker);
+                    });
 
-                app.infoWindows.push( infoWindow );
+                    app.infoWindows.push( infoWindow );
 
-                /*
-                    Push the new marker on to the array.
-                */
-                app.markers.push( marker );
+                    /*
+                        Push the new marker on to the array.
+                    */
+                    app.markers.push( marker );
+                } else {
+                    console.log('BUILD | Missing LAT/LNG: ', app.locations[i].title.rendered, app.locations[i].id, app.locations[i]);
+                }
                 
             }
 
@@ -315,7 +321,7 @@ export default {
 
                         // app.map.fitBounds(bounds);
                     } else {
-                        console.log('Missing LAT/LNG: ', app.activeMarkers[i].title.rendered, app.activeMarkers[i].id, app.activeMarkers[i]);
+                        console.log('REBUILD | Missing LAT/LNG: ', app.activeMarkers[i].title.rendered, app.activeMarkers[i].id, app.activeMarkers[i]);
                     }
                 } 
 
