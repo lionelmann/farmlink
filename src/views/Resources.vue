@@ -3,7 +3,7 @@
         <div class="filter-wrapper">
             <div class="filter">
                 <div class="filter-item">
-                <button v-on:click="isAllFilters = !isAllFilters"><i class="fas fa-filter"></i> Filter Resources<span class="marker" v-html="checkedCount"></span></button>
+                <button v-on:click="isAllFilters = !isAllFilters"><i class="fas fa-filter"></i> Filter Resources<span class="marker" v-html="resourceCheckedCount"></span></button>
                     <div v-if="!isAllFilters" class="filter-form-wide">
                         <filter-viability></filter-viability>
                         <filter-assessment></filter-assessment>
@@ -12,7 +12,7 @@
                         <filter-farm-stage></filter-farm-stage>
                         <div class="filter-apply-container">
                             <span style="float: left"><a href="#">Clear</a></span>
-                            <span style="float: right"><a href="#">Apply</a></span> 
+                            <button style="float: right" @click="startFilter">Apply</button> 
                         </div>
                     </div>
                </div>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import FilterViability from '../components/filters/resource/Viability.vue';
 import FilterAssessment from '../components/filters/resource/Assessment.vue';
 import FilterSuccession from '../components/filters/resource/Succession.vue';
@@ -59,6 +59,9 @@ export default {
         FilterFarmStage,
     },
     methods: {
+        ...mapActions([
+            'startFilter',
+        ]),
 		onPageChange: () => {
             window.scrollTo(0, 0);
         }
@@ -66,7 +69,7 @@ export default {
     computed: {
         ...mapGetters([
             'resource',
-            'checkedCount',
+            'resourceCheckedCount',
         ])
     },
     created() {

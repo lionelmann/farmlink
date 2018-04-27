@@ -13,7 +13,7 @@ const getters = {
     resource: state => {
         return state.resource;
     },
-    checkedCount: state => {
+    resourceCheckedCount: state => {
         let sum = (
             state.farmstageChecked.length +
             state.agreementChecked.length +
@@ -27,27 +27,25 @@ const getters = {
 
 const mutations = {
     getResource: (state, resource) => {
-        state.resource = resource;  
+        state.resource = resource;
     },
     setAssessment: (state, list) => {
-        state.assessmentChecked = list;  
-        console.log(state.assessmentChecked);
+        state.assessmentChecked = list;
     },
     setViability: (state, list) => {
-        state.viabilityChecked = list;  
-        console.log(state.viabilityChecked);
+        state.viabilityChecked = list;
     },
     setSuccession: (state, list) => {
-        state.successionChecked = list;  
-        console.log(state.successionChecked);
+        state.successionChecked = list;
     },
     setAgreement: (state, list) => {
-        state.agreementChecked = list;  
-        console.log(state.agreementChecked);
+        state.agreementChecked = list;
     },
     setFarmStage: (state, list) => {
-        state.farmstageChecked = list;  
-        console.log(state.farmstageChecked);
+        state.farmstageChecked = list;
+    },
+    filterMatch: (state) => {
+        console.log(state.viabilityChecked);
     }
 }
 
@@ -78,7 +76,15 @@ const actions = {
             
             commit('getResource', allResources);
         }))
+    },
+    startFilter({ state, commit }) {
+        let checked = state.viabilityChecked
+        if (checked.length > 0) {
+            console.log(checked)
+        }
+        commit('filterMatch');
     }
+
 }
 
 export default {
