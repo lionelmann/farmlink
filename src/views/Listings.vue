@@ -25,10 +25,9 @@
                 <div><span>{{ filterMatchCount }}</span> Active Farm Listings</div>
             </div>
         </div>
-
-        <!-- isMap = False -->
+        
         <transition name="fade">
-        <div v-if="!isMap" class="grid-wrapper grid__spacer">
+        <div v-bind:class="{ 'hide-list': isMap }" class="grid-wrapper grid__spacer">
             <paginate name="data" :list="this.$store.state.moduleListings.filterMatches" :per="21" tag="div">
                 <div class="cards">
                     <div class="card card__full" v-for="listing in paginated('data')" :key="listing.id">
@@ -44,13 +43,8 @@
         
         <!-- isMap = True -->
         <transition name="fade">
-        <div v-if="isMap" style="padding-top: 120px;">
-            <gmap-map :center="center" :zoom="6" class="gmap-map">
-                <gmap-info-window :options="infoOptions" :position="infoWindowPos" :opened="infoWinOpen" @closeclick="infoWinOpen=false">
-                    {{ infoContent }}
-                </gmap-info-window>
-               <gmap-marker :key="i" v-for="(m,i) in markers" :position="m.position" :clickable="true" @click="toggleInfoWindow(m,i)"></gmap-marker>
-            </gmap-map>
+        <div v-bind:class="{ 'show-map': isMap }" class="the-map" style="padding-top: 120px;">
+            <section id="google-map"></section>
         </div>
         </transition>
 
@@ -84,7 +78,9 @@ export default {
                     height: -35
                 }
             },
-            markers: [{ position: {lat: 43.66627899999999, lng: -80.78653369999997}, infoText: 'Marker 1'},],
+            markers: [],
+            mapName: "google-map",
+            infoWindows: [],
             isMap: true,
             isProvince: true,
             isAcreage: true,
@@ -100,6 +96,57 @@ export default {
         FilterAcreage,
         FilterFacilityEquipt,
         FilterPractices
+    },
+    props: {
+        'latitude': {
+            type: Number,
+            default: function(){
+            return 43.52385109999999
+            }
+        },
+        'longitude': {
+            type: Number,
+            default: function(){
+            return -79.71254299999998
+            }
+        },
+        'zoom': {
+            type: Number,
+            default: function(){
+            return 4
+            }
+        }
+    },
+    created() {
+        this.$store.dispatch('getListings');
+    },
+    mounted() {
+        // Store 'this' in a variable, so you can referecne 'this' properly in
+        // the following fucntions
+        let app = this;
+
+        app.bounds     = new google.maps.LatLngBounds();
+
+        const element   = document.getElementById('google-map');
+        // const mapCentre = this.markerCoordinates[0]
+        const options   = {
+            // How zoomed in you want the map to start at (always required)
+            zoom: 4,
+
+            scrollwheel:  false,
+            // draggable: isDraggable,
+
+            // The latitude and longitude to center the map (always required)
+            center: {lat: this.latitude, lng: this.longitude}, 
+
+            // How you would like to style the map. 
+            // This is where you would paste any style found on Snazzy Maps.
+            styles: [{"featureType": 'poi.park', "elementType": 'geometry',"stylers": [{"color": '#137E23'},{ "visibility": "on" }]},{"featureType":"poi.business","stylers": [{ "visibility": "off" }]},{"featureType":"landscape","stylers":[{"hue":"#FFBB00"},{"saturation":43.400000000000006},{"lightness":37.599999999999994},{"gamma":1}]},{"featureType":"road.highway","stylers":[{"hue":"#FFC200"},{"saturation":-61.8},{"lightness":45.599999999999994},{"gamma":1}]},{"featureType":"road.arterial","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":51.19999999999999},{"gamma":1}]},{"featureType":"road.local","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":52},{"gamma":1}]},{"featureType":"water","stylers":[{"hue":"#0078FF"},{"saturation":-13.200000000000003},{"lightness":2.4000000000000057},{"gamma":1}]},{"featureType":"poi","stylers":[{"hue":"#00FF6A"},{"saturation":-1.0989010989011234},{"lightness":11.200000000000017},{"gamma":1}]}]
+        }
+
+        app.map = new google.maps.Map(element, options);
+        
+        app.buildMarkers();
     },
     methods: {
 		onPageChange: () => {
@@ -119,7 +166,7 @@ export default {
             }
         },
         filterChange() {
-            // Check if apply buttons are clicked
+            // Check if apply button is clicked
             console.log('apply clicked');
 			this.$store.dispatch("filterChange", this.checkedProvince); 
         },
@@ -127,43 +174,196 @@ export default {
             // Clear activeProvince in store
             console.log('clear clicked');
             this.checked = [];
-            // Might have to pass an object
-            // So that in provinceChange the check doesn't fire filterChange
-            // if someone just unchecks all the filters
-            // ie. {'checked': this.checked, 'type': 'clear'}
-            // Then in provinceChange check becomes
-            // (info.checked == 0 && info.type != 'clear')
-            // Note: 'provinceList' argument becomes 'info' in provinceChange
 			this.$store.dispatch("provinceChange", []);
-		}
+        },
+        buildMarkers(){
+            console.log('Build Markers');
+            let app = this;
+
+            // Let's combine this method with rebuildMarkers
+            // We can set a variable to contain the right set of locations with a conditional
+            app.markers = [];
+            app.infoWindows = [];
+
+            /*
+                Iterate over all of the events
+            */
+            for( var i = 0; i < app.locations.length; i++ ){
+                /*
+                    Set marker position
+                */
+                let theposition = new google.maps.LatLng(app.locations[i].meta_box.lat, app.locations[i].meta_box.lng);
+
+                /*
+                    Create the marker for each of the locations and set the
+                    latitude and longitude to the latitude and longitude
+                    of the location. Also set the map to be the local map.
+                */
+                
+                let marker = new google.maps.Marker({
+                    position: theposition,
+                    map: app.map,
+                    title: app.locations[i].title.rendered,
+                });
+
+                /*
+                    Create the info window and add it to the local
+                    array.
+                */
+                // console.log(app.locations[i].listing);
+                let windowString = app.infoWindowString(app.locations[i].slug,app.locations[i].id,app.locations[i].title.rendered);
+
+                let infoWindow = new google.maps.InfoWindow({
+                    content: windowString
+                });
+
+                marker.addListener('click', function() {
+                    infoWindow.open(app.map, marker);
+                });
+
+                app.infoWindows.push( infoWindow );
+
+                /*
+                    Push the new marker on to the array.
+                */
+                app.markers.push( marker );
+                
+            }
+
+            this.map.panBy(-80, -100);
+
+        },
+        infoWindowString(slug,id,title) {
+            let header = '<h6 style="margin-bottom: 10px;font-size: 16px;">'+ title + '</h6>';
+            return '<div style="width: 250px;">' + header +'</div>';
+        },
+        clearMarkers(){
+            console.log('clearMarkers start', this.markers, this.infoWindows);
+            let app = this;
+            /*
+                Iterate over all of the markers and set the map
+                to null so they disappear.
+            */
+            for( var i = 0; i < app.markers.length; i++ ){
+                app.markers[i].setVisible(false);
+                app.markers[i].setMap( null );
+                
+            }
+
+            app.markers = [];
+            app.infoWindows = [];
+            console.log('clearMarkers end', app.markers, app.infoWindows);
+        },
+        rebuildMarkers(){
+            let app = this;
+
+            if (app.activeMarkers.length > 0 && (app.activeMarkers.length != app.locations.length)) {
+                console.log('rebuild markers', app.activeMarkers);
+                app.clearMarkers();
+            
+                // COMMINGTING THIS OUT MADE THE PLACES DISAPPEAR
+                // app.markers = [];
+                // app.infoWindows = [];
+
+                let bounds = new google.maps.LatLngBounds();
+
+                /*
+                    Iterate over all of the events
+                */
+                for( var i = 0; i < app.activeMarkers.length; i++ ){
+                    
+                    if (app.activeMarkers[i].meta_box.lat != "") {
+                        /*
+                            Set marker position
+                        */
+                        let theposition = new google.maps.LatLng(app.activeMarkers[i].meta_box.lat, app.activeMarkers[i].meta_box.lng);
+
+                        /*
+                            Create the marker for each of the locations and set the
+                            latitude and longitude to the latitude and longitude
+                            of the location. Also set the map to be the local map.
+                        */
+                        var iconSize = new google.maps.Size(45, 42);
+                        var marker = new google.maps.Marker({
+                            position: theposition,
+                            map: app.map,
+                            title: app.activeMarkers[i].title.rendered,
+                        });
+
+                        console.log('markers',app.markers);
+                        /*
+                            Create the info window and add it to the local
+                            array.
+                        */
+                        let windowString = app.infoWindowString(app.activeMarkers[i].slug,app.activeMarkers[i].id,app.activeMarkers[i].title.rendered);
+
+                        let infoWindow = new google.maps.InfoWindow({
+                            content: windowString
+                        });
+
+                        marker.addListener('click', function() {
+                            infoWindow.open(app.map, marker);
+                        });
+
+                        app.infoWindows.push( infoWindow );
+
+                        /*
+                            Push the new marker on to the array.
+                        */
+                        app.markers.push( marker );
+                        // bounds.extend( app.markers[i].getPosition()); 
+
+                        // app.map.fitBounds(bounds);
+                    } else {
+                        console.log('Missing LAT/LNG: ', app.activeMarkers[i].title.rendered, app.activeMarkers[i].id, app.activeMarkers[i]);
+                    }
+                } 
+
+            } else {
+                return
+            }
+
+        },
     },
     computed: {
         ...mapGetters([
             'listings',
             'checkedCount',
-            'filterMatchCount'
+            'filterMatchCount',
+            'locations',
+            'activeMarkers'
         ])
     },
-    created() {
-        this.$store.dispatch('getListings');
-        //this.markers = { position: {lat: 43.66627899999999, lng: -80.78653369999997}, infoText: 'Marker 1'}, 
+    watch: {
         /*
-        for(let i = 0; i < this.$store.state.moduleListings['listings'].length; i++) {
-            this.markers.push({ position: {lat: this.$store.state.moduleListings['listings'][i].meta_box.lat, lng: this.$store.state.moduleListings['listings'][i].meta_box.lng}, infoText: 'Marker 1'},);
-
-
-            //console.log(this.$store.state.moduleListings['listings'][i].meta_box.lat);
-            //console.log(this.$store.state.moduleListings['listings'][i].meta_box.lng);
-        }*/
-        
+            Watches the list of locations in the store. 
+            When they are updated, clear the markers and re build them.
+            TKNOTE: This is eventually should be attached to the getter that contained filtered results.
+        */
+        locations(){
+            // this.clearMarkers();
+            this.buildMarkers();
+            // this.resetMarkers();
+            // this.checkLoader();
+        },
+        activeMarkers(){
+            // this.clearMarkers();
+            this.rebuildMarkers();
+            // this.checkLoader();
+        }
     },
-    mounted() {
-        
-    }
 };
 </script>
 
 <style lang="scss" scoped>
+    #google-map {
+        transition: all 0.5s ease;
+        width: 100%;
+        min-height: 90vh;
+        // margin-bottom: 50px;
+        display: inline-block;
+    }
+
     .filter-form-wide {
         display: none;
     }
@@ -191,5 +391,17 @@ export default {
         li {
            margin-bottom: 5px;
         }
+    }
+
+    .grid-wrapper.hide-list {
+        display: none;
+    }
+
+    .the-map {
+        display: none;
+    }
+
+    .the-map.show-map {
+        display: block;
     }
 </style>
