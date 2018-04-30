@@ -3,31 +3,30 @@
        <div class="filter-wrapper">
             <div class="filter">
                 <div class="filter-item">
-                <button v-on:click="isAllFilters = !isAllFilters">All Filters<span class="marker">5</span></button>
+                <button v-on:click="isAllFilters = !isAllFilters">All Filters<span class="marker" v-html="seekersCheckedCount"></span></button>
                     
-                    <div v-if="!isAllFilters" class="filter-form-wide">
+                    <div v-bind:class="{ 'open-filter': isAllFilters }" class="filter-form-wide">
                         <filter-opportunity></filter-opportunity>
-                        <filter-province></filter-province>
+                        <filter-province buttons="false"></filter-province>
                         <filter-acreage></filter-acreage>
-                        <filter-acreage></filter-acreage>
-                        <filter-acreage></filter-acreage>
-                        <filter-acreage></filter-acreage>
+                        <filter-facility-equipt></filter-facility-equipt>
+                        <filter-practices></filter-practices>
                         <div class="filter-apply-container">
-                            <span style="float: left"><a href="#">Clear</a></span>
-                            <span style="float: right"><a href="#">Apply</a></span> 
+                            <span style="float: left"><button @click="filterChange">Clear</button></span>
+                            <span style="float: right"><button @click="filterChange">Apply</button></span> 
                         </div>
                     </div>
                </div>
             </div> 
             <div class="filter-number">
-                <div><span>{{ seekers.length }}</span> Active Farm Seekers</div>
+                <div><span>{{ seekerFilterMatchCount }}</span> Active Farm Seekers</div>
             </div>
         </div>
             
         <div class="grid-wrapper grid__spacer">
-            <paginate name="data" :list="seekers" :per="51" tag="div">
+            <paginate name="data" :list="this.$store.state.moduleSeekers.seekerFilterMatches" :per="51" tag="div">
                 <div class="cards">
-                    <div class="card card__seeker" v-for="seeker in paginated('data')">
+                    <div class="card card__seeker" v-for="seeker in paginated('data')" :key="seeker.id">
                         <!-- See cards/Seeker.vue -->
                         <farm-seeker :farmCard="seeker"></farm-seeker>
                     </div>
@@ -42,32 +41,44 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import FilterOpportunity from '../components/filters/farmer/Opportunity.vue';
-import FilterAcreage from '../components/filters/farmer/Acreage.vue';
-import FilterProvince from '../components/filters/farmer/Province.vue';
+import FilterOpportunity from '../components/filters/seeker/Opportunity.vue';
+import FilterAcreage from '../components/filters/seeker/Acreage.vue';
+import FilterProvince from '../components/filters/seeker/Province.vue';
+import FilterFacilityEquipt from '../components/filters/seeker/FacilitiesEquiptment.vue';
+import FilterPractices from '../components/filters/seeker/Practices.vue';
 export default {
 	data() {
 		return {
             isProvince: true,
             isAcreage: true,
             isOpportunity: true,
-            isAllFilters: true,
+            isAllFilters: false,
             paginate: ['data']
 		}
     },
     components: {
         FilterOpportunity,
         FilterProvince,
-        FilterAcreage
+        FilterAcreage,
+        FilterFacilityEquipt,
+        FilterPractices
     },
     methods: {
 		onPageChange: () => {
             window.scrollTo(0, 0);
-        }
+        },
+        filterChange() {
+            // Check if apply button is clicked
+            console.log('apply clicked');
+            this.$store.dispatch("seekerFilterChange", this.checkedProvince); 
+            this.isAllFilters = false;
+        },
     },
     computed: {
         ...mapGetters([
-            'seekers'
+            'seekers',
+            'seekersCheckedCount',
+            'seekerFilterMatchCount'
         ])
     },
     created() {
@@ -75,3 +86,14 @@ export default {
 	}
 };
 </script>
+
+<style lang="scss" scoped>
+
+    .filter-form-wide {
+        display: none;
+    }
+
+    .filter-form-wide.open-filter {
+        display: grid;
+    }
+</style>

@@ -8,8 +8,6 @@ const state = {
     activeAcreage: [],
     activeFacilityEquipt: [],
     activePractice: [],
-    activeSix: [],
-
 }
 
 const getters = {
