@@ -69,6 +69,7 @@ export default {
             // Check if apply button is clicked
             console.log('apply clicked');
             this.$store.dispatch("startFilter");
+            this.isAllFilters = false;
         },
     },
     computed: {
