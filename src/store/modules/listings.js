@@ -191,16 +191,16 @@ const actions = {
                     filterMatches.push(info.list[i]);
                 }
             }
-            dispatch("createFilteredList", {'type': 'filter-change', 'list': filterMatches, 'checked': ''});
+            dispatch("listingsCreateFilteredList", {'type': 'filter-change', 'list': filterMatches, 'checked': ''});
         } else {
-            dispatch("createFilteredList", {'type': 'filter-change', 'list': info.list, 'checked': ''});
+            dispatch("listingsCreateFilteredList", {'type': 'filter-change', 'list': info.list, 'checked': ''});
         }  
     },
     filterChange({commit, dispatch, context, state}, checkedProvince) {
         console.log('filterChange', state.activeProvince);
         dispatch("provFilter", {'type': 'filter-change', 'list': state.listings, 'checked': state.activeProvince});
     },
-    createFilteredList({commit, dispatch, context, state}, info) {
+    listingsCreateFilteredList({commit, dispatch, context, state}, info) {
         console.log('createFilteredList dispatched',info);
         let matches = info.list;
         let empty = []
