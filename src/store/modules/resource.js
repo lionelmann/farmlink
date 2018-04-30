@@ -82,88 +82,88 @@ const actions = {
             dispatch('renderList');
         }))
     },
-    renderList({commit, dispatch, context, state}, info) {
+    renderList({commit, dispatch, state}) {
         commit("setFilteredList", state.resource);
     },
     startFilter({ state, dispatch }) {
         console.log('startFilter');
-        dispatch("viabilityFilter", {'type': 'filter-change', 'list': state.resource, 'checked': state.viabilityChecked});
+        dispatch("viabilityFilter", {'list': state.resource, 'checked': state.viabilityChecked});
     },
-    viabilityFilter({commit, dispatch, state}, info) {
-        console.log('viabilityFilter', info, info.checked);
+    viabilityFilter({commit, dispatch, state}, payload) {
+        console.log('viabilityFilter', payload, payload.checked);
         let filterMatches = [];
-        let checked = info.checked;
+        let checked = payload.checked;
         
         if (checked.length > 0) {
-            for(let i = 0; i < info.list.length; i++) {
-                let found = checked.some(r=> info.list[i].viability.indexOf(r) >= 0);
+            for(let i = 0; i < payload.list.length; i++) {
+                let found = checked.some(r=> payload.list[i].viability.indexOf(r) >= 0);
                 if (found == true){
                     console.log(i);
-                    filterMatches.push(info.list[i]);
+                    filterMatches.push(payload.list[i]);
                 }
             }
-            dispatch("assessmentFilter", {'type': 'filter-change', 'list': filterMatches, 'checked': state.assessmentChecked});
+            dispatch("assessmentFilter", {'list': filterMatches, 'checked': state.assessmentChecked});
         } else {
-            dispatch("assessmentFilter", {'type': 'filter-change', 'list': info.list, 'checked': state.assessmentChecked});
+            dispatch("assessmentFilter", {'list': payload.list, 'checked': state.assessmentChecked});
         }  
     },
-    assessmentFilter({commit, dispatch, state}, info) {
-        console.log('assessmentFilter', info, info.checked);
+    assessmentFilter({commit, dispatch, state}, payload) {
+        console.log('assessmentFilter', payload, payload.checked);
         let filterMatches = [];
-        let checked = info.checked;
+        let checked = payload.checked;
         
         if (checked.length > 0) {
-            for(let i = 0; i < info.list.length; i++) {
-                let found = checked.some(r=> info.list[i].assessment.indexOf(r) >= 0);
+            for(let i = 0; i < payload.list.length; i++) {
+                let found = checked.some(r=> payload.list[i].assessment.indexOf(r) >= 0);
                 if (found == true){
                     console.log(i);
-                    filterMatches.push(info.list[i]);
+                    filterMatches.push(payload.list[i]);
                 }
             }
-            dispatch("successionFilter", {'type': 'filter-change', 'list': filterMatches, 'checked': state.successionChecked});
+            dispatch("successionFilter", {'list': filterMatches, 'checked': state.successionChecked});
         } else {
-            dispatch("successionFilter", {'type': 'filter-change', 'list': info.list, 'checked': state.successionChecked});
+            dispatch("successionFilter", {'list': payload.list, 'checked': state.successionChecked});
         }  
     },
-    successionFilter({commit, dispatch, state}, info) {
-        console.log('successionFilter', info, info.checked);
+    successionFilter({commit, dispatch, state}, payload) {
+        console.log('successionFilter', payload, payload.checked);
         let filterMatches = [];
-        let checked = info.checked;
+        let checked = payload.checked;
         
         if (checked.length > 0) {
-            for(let i = 0; i < info.list.length; i++) {
-                let found = checked.some(r=> info.list[i].succession.indexOf(r) >= 0);
+            for(let i = 0; i < payload.list.length; i++) {
+                let found = checked.some(r=> payload.list[i].succession.indexOf(r) >= 0);
                 if (found == true){
                     console.log(i);
-                    filterMatches.push(info.list[i]);
+                    filterMatches.push(payload.list[i]);
                 }
             }
-            dispatch("farmStageFilter", {'type': 'filter-change', 'list': filterMatches, 'checked': state.farmstageChecked});
+            dispatch("farmStageFilter", {'list': filterMatches, 'checked': state.farmstageChecked});
         } else {
-            dispatch("farmStageFilter", {'type': 'filter-change', 'list': info.list, 'checked': state.farmstageChecked});
+            dispatch("farmStageFilter", {'list': payload.list, 'checked': state.farmstageChecked});
         }  
     },
-    farmStageFilter({commit, dispatch, state}, info) {
-        console.log('farmStageFilter', info, info.checked);
+    farmStageFilter({commit, dispatch, state}, payload) {
+        console.log('farmStageFilter', payload, payload.checked);
         let filterMatches = [];
-        let checked = info.checked;
+        let checked = payload.checked;
         
         if (checked.length > 0) {
-            for(let i = 0; i < info.list.length; i++) {
-                let found = checked.some(r=> info.list[i].farm_stage.indexOf(r) >= 0);
+            for(let i = 0; i < payload.list.length; i++) {
+                let found = checked.some(r=> payload.list[i].farm_stage.indexOf(r) >= 0);
                 if (found == true){
                     console.log(i);
-                    filterMatches.push(info.list[i]);
+                    filterMatches.push(payload.list[i]);
                 }
             }
-            dispatch("createFilteredList", {'type': 'filter-change', 'list': filterMatches, 'checked': ''});
+            dispatch("createFilteredList", {'list': filterMatches, 'checked': ''});
         } else {
-            dispatch("createFilteredList", {'type': 'filter-change', 'list': info.list, 'checked': ''});
+            dispatch("createFilteredList", {'list': payload.list, 'checked': ''});
         }  
     },
-    createFilteredList({commit, dispatch, context, state}, info) {
-        console.log('createFilteredList dispatched',info);
-        let matches = info.list;
+    createFilteredList({commit, dispatch, context, state}, payload) {
+        console.log('createFilteredList dispatched',payload);
+        let matches = payload.list;
         let empty = []
         let sum = (
             state.assessmentChecked.length+
