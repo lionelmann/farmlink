@@ -87,83 +87,83 @@ const actions = {
     },
     startFilter({ state, dispatch }) {
         console.log('startFilter');
-        dispatch("viabilityFilter", {'list': state.resource, 'checked': state.viabilityChecked});
+        dispatch("viabilityFilter", {'resources': state.resource, 'checked': state.viabilityChecked});
     },
-    viabilityFilter({commit, dispatch, state}, payload) {
+    viabilityFilter({dispatch, state}, payload) {
         console.log('viabilityFilter', payload, payload.checked);
         let filterMatches = [];
         let checked = payload.checked;
         
         if (checked.length > 0) {
-            for(let i = 0; i < payload.list.length; i++) {
-                let found = checked.some(r=> payload.list[i].viability.indexOf(r) >= 0);
+            for(let i = 0; i < payload.resources.length; i++) {
+                let found = checked.some(r=> payload.resources[i].viability.indexOf(r) >= 0);
                 if (found == true){
                     console.log(i);
-                    filterMatches.push(payload.list[i]);
+                    filterMatches.push(payload.resources[i]);
                 }
             }
-            dispatch("assessmentFilter", {'list': filterMatches, 'checked': state.assessmentChecked});
+            dispatch("assessmentFilter", {'resources': filterMatches, 'checked': state.assessmentChecked});
         } else {
-            dispatch("assessmentFilter", {'list': payload.list, 'checked': state.assessmentChecked});
+            dispatch("assessmentFilter", {'resources': payload.resources, 'checked': state.assessmentChecked});
         }  
     },
-    assessmentFilter({commit, dispatch, state}, payload) {
+    assessmentFilter({dispatch, state}, payload) {
         console.log('assessmentFilter', payload, payload.checked);
         let filterMatches = [];
         let checked = payload.checked;
         
         if (checked.length > 0) {
-            for(let i = 0; i < payload.list.length; i++) {
-                let found = checked.some(r=> payload.list[i].assessment.indexOf(r) >= 0);
+            for(let i = 0; i < payload.resources.length; i++) {
+                let found = checked.some(r=> payload.resources[i].assessment.indexOf(r) >= 0);
                 if (found == true){
                     console.log(i);
-                    filterMatches.push(payload.list[i]);
+                    filterMatches.push(payload.resources[i]);
                 }
             }
-            dispatch("successionFilter", {'list': filterMatches, 'checked': state.successionChecked});
+            dispatch("successionFilter", {'resources': filterMatches, 'checked': state.successionChecked});
         } else {
-            dispatch("successionFilter", {'list': payload.list, 'checked': state.successionChecked});
+            dispatch("successionFilter", {'resources': payload.resources, 'checked': state.successionChecked});
         }  
     },
-    successionFilter({commit, dispatch, state}, payload) {
+    successionFilter({dispatch, state}, payload) {
         console.log('successionFilter', payload, payload.checked);
         let filterMatches = [];
         let checked = payload.checked;
         
         if (checked.length > 0) {
-            for(let i = 0; i < payload.list.length; i++) {
-                let found = checked.some(r=> payload.list[i].succession.indexOf(r) >= 0);
+            for(let i = 0; i < payload.resources.length; i++) {
+                let found = checked.some(r=> payload.resources[i].succession.indexOf(r) >= 0);
                 if (found == true){
                     console.log(i);
-                    filterMatches.push(payload.list[i]);
+                    filterMatches.push(payload.resources[i]);
                 }
             }
-            dispatch("farmStageFilter", {'list': filterMatches, 'checked': state.farmstageChecked});
+            dispatch("farmStageFilter", {'resources': filterMatches, 'checked': state.farmstageChecked});
         } else {
-            dispatch("farmStageFilter", {'list': payload.list, 'checked': state.farmstageChecked});
+            dispatch("farmStageFilter", {'resources': payload.resources, 'checked': state.farmstageChecked});
         }  
     },
-    farmStageFilter({commit, dispatch, state}, payload) {
+    farmStageFilter({dispatch, state}, payload) {
         console.log('farmStageFilter', payload, payload.checked);
         let filterMatches = [];
         let checked = payload.checked;
         
         if (checked.length > 0) {
-            for(let i = 0; i < payload.list.length; i++) {
-                let found = checked.some(r=> payload.list[i].farm_stage.indexOf(r) >= 0);
+            for(let i = 0; i < payload.resources.length; i++) {
+                let found = checked.some(r=> payload.resources[i].farm_stage.indexOf(r) >= 0);
                 if (found == true){
                     console.log(i);
-                    filterMatches.push(payload.list[i]);
+                    filterMatches.push(payload.resources[i]);
                 }
             }
-            dispatch("createFilteredList", {'list': filterMatches, 'checked': ''});
+            dispatch("createFilteredList", {'resources': filterMatches});
         } else {
-            dispatch("createFilteredList", {'list': payload.list, 'checked': ''});
+            dispatch("createFilteredList", {'resources': payload.resources});
         }  
     },
-    createFilteredList({commit, dispatch, context, state}, payload) {
+    createFilteredList({commit, state}, payload) {
         console.log('createFilteredList dispatched',payload);
-        let matches = payload.list;
+        let matches = payload.resources;
         let empty = []
         let sum = (
             state.assessmentChecked.length+
@@ -181,7 +181,7 @@ const actions = {
             commit("setFilteredList", empty)
         }  else {
             console.log('Third option');
-            commit("setFilteredList", state.listings)
+            commit("setFilteredList", state.resourcesings)
         }
     },
 }

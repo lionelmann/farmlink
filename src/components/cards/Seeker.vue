@@ -36,6 +36,11 @@ export default {
                 this.errors.push(e)
             })
         }
-    }
+    },
+    // computed: {
+    //     avatarURL() {
+    //         return this.farmCard.meta.user_avatar_custom;
+    //     }
+    // }
 }
 </script>
