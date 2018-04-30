@@ -252,8 +252,7 @@ export default {
             */
             for( var i = 0; i < app.markers.length; i++ ){
                 app.markers[i].setVisible(false);
-                app.markers[i].setMap( null );
-                
+                // app.markers[i].setMap( null );
             }
 
             app.markers = [];

@@ -3,7 +3,7 @@
         <h6>{{ taxName }}</h6>
         <div v-for="checkbox in checkboxList" :key="checkbox.id">
             <label class="container">{{ checkbox.name }} ({{checkbox.count}})
-                <input type="checkbox" :value="checkbox.slug" v-model="checkedValues">
+                <input type="checkbox" :value="checkbox.id" v-model="checkedValues">
                 <span class="checkmark"></span>
             </label>
         </div>

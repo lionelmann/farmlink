@@ -4,7 +4,7 @@
             <div class="filter">
                 <div class="filter-item">
                 <button v-on:click="isAllFilters = !isAllFilters"><i class="fas fa-filter"></i> Filter Resources<span class="marker" v-html="resourceCheckedCount"></span></button>
-                    <div v-if="!isAllFilters" class="filter-form-wide">
+                    <div class="filter-form-wide" v-bind:class="{ 'open-filter': isAllFilters }">
                         <filter-viability></filter-viability>
                         <filter-assessment></filter-assessment>
                         <filter-succession></filter-succession>
@@ -18,13 +18,13 @@
                </div>
             </div> 
             <div class="filter-number">
-                <div><span>{{ resource.length }}</span> Resources</div>
+                <div><span>{{ resourceMatchCount }}</span> Resources</div>
             </div>
         </div>
         <div class="grid-wrapper grid__spacer">
-            <paginate name="data" :list="resource" :per="18" tag="div">
+            <paginate name="data" :list="this.$store.state.moduleResource.filteredList" :per="18" tag="div">
                 <div class="cards">
-                    <div class="card card__resource" v-for="resource in paginated('data')">
+                    <div class="card card__resource" v-for="resource in paginated('data')" :key="resource.id">
                         <farm-resource :farmCard="resource"></farm-resource>
                     </div>
                 </div>
@@ -47,7 +47,7 @@ import FilterFarmStage from '../components/filters/resource/FarmStage.vue';
 export default {
 	data() {
 		return {
-            isAllFilters: true,
+            isAllFilters: false,
             paginate: ['data']
 		}
     },
@@ -64,12 +64,18 @@ export default {
         ]),
 		onPageChange: () => {
             window.scrollTo(0, 0);
-        }
+        },
+        startFilter() {
+            // Check if apply button is clicked
+            console.log('apply clicked');
+            this.$store.dispatch("startFilter");
+        },
     },
     computed: {
         ...mapGetters([
             'resource',
             'resourceCheckedCount',
+            'resourceMatchCount'
         ])
     },
     created() {
@@ -77,3 +83,13 @@ export default {
 	}
 };
 </script>
+
+<style lang="scss" scoped>
+    .filter-form-wide {
+        display: none;
+    }
+
+    .filter-form-wide.open-filter {
+        display: grid;
+    }
+</style>
