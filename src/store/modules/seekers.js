@@ -242,10 +242,6 @@ const actions = {
             dispatch("seekerCreateFilteredList", {'type': 'filter-change', 'list': info.list, 'checked': ''});
         }  
     },
-    filterChange({commit, dispatch, context, state}, checkedProvince) {
-        console.log('filterChange', state.activeProvince);
-        dispatch("provFilter", {'type': 'filter-change', 'list': state.listings, 'checked': state.activeProvince});
-    },
     seekerCreateFilteredList({commit, dispatch, context, state}, info) {
         console.log('seekerCreateFilteredList dispatched',info.list, info.checked);
         let matches = info.list;
