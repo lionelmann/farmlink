@@ -87,72 +87,30 @@ const actions = {
     },
     startFilter({ state, dispatch }) {
         console.log('startFilter');
-        dispatch("viabilityFilter", {'resources': state.resource, 'checked': state.viabilityChecked});
+        const a = state.assessmentChecked;
+        const b = state.viabilityChecked;
+        const c = state.successionChecked;
+        const d = state.agreementChecked;
+        const e = state.farmstageChecked;
+        const combined = a.concat(b, c, d, e);
+        dispatch("combinedResourceFilter", {'resources': state.resource, 'checked': combined});
     },
-    viabilityFilter({dispatch, state}, payload) {
-        console.log('viabilityFilter', payload, payload.checked);
+    combinedResourceFilter({dispatch, state}, payload) {
+        console.log('combinedResourceFilter', payload, payload.checked);
         let filterMatches = [];
         let checked = payload.checked;
         
         if (checked.length > 0) {
             for(let i = 0; i < payload.resources.length; i++) {
-                let found = checked.some(r=> payload.resources[i].viability.indexOf(r) >= 0);
+                const a = payload.resources[i].assessment;
+                const b = payload.resources[i].viability;
+                const c = payload.resources[i].succession;
+                const d = payload.resources[i].agreement;
+                const e = payload.resources[i].farm_stage;
+                const combinedResource = a.concat(b, c, d, e);
+                let found = checked.some(r=> combinedResource.indexOf(r) >= 0);
                 if (found == true){
-                    console.log(i);
-                    filterMatches.push(payload.resources[i]);
-                }
-            }
-            dispatch("assessmentFilter", {'resources': filterMatches, 'checked': state.assessmentChecked});
-        } else {
-            dispatch("assessmentFilter", {'resources': payload.resources, 'checked': state.assessmentChecked});
-        }  
-    },
-    assessmentFilter({dispatch, state}, payload) {
-        console.log('assessmentFilter', payload, payload.checked);
-        let filterMatches = [];
-        let checked = payload.checked;
-        
-        if (checked.length > 0) {
-            for(let i = 0; i < payload.resources.length; i++) {
-                let found = checked.some(r=> payload.resources[i].assessment.indexOf(r) >= 0);
-                if (found == true){
-                    console.log(i);
-                    filterMatches.push(payload.resources[i]);
-                }
-            }
-            dispatch("successionFilter", {'resources': filterMatches, 'checked': state.successionChecked});
-        } else {
-            dispatch("successionFilter", {'resources': payload.resources, 'checked': state.successionChecked});
-        }  
-    },
-    successionFilter({dispatch, state}, payload) {
-        console.log('successionFilter', payload, payload.checked);
-        let filterMatches = [];
-        let checked = payload.checked;
-        
-        if (checked.length > 0) {
-            for(let i = 0; i < payload.resources.length; i++) {
-                let found = checked.some(r=> payload.resources[i].succession.indexOf(r) >= 0);
-                if (found == true){
-                    console.log(i);
-                    filterMatches.push(payload.resources[i]);
-                }
-            }
-            dispatch("farmStageFilter", {'resources': filterMatches, 'checked': state.farmstageChecked});
-        } else {
-            dispatch("farmStageFilter", {'resources': payload.resources, 'checked': state.farmstageChecked});
-        }  
-    },
-    farmStageFilter({dispatch, state}, payload) {
-        console.log('farmStageFilter', payload, payload.checked);
-        let filterMatches = [];
-        let checked = payload.checked;
-        
-        if (checked.length > 0) {
-            for(let i = 0; i < payload.resources.length; i++) {
-                let found = checked.some(r=> payload.resources[i].farm_stage.indexOf(r) >= 0);
-                if (found == true){
-                    console.log(i);
+                    console.log(payload.resources[i]);
                     filterMatches.push(payload.resources[i]);
                 }
             }
