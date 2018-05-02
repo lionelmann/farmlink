@@ -6,7 +6,6 @@ import moduleSeekers from './modules/seekers';
 import moduleListings from './modules/listings';
 import moduleSingleListing from './modules/singleListing';
 import moduleSingleSeeker from './modules/singleSeeker';
-import moduleSingleResource from './modules/singleResource';
 
 Vue.use(Vuex);
 
@@ -17,7 +16,6 @@ export const store = new Vuex.Store({
         moduleSeekers,
         moduleListings,
         moduleSingleListing,
-        moduleSingleSeeker,
-        moduleSingleResource
+        moduleSingleSeeker
     }
 });

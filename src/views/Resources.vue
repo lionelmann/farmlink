@@ -25,7 +25,7 @@
             <paginate name="data" :list="this.$store.state.moduleResource.filteredList" :per="18" tag="div">
                 <div class="cards">
                     <div class="card card__resource" v-for="resource in paginated('data')" :key="resource.id">
-                        <farm-resource :farmCard="resource"></farm-resource>
+                        <farm-resource :resourceCard="resource"></farm-resource>
                     </div>
                 </div>
             </paginate>
