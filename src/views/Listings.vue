@@ -21,7 +21,6 @@
                 <button class="filter-item" v-if="!isMap" v-on:click="isMap = !isMap"><i class="fas fa-map-marker-alt"></i> Map View</button>
             </div> 
             <div class="filter-number">
-                <!-- <div><span>{{ listings.length }}</span> Active Farm Listings</div> -->
                 <div><span>{{ filterMatchCount }}</span> Active Farm Listings</div>
             </div>
         </div>
