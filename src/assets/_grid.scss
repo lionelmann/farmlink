@@ -45,3 +45,31 @@ aside {
         }
     }
 }
+
+.slideout {
+    position: fixed;
+    top: 125px;
+    right: 0px;
+    bottom:0px;
+    height: 100%;
+    overflow-y: scroll;
+    background: white;
+    z-index: 3000;
+    //transition: width 2s;
+    width: 40%;
+    box-shadow: 0 1px 0px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.20);
+    .btn-close{
+        position: fixed; 
+        top: 140px; 
+        right: 38%; 
+        z-index: 5001; 
+        border: none; 
+        cursor: pointer; 
+        outline: none;
+    }
+}
+
+.slide-container {
+    margin: 4em 0 10em 0; 
+    padding: 0 2em;
+}
