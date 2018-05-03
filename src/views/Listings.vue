@@ -78,8 +78,8 @@ export default {
                 }
             },
             markers: [],
-            mapName: "google-map",
             infoWindows: [],
+            mapName: "google-map",
             isMap: true,
             isProvince: true,
             isAcreage: true,
@@ -141,7 +141,7 @@ export default {
         }
 
         app.map     = new google.maps.Map(element, options);
-        // app.bounds  = new google.maps.LatLngBounds();
+        app.bounds  = new google.maps.LatLngBounds();
         
         app.buildMarkers();
     },
@@ -149,19 +149,19 @@ export default {
 		onPageChange: () => {
             window.scrollTo(0, 0);
         },
-        toggleInfoWindow: function(marker, idx) {
-            this.infoWindowPos = marker.position;
-            this.infoContent = marker.infoText;
-            //check if its the same marker that was selected if yes toggle
-            if (this.currentMidx == idx) {
-              this.infoWinOpen = !this.infoWinOpen;
-            }
-            //if different marker set infowindow to open and reset current marker index
-            else {
-              this.infoWinOpen = true;
-              this.currentMidx = idx;
-            }
-        },
+        // toggleInfoWindow: function(marker, idx) {
+        //     this.infoWindowPos = marker.position;
+        //     this.infoContent = marker.infoText;
+        //     //check if its the same marker that was selected if yes toggle
+        //     if (this.currentMidx == idx) {
+        //       this.infoWinOpen = !this.infoWinOpen;
+        //     }
+        //     //if different marker set infowindow to open and reset current marker index
+        //     else {
+        //       this.infoWinOpen = true;
+        //       this.currentMidx = idx;
+        //     }
+        // },
         filterChange() {
             // Check if apply button is clicked
             console.log('apply clicked');
@@ -218,7 +218,7 @@ export default {
                     });
 
                     marker.addListener('click', function() {
-                        infoWindow.open(app.map, marker);
+                        infoWindow.open(app.map, this);
                     });
 
                     app.infoWindows.push( infoWindow );
@@ -248,12 +248,12 @@ export default {
                 to null so they disappear.
             */
             for( var i = 0; i < app.markers.length; i++ ){
-                app.markers[i].setVisible(false);
-                // app.markers[i].setMap( null );
+                // app.markers[i].setVisible(false);
+                app.markers[i].setMap( null );
             }
 
-            app.markers = [];
-            app.infoWindows = [];
+            // app.markers = [];
+            // app.infoWindows = [];
             console.log('clearMarkers end', app.markers, app.infoWindows);
         },
         rebuildMarkers(){
@@ -261,11 +261,12 @@ export default {
 
             if (app.activeMarkers.length > 0 && (app.activeMarkers.length != app.locations.length)) {
                 console.log('rebuild markers', app.activeMarkers);
+
                 app.clearMarkers();
             
                 // COMMINGTING THIS OUT MADE THE PLACES DISAPPEAR
-                // app.markers = [];
-                // app.infoWindows = [];
+                app.markers = [];
+                app.infoWindows = [];
 
                 let bounds = new google.maps.LatLngBounds();
 
@@ -292,7 +293,7 @@ export default {
                             title: app.activeMarkers[i].title.rendered,
                         });
 
-                        console.log('markers',app.markers);
+                        // console.log('markers',app.markers);
                         /*
                             Create the info window and add it to the local
                             array.
@@ -304,7 +305,7 @@ export default {
                         });
 
                         marker.addListener('click', function() {
-                            infoWindow.open(app.map, marker);
+                            infoWindow.open(app.map, this);
                         });
 
                         app.infoWindows.push( infoWindow );
@@ -316,10 +317,16 @@ export default {
                         // bounds.extend( app.markers[i].getPosition()); 
 
                         // app.map.fitBounds(bounds);
+
+                        
                     } else {
                         console.log('REBUILD | Missing LAT/LNG: ', app.activeMarkers[i].title.rendered, app.activeMarkers[i].id, app.activeMarkers[i]);
                     }
                 } 
+
+                console.log('markers',app.markers);
+
+                console.log('infoWindows',app.infoWindows);
 
             } else {
                 return
