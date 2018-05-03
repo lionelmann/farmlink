@@ -10,7 +10,8 @@
             </div>
 
              <div class="outer-container">
-                <h3>Stats</h3>   
+                <h3>Stats</h3>
+                <div class="wrapper">
                 <ul class="stats-list" v-if="seeker.meta.hasOwnProperty('_seeker_provinces')">
                     <li class="title">Looking for a farm in:</li>
                     <li v-for="item in seeker.meta._seeker_provinces" :key="item.id" v-html="item"></li>
@@ -47,6 +48,7 @@
                     <li class="title">Planned farming practices:</li>
                     <li v-for="item in seeker.meta._seeker_practices" :key="item.id" v-html="item"></li>
                 </ul>
+                </div>
             </div>
 
             <div class="outer-container">
