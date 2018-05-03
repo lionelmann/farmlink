@@ -13,6 +13,41 @@
     padding-top: 140px;
 }
 
+// Used for Single Seekers and Single Listings
+.outer-container {
+    color: rgba(255,255,255, 1);
+    display: grid;
+    grid-template-columns: minmax(200px, 768px);
+    justify-content: center;
+    padding: 10px;
+    .inner-container {
+        background-color: rgba(55,83,65, 1);
+        padding: 30px;
+    }
+    p {
+        color: rgba(255,255,255, 0.8);
+        padding: 20px;  
+        white-space:pre-wrap;
+    }
+    ul.stats-list {
+        list-style-type: none;
+        
+        padding: 0;
+        margin-bottom: 0;
+        font-size: .915rem;
+        li.title {
+            font-family: $sans-serif;
+            opacity: 1;
+            font-weight: 600;
+        }
+        li {
+            opacity: 0.8;
+            font-family: $serif;
+            margin-bottom: .5rem;
+        }
+    }
+}
+
 main {
     display: grid;
     grid-gap: 50px;
