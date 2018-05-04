@@ -3,7 +3,8 @@
         <div v-if="seeker != null">
             <div class="outer-container">
                 <div class="hero">
-                    <img :src='avatar'>
+                    <img v-if="seeker.custom_avatar[0]" :src='seeker.custom_avatar[0]'>
+                    <img v-else-if="seeker.avatar_urls['96']" :src="seeker.avatar_urls['96']">
                     <div>
                         <h2 v-html="seeker.meta.first_name[0]"></h2>
                         <span v-if="seeker.meta._seeker_provinces.length > 1">Seeking a farm in multiple provinces</span>
@@ -90,7 +91,6 @@ export default {
     computed: {
         ...mapGetters([
             'seeker',
-            'avatar'
         ]),
     },
     created() {

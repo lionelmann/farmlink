@@ -28,7 +28,7 @@
                 <div class="cards">
                     <div class="card card__seeker" v-for="seeker in paginated('data')" :key="seeker.id">
                         <!-- See cards/Seeker.vue -->
-                        <farm-seeker :farmCard="seeker"></farm-seeker>
+                        <farm-seeker :seekerCard="seeker"></farm-seeker>
                     </div>
                 </div>
             </paginate>
