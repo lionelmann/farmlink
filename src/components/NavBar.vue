@@ -1,5 +1,5 @@
 <template>
-	<header>
+	<header :class="{ darkheader: changeBgColor }">
 		<router-link to="/" class="logo"></router-link>	
 		<nav class="menu">
 			<ul>
@@ -39,6 +39,15 @@ export default {
             menuLinks: [] 
         }
     },
+    computed: {
+        changeBgColor(){
+            if(this.$route.name == 'profile') {
+                return true
+            } else {
+                return false
+            }
+        }
+    },
     beforeCreate() {
         axios.get('http://dev.hypenotic.com/flink/wp-json/wp-api-menus/v2/menus/2')
        .then(response => {
@@ -63,6 +72,10 @@ header{
     position: fixed;
     width: 100%;
     z-index: 1500;
+}
+
+.darkheader {
+    background-color: rgba(69,105,81, 1);
 }
 
 .menu {

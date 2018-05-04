@@ -17,5 +17,5 @@ export const routes = [
 	{ path:'/farm-seekers', component: Seekers, props: true },
 	{ path:'/farm-regions', component: Regions, props: true },
 	{ path:'/:slug', component: Page, props: true },
-	{ path:'/profile/:slug', component: SingleSeeker, props: true },
+	{ path:'/profile/:slug', name: 'profile', component: SingleSeeker, props: true },
 ]

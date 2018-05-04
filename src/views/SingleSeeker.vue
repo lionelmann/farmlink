@@ -2,13 +2,16 @@
     <div style="background-color: rgba(69,105,81, 1);">
         <div v-if="seeker != null">
             <div class="outer-container">
-            
                 <div class="hero">
-                    <h3 v-html="seeker.meta.first_name[0]"></h3>
-                     <time>Last Modified: {{ moment(seeker.meta.user_mod_date[0]) }}</time>
-                </div>
+                    <img :src='avatar'>
+                    <div>
+                        <h2 v-html="seeker.meta.first_name[0]"></h2>
+                        <span v-if="seeker.meta._seeker_provinces.length > 1">Seeking a farm in multiple provinces</span>
+                        <span v-else>Seeking a farm in {{ seeker.meta._seeker_provinces[0] }}</span>
+                    </div>
+                </div> 
             </div>
-
+            
              <div class="outer-container">
                 <h3>Stats</h3>
                 <div class="wrapper">
@@ -86,7 +89,8 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'seeker'
+            'seeker',
+            'avatar'
         ]),
     },
     created() {
@@ -99,13 +103,17 @@ export default {
 
 .hero {
     display: grid;
+    grid-template-columns: 200px 1fr; 
     height: 200px;
     margin-top: 60px;
     color: white;
     justify-content: start;
     align-content: center;
-    //border: 1px solid white;
-    
+    img {
+        border-radius: 4px;
+        border: 1px solid white;
+        width: 150px;
+    }
 }
 
 
