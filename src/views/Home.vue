@@ -6,7 +6,7 @@
                  <span style="min-width: 120px; display:inline-block;"> 
                      <ICountUp
                         :startVal="startVal"
-                        :endVal="800"
+                        :endVal="endVal"
                         :decimals="decimals"
                         :duration="duration"
                         :options="options"
@@ -36,7 +36,7 @@
             <h4 class="pin">Recent farm seekers <a href="/farm-seekers"><small> See all farm seekers ></small></a></h4>
             <div class="cards">
                 <div class="card card__seeker" v-for="seeker in filteredSeekers">
-                    <farm-seeker :farmCard="seeker"></farm-seeker>
+                    <farm-seeker :seekerCard="seeker"></farm-seeker>
                 </div>
 
             </div>
@@ -102,7 +102,7 @@ export default {
     data() {
         return {
             startVal: 0,
-            //endVal: 815,
+            endVal: 0,
             decimals: 0,
             duration: 3,
             options: {
@@ -120,9 +120,6 @@ export default {
             const that = this;
             instance.update(that.endVal);
         },
-        count: function() {
-            return this.seekers.length;
-        }
     },
     computed: {
         ...mapGetters([
@@ -130,16 +127,6 @@ export default {
         'listings'
         ]),    
         filteredSeekers: function () {
-            /* This should be a reverse for loop like this:
-            'for (let i = this.seekers.length - 1; i >= 0; --i)'
-            But it's too slow to go through all seekers. 
-            Better to just get the first 15 and hope they 
-            have a profile image. */
-            for(let i = 0; i < 15; i++) {
-                if(!this.seekers[i].meta.hasOwnProperty('user_avatar_custom')){
-                    this.seekers.splice(i,1)
-                }
-            }
             // Only show 3 profiles.
             return this.seekers.slice(0, 3)
         },
@@ -149,8 +136,9 @@ export default {
         },
     },
     created() {
-        this.$store.dispatch('getSeekers');
+        this.$store.dispatch('activeSeekers');
         this.$store.dispatch('getListings');
+        this.endVal = this.seekers.length;
     }
 };
 </script>
