@@ -3,7 +3,7 @@
         <div class="filter-wrapper">
             <div class="filter">
                 <div class="filter-item">
-                <button v-on:click="isAllFilters = !isAllFilters">All Filters<span class="marker" v-html="checkedCount"></span></button>
+                <button v-on:click="isAllFilters = !isAllFilters" v-bind:class="{ 'open-filter-button': isAllFilters }">All Filters<span class="marker" v-html="checkedCount"></span></button>
                     
                     <div class="filter-form-wide" v-bind:class="{ 'open-filter': isAllFilters }">
                         <filter-opportunity ref="filter1"></filter-opportunity>
@@ -191,7 +191,9 @@ export default {
             this.$refs.filter4.clear();
             this.$refs.filter5.clear();
             // Clear out all checked values in store
-			this.$store.dispatch("moduleListings/clearCheckboxes", []);
+            this.$store.dispatch("moduleListings/clearCheckboxes", []);
+            this.$store.dispatch("moduleListings/renderList");
+            this.isAllFilters = false;
         },
         buildMarkers(){
             console.log('Build Markers');
@@ -229,7 +231,7 @@ export default {
                         array.
                     */
                     // console.log(app.locations[i].listing);
-                    let windowString = app.infoWindowString(app.locations[i].slug,app.locations[i].id,app.locations[i].title.rendered);
+                    let windowString = app.infoWindowString(app.locations[i].slug,app.locations[i].id,app.locations[i].title.rendered, app.locations[i].meta_box._acre_farmland[0]);
 
                     let infoWindow = new google.maps.InfoWindow({
                         content: windowString
@@ -251,13 +253,18 @@ export default {
                 
             }
 
-            this.map.panBy(-80, -100);
+            app.map.panBy(-80, -100);
 
         },
-        infoWindowString(slug,id,title) {
+        infoWindowString(slug,id,title,acre) {
             let url="/farm-opportunity/"+slug;
             let header = '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="'+url+'">'+ title + '</a></h6>';
-            return '<div style="width: 250px;">' + header +'</div>';
+            let ac = '';
+            if (acre != undefined) {
+                ac = '<p style="margin: 0;font-size: 12px;font-style:italic;">'+acre+'</p>';
+            }
+            let button = '<a href="'+url+'" style="border: 2px solid orange;padding:8px 16px;background: white;color:orange;display:inline-block;border-radius: 8px;margin-top:16px;">See Farm</a>';
+            return '<div style="width: 250px;">' + header+ ac + button+'</div>';
         },
         clearMarkers(){
             console.log('clearMarkers start', this.markers, this.infoWindows);
@@ -275,6 +282,14 @@ export default {
             // app.infoWindows = [];
             console.log('clearMarkers end', app.markers, app.infoWindows);
         },
+        closeWindows(open){
+            let app = this;
+            for( var i = 0; i < app.infoWindows.length; i++ ){
+                if (app.infoWindows[i] != open) {
+                    app.infoWindows[i].close();
+                } 
+            }
+        },
         rebuildMarkers(){
             let app = this;
 
@@ -283,7 +298,7 @@ export default {
 
                 app.clearMarkers();
             
-                // COMMINGTING THIS OUT MADE THE PLACES DISAPPEAR
+                // COMMENTING THIS OUT MADE THE PLACES PIN DISAPPEAR
                 app.markers = [];
                 app.infoWindows = [];
 
@@ -317,13 +332,16 @@ export default {
                             Create the info window and add it to the local
                             array.
                         */
-                        let windowString = app.infoWindowString(app.activeMarkers[i].slug,app.activeMarkers[i].id,app.activeMarkers[i].title.rendered);
+                        let windowString = app.infoWindowString(app.activeMarkers[i].slug,app.activeMarkers[i].id,app.activeMarkers[i].title.rendered,app.activeMarkers[i].meta_box._acre_farmland[0]);
 
                         let infoWindow = new google.maps.InfoWindow({
                             content: windowString
                         });
 
+                        var activeInfoWindow; 
+
                         marker.addListener('click', function() {
+                            app.closeWindows(this);
                             infoWindow.open(app.map, this);
                         });
 
@@ -333,15 +351,19 @@ export default {
                             Push the new marker on to the array.
                         */
                         app.markers.push( marker );
-                        // bounds.extend( app.markers[i].getPosition()); 
+                        bounds.extend( marker.getPosition()); 
 
-                        // app.map.fitBounds(bounds);
+                        app.map.fitBounds(bounds);
 
                         
                     } else {
                         console.log('REBUILD | Missing LAT/LNG: ', app.activeMarkers[i].title.rendered, app.activeMarkers[i].id, app.activeMarkers[i]);
                     }
                 } 
+
+                if (app.activeMarkers.length == app.listings.length ) {
+                    app.map.panBy(-80, -100);
+                }
 
                 console.log('markers',app.markers);
 
@@ -389,6 +411,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+    @import '../assets/_variables.scss';
+
     #google-map {
         transition: all 0.5s ease;
         width: 100%;
@@ -436,5 +461,14 @@ export default {
 
     .the-map.show-map {
         display: block;
+    }
+
+    .open-filter-button {
+        background: rgba(0,0,0,0.4);
+        background: $green;
+        color: white;
+        &:hover {
+            color: black;
+        }
     }
 </style>
