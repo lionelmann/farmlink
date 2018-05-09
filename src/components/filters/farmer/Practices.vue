@@ -36,9 +36,13 @@ export default {
 		};
     },
     methods: {
+        clear() {
+			// Set active provinces
+            this.checked = [];
+        },
         checkboxChange() {
 			// Set active provinces
-            this.$store.dispatch("checkboxChange", {'type': 'practices', 'checked': this.checked});
+            this.$store.dispatch("moduleListings/checkboxChange", {'type': 'practices', 'checked': this.checked});
         }
     }
 }

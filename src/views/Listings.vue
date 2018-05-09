@@ -6,11 +6,11 @@
                 <button v-on:click="isAllFilters = !isAllFilters">All Filters<span class="marker" v-html="checkedCount"></span></button>
                     
                     <div class="filter-form-wide" v-bind:class="{ 'open-filter': isAllFilters }">
-                        <filter-opportunity></filter-opportunity>
-                        <filter-province buttons="false"></filter-province>
-                        <filter-acreage></filter-acreage>
-                        <filter-facility-equipt></filter-facility-equipt>
-                        <filter-practices></filter-practices>
+                        <filter-opportunity ref="filter1"></filter-opportunity>
+                        <filter-province buttons="false" ref="filter2"></filter-province>
+                        <filter-acreage ref="filter3"></filter-acreage>
+                        <filter-facility-equipt ref="filter4"></filter-facility-equipt>
+                        <filter-practices ref="filter5"></filter-practices>
                         <div class="filter-apply-container">
                             <span style="float: left"><button @click="filterClear">Clear</button></span>
                             <span style="float: right"><button @click="filterChange">Apply</button></span> 
@@ -175,10 +175,23 @@ export default {
             this.isAllFilters = false;
         },
         filterClear() {
-            // Clear activeProvince in store
             console.log('clear clicked');
-            this.checked = [];
-			this.$store.dispatch("moduleListings/provinceChange", []);
+            // Uncheck all checkbox inputs
+            var inputs = document.getElementsByTagName('input');
+
+            for(var i = 0; i < inputs.length; i++) {
+                if(inputs[i].type.toLowerCase() == 'checkbox') {
+                    inputs[i].checked = false;
+                }
+            }
+            // Clear out the local state of each child filter component
+            this.$refs.filter1.clear();
+            this.$refs.filter2.clear();
+            this.$refs.filter3.clear();
+            this.$refs.filter4.clear();
+            this.$refs.filter5.clear();
+            // Clear out all checked values in store
+			this.$store.dispatch("moduleListings/clearCheckboxes", []);
         },
         buildMarkers(){
             console.log('Build Markers');
@@ -265,7 +278,7 @@ export default {
         rebuildMarkers(){
             let app = this;
 
-            if (app.activeMarkers.length > 0 && (app.activeMarkers.length != app.locations.length)) {
+            if (app.activeMarkers.length > 0) {
                 console.log('rebuild markers', app.activeMarkers);
 
                 app.clearMarkers();
@@ -335,6 +348,7 @@ export default {
                 console.log('infoWindows',app.infoWindows);
 
             } else {
+                app.clearMarkers();
                 return
             }
 
@@ -347,7 +361,11 @@ export default {
             'filterMatchCount',
             'locations',
             'activeMarkers'
-        ])
+        ]),
+        clearMap() {
+            
+        },
+
     },
     watch: {
         /*
@@ -359,7 +377,12 @@ export default {
             this.buildMarkers();
         },
         activeMarkers(){
+            console.log('watch on activeMarkers!')
             this.rebuildMarkers();
+        },
+        clearMap() {
+            this.clearMarkers();
+            this.buildMarkers();
         }
     },
 };

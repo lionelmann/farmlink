@@ -41,6 +41,7 @@ const SET_OPPORTUNITY_LIST  = 'SET_OPPORTUNITY_LIST';
 const SET_ACREAGE_LIST      = 'SET_ACREAGE_LIST';
 const SET_FE_LIST           = 'SET_FE_LIST';
 const SET_PRACTICE_LIST     = 'SET_PRACTICE_LIST';
+const EMPTY_CHECKBOXES     = 'EMPTY_CHECKBOXES';
 
 const mutations = {
     getListings: (state, listings) => {
@@ -70,6 +71,13 @@ const mutations = {
         console.log('SET_PRACTICE_LIST')
         state.activePractice = list
     },
+    EMPTY_CHECKBOXES(state, info) {
+        state.activeOppotunity = info
+        state.activeProvince = info
+        state.activeAcreage = info
+        state.activeFacilityEquipt = info
+        state.activePractice = info
+    }
 }
 
 const actions = {
@@ -92,7 +100,7 @@ const actions = {
             dispatch('renderList');
         }))
     },
-    checkboxChange({commit, dispatch, context, state}, info) {
+    checkboxChange({commit, dispatch, state}, info) {
         console.log('checkboxChange', info);
         if (info.type == 'province') {
             commit(SET_PROVINCE_LIST, info.checked);
@@ -106,7 +114,7 @@ const actions = {
             commit(SET_PRACTICE_LIST, info.checked);
         }
     },
-    provFilter({commit, dispatch, context, state}, info) {
+    provFilter({commit, dispatch, state}, info) {
         console.log('provFilter', info);
         let filterMatches = [];
         let checked = info.checked;
@@ -123,7 +131,7 @@ const actions = {
             dispatch("oppFilter", {'type': 'filter-change', 'list': state.listings, 'checked': state.activeOppotunity});
         }  
     },
-    oppFilter({commit, dispatch, context, state}, info) {
+    oppFilter({commit, dispatch, state}, info) {
         console.log('oppFilter', info);
         let filterMatches = [];
         let checked = info.checked;
@@ -141,7 +149,7 @@ const actions = {
             dispatch("acreFilter", {'type': 'filter-change', 'list': info.list, 'checked': state.activeAcreage});
         }  
     },
-    acreFilter({commit, dispatch, context, state}, info) {
+    acreFilter({commit, dispatch, state}, info) {
         console.log('acreFilter', info);
         let filterMatches = [];
         let checked = info.checked;
@@ -159,7 +167,7 @@ const actions = {
             dispatch("feFilter", {'type': 'filter-change', 'list': info.list, 'checked': state.activeFacilityEquipt});
         }  
     },
-    feFilter({commit, dispatch, context, state}, info) {
+    feFilter({commit, dispatch, state}, info) {
         console.log('facilityEquiptFilter', info);
         let filterMatches = [];
         let checked = info.checked;
@@ -178,7 +186,7 @@ const actions = {
             dispatch("practiceFilter", {'type': 'filter-change', 'list': info.list, 'checked': state.activePractice});
         }  
     },
-    practiceFilter({commit, dispatch, context, state}, info) {
+    practiceFilter({commit, dispatch, state}, info) {
         console.log('practiceFilter', info);
         let filterMatches = [];
         let checked = info.checked;
@@ -196,11 +204,11 @@ const actions = {
             dispatch("listingsCreateFilteredList", {'type': 'filter-change', 'list': info.list, 'checked': ''});
         }  
     },
-    filterChange({commit, dispatch, context, state}, checkedProvince) {
+    filterChange({commit, dispatch, state}, checkedProvince) {
         console.log('filterChange', state.activeProvince);
         dispatch("provFilter", {'type': 'filter-change', 'list': state.listings, 'checked': state.activeProvince});
     },
-    listingsCreateFilteredList({commit, dispatch, context, state}, info) {
+    listingsCreateFilteredList({commit, dispatch, state}, info) {
         console.log('createFilteredList dispatched',info);
         let matches = info.list;
         let empty = []
@@ -212,20 +220,23 @@ const actions = {
             state.activePractice.length
         )
         if (matches.length > 0 & sum > 0) {
+            // If there are matches and at least one checkbox checked
             console.log(matches.length,'1');
-            commit(SET_FILTERED_LIST, matches)
+            commit(SET_FILTERED_LIST, matches);
         } else if (sum > 0) {
             // Else just return all the results
             // Will have to change this...need an empty view
             console.log('NO MATCHES!!!');
-            commit(SET_FILTERED_LIST, empty)
+            commit(SET_FILTERED_LIST, empty);
         }  else {
             console.log('Third option');
-            commit(SET_FILTERED_LIST, state.listings)
+            commit(SET_FILTERED_LIST, state.listings);
         }
     },
-    renderList({commit, dispatch, context, state}, info) {
-        console.log('228');
+    clearCheckboxes({commit, dispatch, state}, info) {
+        commit(EMPTY_CHECKBOXES, info);
+    },
+    renderList({commit, dispatch, state}, info) {
         commit(SET_FILTERED_LIST, state.listings);
     },
 }
