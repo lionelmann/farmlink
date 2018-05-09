@@ -53,7 +53,7 @@ export default {
     },
     methods: {
         seekerCheckboxChange() {
-            this.$store.dispatch("seekerCheckboxChange", {'type': 'facequipt', 'checked': this.checked});
+            this.$store.dispatch("moduleSeekers/seekerCheckboxChange", {'type': 'facequipt', 'checked': this.checked});
         }
     }
 }

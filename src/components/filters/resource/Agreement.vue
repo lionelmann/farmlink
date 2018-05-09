@@ -23,10 +23,10 @@ export default {
     computed: {
         checkedValues: {
             get: function () {
-                return this.$store.state.moduleResource.agreementChecked;
+                return this.$store.state.moduleResources.agreementChecked;
             },
             set: function (newValue) {
-                this.$store.commit('setAgreement', newValue);
+                this.$store.commit('moduleResources/setAgreement', newValue);
             }
         }
     },

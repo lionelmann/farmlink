@@ -23,10 +23,10 @@ export default {
     computed: {
         checkedValues: {
             get: function () {
-                return this.$store.state.moduleResource.viabilityChecked;
+                return this.$store.state.moduleResources.viabilityChecked;
             },
             set: function (newValue) {
-                this.$store.commit('setViability', newValue);
+                this.$store.commit('moduleResources/setViability', newValue);
             }
         }
     },

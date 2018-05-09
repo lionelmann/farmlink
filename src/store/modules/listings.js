@@ -211,7 +211,8 @@ const actions = {
             state.activeFacilityEquipt.length +
             state.activePractice.length
         )
-        if (matches.length > 0) {
+        if (matches.length > 0 & sum > 0) {
+            console.log(matches.length,'1');
             commit(SET_FILTERED_LIST, matches)
         } else if (sum > 0) {
             // Else just return all the results
@@ -224,6 +225,7 @@ const actions = {
         }
     },
     renderList({commit, dispatch, context, state}, info) {
+        console.log('228');
         commit(SET_FILTERED_LIST, state.listings);
     },
 }
@@ -232,5 +234,6 @@ export default {
     state,
     getters,
     mutations,
-    actions
+    actions,
+    namespaced: true
 }

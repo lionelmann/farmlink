@@ -23,10 +23,10 @@ export default {
     computed: {
         checkedValues: {
             get: function () {
-                return this.$store.state.moduleResource.assessmentChecked;
+                return this.$store.state.moduleResources.assessmentChecked;
             },
             set: function (newValue) {
-                this.$store.commit('setAssessment', newValue);
+                this.$store.commit('moduleResources/setAssessment', newValue);
             }
         }
     },

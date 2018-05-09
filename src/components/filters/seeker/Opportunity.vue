@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         seekerCheckboxChange() {
-            this.$store.dispatch("seekerCheckboxChange", {'type': 'opportunity', 'checked': this.checked});
+            this.$store.dispatch("moduleSeekers/seekerCheckboxChange", {'type': 'opportunity', 'checked': this.checked});
         }
     }
 }

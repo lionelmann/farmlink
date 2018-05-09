@@ -23,10 +23,10 @@ export default {
     computed: {
         checkedValues: {
             get: function () {
-                return this.$store.state.moduleResource.successionChecked;
+                return this.$store.state.moduleResources.successionChecked;
             },
             set: function (newValue) {
-                this.$store.commit('setSuccession', newValue);
+                this.$store.commit('moduleResources/setSuccession', newValue);
             }
         }
     },

@@ -40,7 +40,7 @@ export default {
     },
     methods: {
         seekerCheckboxChange() {
-            this.$store.dispatch("seekerCheckboxChange", {'type': 'acreage', 'checked': this.checked});
+            this.$store.dispatch("moduleSeekers/seekerCheckboxChange", {'type': 'acreage', 'checked': this.checked});
         }
     }
 }

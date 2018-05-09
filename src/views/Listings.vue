@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
+import { mapGetters, mapState, mapActions } from 'vuex';
 import FilterOpportunity from '../components/filters/farmer/Opportunity.vue';
 import FilterAcreage from '../components/filters/farmer/Acreage.vue';
 import FilterProvince from '../components/filters/farmer/Province.vue';
@@ -117,7 +117,7 @@ export default {
         }
     },
     created() {
-        this.$store.dispatch('getListings');
+        this.$store.dispatch('moduleListings/getListings');
     },
     mounted() {
         // Store 'this' in a variable, so you can referecne 'this' properly in
@@ -146,6 +146,11 @@ export default {
         app.buildMarkers();
     },
     methods: {
+        ...mapActions("moduleListings", [
+            'getListings',
+            'filterChange',
+            'provinceChange'
+        ]), 
 		onPageChange: () => {
             window.scrollTo(0, 0);
         },
@@ -165,7 +170,7 @@ export default {
         filterChange() {
             // Check if apply button is clicked
             console.log('apply clicked');
-            this.$store.dispatch("filterChange", this.checkedProvince); 
+            this.$store.dispatch("moduleListings/filterChange", this.checkedProvince); 
             this.isMap = true;
             this.isAllFilters = false;
         },
@@ -173,7 +178,7 @@ export default {
             // Clear activeProvince in store
             console.log('clear clicked');
             this.checked = [];
-			this.$store.dispatch("provinceChange", []);
+			this.$store.dispatch("moduleListings/provinceChange", []);
         },
         buildMarkers(){
             console.log('Build Markers');
@@ -237,7 +242,8 @@ export default {
 
         },
         infoWindowString(slug,id,title) {
-            let header = '<h6 style="margin-bottom: 10px;font-size: 16px;">'+ title + '</h6>';
+            let url="/farm-opportunity/"+slug;
+            let header = '<h6 style="margin-bottom: 10px;font-size: 16px;"><a href="'+url+'">'+ title + '</a></h6>';
             return '<div style="width: 250px;">' + header +'</div>';
         },
         clearMarkers(){
@@ -335,7 +341,7 @@ export default {
         },
     },
     computed: {
-        ...mapGetters([
+        ...mapGetters("moduleListings", [
             'listings',
             'checkedCount',
             'filterMatchCount',
@@ -350,15 +356,10 @@ export default {
             TKNOTE: This is eventually should be attached to the getter that contained filtered results.
         */
         locations(){
-            // this.clearMarkers();
             this.buildMarkers();
-            // this.resetMarkers();
-            // this.checkLoader();
         },
         activeMarkers(){
-            // this.clearMarkers();
             this.rebuildMarkers();
-            // this.checkLoader();
         }
     },
 };

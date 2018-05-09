@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="grid-wrapper grid__spacer">
-            <paginate name="data" :list="this.$store.state.moduleResource.filteredList" :per="18" tag="div">
+            <paginate name="data" :list="this.$store.state.moduleResources.filteredList" :per="18" tag="div">
                 <div class="cards">
                     <div class="card card__resource" v-for="resource in paginated('data')" :key="resource.id">
                         <farm-resource :resourceCard="resource"></farm-resource>
@@ -68,19 +68,19 @@ export default {
         startFilter() {
             // Check if apply button is clicked
             console.log('apply clicked');
-            this.$store.dispatch("startFilter");
+            this.$store.dispatch("moduleResources/startFilter");
             this.isAllFilters = false;
         },
     },
     computed: {
-        ...mapGetters([
+        ...mapGetters('moduleResources',[
             'resource',
             'resourceCheckedCount',
             'resourceMatchCount'
         ])
     },
     created() {
-        this.$store.dispatch('getResource');
+        this.$store.dispatch('moduleResources/getResources');
 	}
 };
 </script>

@@ -74,7 +74,7 @@ export default {
     },
     methods: {
         seekerCheckboxChange() {
-            this.$store.dispatch("seekerCheckboxChange", {'type': 'province', 'checked': this.checked});
+            this.$store.dispatch("moduleSeekers/seekerCheckboxChange", {'type': 'province', 'checked': this.checked});
         }
     }
 }

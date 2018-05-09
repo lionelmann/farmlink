@@ -30,7 +30,7 @@ const getters = {
 }
 
 const mutations = {
-    getResource: (state, resource) => {
+    setResources: (state, resource) => {
         state.resource = resource;
     },
     setAssessment: (state, list) => {
@@ -54,7 +54,7 @@ const mutations = {
 }
 
 const actions = {
-    getResource: ({ commit, dispatch }) => {
+    getResources: ({ commit, dispatch }) => {
         axios.all([
             axios.get('https://farmlink.net/wp-json/wp/v2/resource?per_page=100'),
             axios.get('https://farmlink.net/wp-json/wp/v2/resource?per_page=100&offset=100'),
@@ -78,7 +78,7 @@ const actions = {
                 response4.data
             )
             
-            commit('getResource', allResources);
+            commit('setResources', allResources);
             dispatch('renderList');
         }))
     },
@@ -148,5 +148,6 @@ export default {
     state,
     getters,
     mutations,
-    actions
+    actions,
+    namespaced: true
 }

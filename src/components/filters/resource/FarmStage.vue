@@ -23,10 +23,10 @@ export default {
     computed: {
         checkedValues: {
             get: function () {
-                return this.$store.state.moduleResource.farmstageChecked;
+                return this.$store.state.moduleResources.farmstageChecked;
             },
             set: function (newValue) {
-                this.$store.commit('setFarmStage', newValue);
+                this.$store.commit('moduleResources/setFarmStage', newValue);
             }
         }
     },

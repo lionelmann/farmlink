@@ -105,6 +105,7 @@ export default {
             endVal: 0,
             decimals: 0,
             duration: 3,
+            userCount: [],
             options: {
                 useEasing: true,
                 useGrouping: true,
@@ -122,10 +123,12 @@ export default {
         },
     },
     computed: {
-        ...mapGetters([
-        'seekers',
-        'listings'
-        ]),    
+        ...mapGetters("moduleSeekers", [
+            'seekers'
+        ]),   
+        ...mapGetters("moduleListings", [
+            "listings"
+        ]), 
         filteredSeekers: function () {
             // Only show 3 profiles.
             return this.seekers.slice(0, 3)
@@ -136,9 +139,14 @@ export default {
         },
     },
     created() {
-        this.$store.dispatch('activeSeekers');
-        this.$store.dispatch('getListings');
-        this.endVal = this.seekers.length;
+        this.$store.dispatch('moduleSeekers/getSeekers');
+        this.$store.dispatch('moduleListings/getListings');
+        if (this.userCount.length == 0) {
+            this.endVal = 800;
+        } else {
+            this.endVal = this.userCount.length;
+        }
+        
     }
 };
 </script>

@@ -70,19 +70,19 @@ export default {
         filterChange() {
             // Check if apply button is clicked
             console.log('apply clicked');
-            this.$store.dispatch("seekerFilterChange", this.checkedProvince); 
+            this.$store.dispatch("moduleSeekers/seekerFilterChange", this.checkedProvince); 
             this.isAllFilters = false;
         },
     },
     computed: {
-        ...mapGetters([
+        ...mapGetters("moduleSeekers",[
             'seekers',
             'seekersCheckedCount',
             'seekerFilterMatchCount'
         ])
     },
     created() {
-        this.$store.dispatch('getSeekers');
+        this.$store.dispatch('moduleSeekers/getSeekers');
 	}
 };
 </script>
