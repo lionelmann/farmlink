@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
     props: ['buttons'],
     data() {
@@ -39,6 +40,10 @@ export default {
 		};
     },
     methods: {
+        clear() {
+			// Set active provinces
+            this.checked = [];
+        },
         seekerCheckboxChange() {
             this.$store.dispatch("moduleSeekers/seekerCheckboxChange", {'type': 'acreage', 'checked': this.checked});
         }

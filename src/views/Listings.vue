@@ -137,7 +137,26 @@ export default {
 
             // How you would like to style the map. 
             // This is where you would paste any style found on Snazzy Maps.
-            styles: [{"featureType": 'poi.park', "elementType": 'geometry',"stylers": [{"color": '#137E23'},{ "visibility": "on" }]},{"featureType":"poi.business","stylers": [{ "visibility": "off" }]},{"featureType":"landscape","stylers":[{"hue":"#FFBB00"},{"saturation":43.400000000000006},{"lightness":37.599999999999994},{"gamma":1}]},{"featureType":"road.highway","stylers":[{"hue":"#FFC200"},{"saturation":-61.8},{"lightness":45.599999999999994},{"gamma":1}]},{"featureType":"road.arterial","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":51.19999999999999},{"gamma":1}]},{"featureType":"road.local","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":52},{"gamma":1}]},{"featureType":"water","stylers":[{"hue":"#0078FF"},{"saturation":-13.200000000000003},{"lightness":2.4000000000000057},{"gamma":1}]},{"featureType":"poi","stylers":[{"hue":"#00FF6A"},{"saturation":-1.0989010989011234},{"lightness":11.200000000000017},{"gamma":1}]}]
+            styles: [
+                {
+                    "featureType": "poi.business",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "labels.text",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                }
+            ]
         }
 
         app.map     = new google.maps.Map(element, options);
@@ -154,19 +173,6 @@ export default {
 		onPageChange: () => {
             window.scrollTo(0, 0);
         },
-        // toggleInfoWindow: function(marker, idx) {
-        //     this.infoWindowPos = marker.position;
-        //     this.infoContent = marker.infoText;
-        //     //check if its the same marker that was selected if yes toggle
-        //     if (this.currentMidx == idx) {
-        //       this.infoWinOpen = !this.infoWinOpen;
-        //     }
-        //     //if different marker set infowindow to open and reset current marker index
-        //     else {
-        //       this.infoWinOpen = true;
-        //       this.currentMidx = idx;
-        //     }
-        // },
         filterChange() {
             // Check if apply button is clicked
             console.log('apply clicked');
@@ -383,11 +389,7 @@ export default {
             'filterMatchCount',
             'locations',
             'activeMarkers'
-        ]),
-        clearMap() {
-            
-        },
-
+        ])
     },
     watch: {
         /*

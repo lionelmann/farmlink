@@ -50,7 +50,14 @@ const mutations = {
     },
     setFilteredList: (state, list) => {
         state.filteredList = list;
-    }
+    },
+    'EMPTY_CHECKBOXES'(state, info) {
+        state.assessmentChecked = info
+        state.viabilityChecked = info
+        state.successionChecked = info
+        state.agreementChecked = info
+        state.farmstageChecked = info
+    },
 }
 
 const actions = {
@@ -139,8 +146,14 @@ const actions = {
             commit("setFilteredList", empty)
         }  else {
             console.log('Third option');
-            commit("setFilteredList", state.resourcesings)
+            commit("setFilteredList", state.resource)
         }
+    },
+    clearCheckboxes({commit, dispatch, state}, info) {
+        commit('EMPTY_CHECKBOXES', info);
+    },
+    resetFilter({commit, dispatch, state}) {
+        commit("setFilteredList", state.resource)
     },
 }
 

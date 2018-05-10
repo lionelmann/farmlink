@@ -38,6 +38,11 @@ export default {
         .catch(e => {
             this.errors.push(e)
         }) 
+    },
+    methods: {
+        clear() {
+			this.$store.commit('moduleResources/setSuccession', []);
+        }
     }
 }
 </script>

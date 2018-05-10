@@ -63,6 +63,14 @@ const mutations = {
     'SET_SEEKER_PRACTICE_LIST'(state, list) {
         state.seekerActivePractice = list
     },
+    'EMPTY_CHECKBOXES'(state, info) {
+        console.log('empty');
+        state.seekerActiveOpportunity = info
+        state.seekerActiveProvince = info
+        state.seekerActiveAcreage = info
+        state.seekerActiveFacilityEquipt = info
+        state.seekerActivePractice = info
+    },
 }
 
 const actions = {
@@ -238,6 +246,13 @@ const actions = {
         }  else {
             commit('SET_SEEKER_FILTERED_LIST', state.seekers)
         }
+    },
+    clearCheckboxes({commit, dispatch, state}, info) {
+        console.log('clear');
+        commit('EMPTY_CHECKBOXES', info);
+    },
+    resetFilter({commit, dispatch, state}, info) {
+        commit('SET_SEEKER_FILTERED_LIST', state.seekers)
     },
 }
 

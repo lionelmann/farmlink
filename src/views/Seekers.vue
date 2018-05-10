@@ -3,16 +3,16 @@
        <div class="filter-wrapper">
             <div class="filter">
                 <div class="filter-item">
-                <button v-on:click="isAllFilters = !isAllFilters">All Filters<span class="marker" v-html="seekersCheckedCount"></span></button>
+                <button v-on:click="isAllFilters = !isAllFilters" v-bind:class="{ 'open-filter-button': isAllFilters }">All Filters<span class="marker" v-html="seekersCheckedCount"></span></button>
                     
                     <div v-bind:class="{ 'open-filter': isAllFilters }" class="filter-form-wide">
-                        <filter-opportunity></filter-opportunity>
-                        <filter-province buttons="false"></filter-province>
-                        <filter-acreage></filter-acreage>
-                        <filter-facility-equipt></filter-facility-equipt>
-                        <filter-practices></filter-practices>
+                        <filter-opportunity ref="filter1"></filter-opportunity>
+                        <filter-province buttons="false" ref="filter2"></filter-province>
+                        <filter-acreage ref="filter3"></filter-acreage>
+                        <filter-facility-equipt ref="filter4"></filter-facility-equipt>
+                        <filter-practices ref="filter5"></filter-practices>
                         <div class="filter-apply-container">
-                            <span style="float: left"><button @click="filterChange">Clear</button></span>
+                            <span style="float: left"><button @click="filterClear">Clear</button></span>
                             <span style="float: right"><button @click="filterChange">Apply</button></span> 
                         </div>
                     </div>
@@ -73,6 +73,27 @@ export default {
             this.$store.dispatch("moduleSeekers/seekerFilterChange", this.checkedProvince); 
             this.isAllFilters = false;
         },
+        filterClear() {
+            console.log('clear clicked');
+            // Uncheck all checkbox inputs
+            var inputs = document.getElementsByTagName('input');
+
+            for(var i = 0; i < inputs.length; i++) {
+                if(inputs[i].type.toLowerCase() == 'checkbox') {
+                    inputs[i].checked = false;
+                }
+            }
+            // Clear out the local state of each child filter component
+            this.$refs.filter1.clear();
+            this.$refs.filter2.clear();
+            this.$refs.filter3.clear();
+            this.$refs.filter4.clear();
+            this.$refs.filter5.clear();
+            // Clear out all checked values in store
+            this.$store.dispatch("moduleSeekers/clearCheckboxes", []);
+            this.$store.dispatch("moduleSeekers/resetFilter");
+            this.isAllFilters = false;
+        },
     },
     computed: {
         ...mapGetters("moduleSeekers",[
@@ -89,11 +110,22 @@ export default {
 
 <style lang="scss" scoped>
 
+    @import '../assets/_variables.scss';
+
     .filter-form-wide {
         display: none;
     }
 
     .filter-form-wide.open-filter {
         display: grid;
+    }
+
+    .open-filter-button {
+        background: rgba(0,0,0,0.4);
+        background: $green;
+        color: white;
+        &:hover {
+            color: black;
+        }
     }
 </style>

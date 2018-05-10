@@ -73,6 +73,10 @@ export default {
 		};
     },
     methods: {
+        clear() {
+			// Set active provinces
+            this.checked = [];
+        },
         seekerCheckboxChange() {
             this.$store.dispatch("moduleSeekers/seekerCheckboxChange", {'type': 'province', 'checked': this.checked});
         }
