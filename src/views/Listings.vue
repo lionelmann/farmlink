@@ -127,7 +127,7 @@ export default {
         // const mapCentre = this.markerCoordinates[0]
         const options   = {
             // How zoomed in you want the map to start at (always required)
-            zoom: 4,
+            //zoom: 4,
 
             scrollwheel:  false,
             // draggable: isDraggable,
@@ -175,13 +175,13 @@ export default {
         },
         filterChange() {
             // Check if apply button is clicked
-            console.log('apply clicked');
+            //console.log('apply clicked');
             this.$store.dispatch("moduleListings/filterChange", this.checkedProvince); 
             this.isMap = true;
             this.isAllFilters = false;
         },
         filterClear() {
-            console.log('clear clicked');
+            //console.log('clear clicked');
             // Uncheck all checkbox inputs
             var inputs = document.getElementsByTagName('input');
 
@@ -202,7 +202,7 @@ export default {
             this.isAllFilters = false;
         },
         buildMarkers(){
-            console.log('Build Markers');
+            //console.log('Build Markers');
             let app = this;
 
             // Let's combine this method with rebuildMarkers
@@ -253,14 +253,15 @@ export default {
                         Push the new marker on to the array.
                     */
                     app.markers.push( marker );
+                    
                 } else {
-                    console.log('BUILD | Missing LAT/LNG: ', app.locations[i].title.rendered, app.locations[i].id, app.locations[i]);
+                    //console.log('BUILD | Missing LAT/LNG: ', app.locations[i].title.rendered, app.locations[i].id, app.locations[i]);
                 }
                 
             }
 
             app.map.panBy(-80, -100);
-
+            
         },
         infoWindowString(slug,id,title,acre) {
             let url="/farm-opportunity/"+slug;
@@ -273,7 +274,7 @@ export default {
             return '<div style="width: 250px;">' + header+ ac + button+'</div>';
         },
         clearMarkers(){
-            console.log('clearMarkers start', this.markers, this.infoWindows);
+            //console.log('clearMarkers start', this.markers, this.infoWindows);
             let app = this;
             /*
                 Iterate over all of the markers and set the map
@@ -286,7 +287,7 @@ export default {
 
             // app.markers = [];
             // app.infoWindows = [];
-            console.log('clearMarkers end', app.markers, app.infoWindows);
+            //console.log('clearMarkers end', app.markers, app.infoWindows);
         },
         closeWindows(open){
             let app = this;
@@ -300,7 +301,7 @@ export default {
             let app = this;
 
             if (app.activeMarkers.length > 0) {
-                console.log('rebuild markers', app.activeMarkers);
+                //console.log('rebuild markers', app.activeMarkers);
 
                 app.clearMarkers();
             
@@ -363,7 +364,7 @@ export default {
 
                         
                     } else {
-                        console.log('REBUILD | Missing LAT/LNG: ', app.activeMarkers[i].title.rendered, app.activeMarkers[i].id, app.activeMarkers[i]);
+                        //console.log('REBUILD | Missing LAT/LNG: ', app.activeMarkers[i].title.rendered, app.activeMarkers[i].id, app.activeMarkers[i]);
                     }
                 } 
 
@@ -371,9 +372,9 @@ export default {
                     app.map.panBy(-80, -100);
                 }
 
-                console.log('markers',app.markers);
+                //console.log('markers',app.markers);
 
-                console.log('infoWindows',app.infoWindows);
+                //console.log('infoWindows',app.infoWindows);
 
             } else {
                 app.clearMarkers();
@@ -401,7 +402,7 @@ export default {
             this.buildMarkers();
         },
         activeMarkers(){
-            console.log('watch on activeMarkers!')
+            //console.log('watch on activeMarkers!')
             this.rebuildMarkers();
         },
         clearMap() {
@@ -419,8 +420,7 @@ export default {
     #google-map {
         transition: all 0.5s ease;
         width: 100%;
-        min-height: 90vh;
-        // margin-bottom: 50px;
+        min-height: 82.6vh;
         display: inline-block;
     }
 
