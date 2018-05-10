@@ -50,6 +50,4 @@ img {
     grid-column: 2 / -2;
 }
 
-
-
 </style>

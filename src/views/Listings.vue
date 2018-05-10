@@ -263,7 +263,7 @@ export default {
             if (acre != undefined) {
                 ac = '<p style="margin: 0;font-size: 12px;font-style:italic;">'+acre+'</p>';
             }
-            let button = '<a href="'+url+'" style="border: 2px solid orange;padding:8px 16px;background: white;color:orange;display:inline-block;border-radius: 8px;margin-top:16px;">See Farm</a>';
+            let button = '<a href="'+url+'" class="info-window-button" style="border: 2px solid orange;padding:8px 16px;background: white;color:orange;display:inline-block;border-radius: 8px;margin-top:16px;">See Farm</a>';
             return '<div style="width: 250px;">' + header+ ac + button+'</div>';
         },
         clearMarkers(){
@@ -469,6 +469,13 @@ export default {
         color: white;
         &:hover {
             color: black;
+        }
+    }
+    
+    a.info-window-button {
+        &:hover {
+            background: orange;
+            color: white;
         }
     }
 </style>
