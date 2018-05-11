@@ -103,7 +103,10 @@ export default {
         ])
     },
     created() {
-        this.$store.dispatch('moduleSeekers/getSeekers');
+        let app = this;
+        if (app.seekers == null) {
+            app.$store.dispatch('moduleSeekers/getSeekers');
+        }
 	}
 };
 </script>

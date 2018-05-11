@@ -3,23 +3,11 @@
 		<router-link to="/" class="logo"></router-link>	
 		<nav class="menu">
 			<ul>
-                <li><a href="/about">About</a></li>
-                <li><a href="/resources">Resources</a></li>
-                <li><a href="/farm-seekers">Farm Seekers</a></li>
+                <li><router-link to="/about">About</router-link></li>
+                <li><router-link to="/resources">Resources</router-link></li>
+                <li><router-link to="/farm-seekers">Farm Seekers</router-link></li>
                 <li><a href="/farm-opportunities">Farm Opportunities</a></li>
-                <li><a href="/farm-regions">Regions</a></li>
-                <!--
-				<li v-for="parent in menuLinks" :key="parent.title">
-					<router-link :to="`/${parent.object_slug}`">{{ parent.title }}</router-link>
-                    <ul>
-                        <li v-for="child in parent.children" :key="child.title">
-                            <router-link :to="`/${child.object_slug}`">{{ child.title }}</router-link>
-                        </li>
-                    </ul>
-				</li>
-                <li><a href="#">Get Started</a></li>
-                <li><a href="#">Sign In</a></li>
-                -->
+                <li><router-link to="/farm-regions">Regions</router-link></li>
 			</ul>
 		</nav>
         <nav class="cta">

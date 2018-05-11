@@ -100,8 +100,14 @@ export default {
             'resourceMatchCount'
         ])
     },
+    mounted() {
+        let app = this;
+        if (app.resource == null) {
+            app.$store.dispatch('moduleResources/getResources');
+        }
+    },
     created() {
-        this.$store.dispatch('moduleResources/getResources');
+        
 	}
 };
 </script>

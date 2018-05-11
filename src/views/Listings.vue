@@ -117,7 +117,10 @@ export default {
         }
     },
     created() {
-        this.$store.dispatch('moduleListings/getListings');
+        let app = this;
+        if (app.listings.length == 0) {
+           app.$store.dispatch('moduleListings/getListings');
+        }
     },
     mounted() {
         // Store 'this' in a variable, so you can referecne 'this' properly in
