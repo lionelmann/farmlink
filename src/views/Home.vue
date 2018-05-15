@@ -1,9 +1,9 @@
 <template>
 <div class="container">
     <div class="banner-container">
-        <div class="banner-text" style="width: 78%;">
+        <div class="banner-text">
              <h1 class="headline">Currently connecting 
-                 <span style="min-width: 120px; display:inline-block;"> 
+                 <span> 
                      <ICountUp
                         :startVal="startVal"
                         :endVal="endVal"
@@ -12,18 +12,18 @@
                         :options="options"
                         @ready="onReady"/> 
                 </span>
-                farmers & farm seekers</h1>
+                <br>farmers & farm seekers</h1>
             <h3 class="subhead"><a href="/farm-opportunities">Find</a> or <a href="/farm-opportunities">share</a> farm opportunities and <a href="/resources">resources</a></h3>
-            <a href="#" class="btn btn__cta">Create an Account</a>
+            <a href="https://farmlink.net/member-register/" class="btn btn__cta">Create an Account</a>
         </div>
     </div>
 
     <!-- LISTINGS -->
-    <div v-if="listings != null" >
+    <div v-if="listings != null">
         <div class="grid-wrapper">
             <h4 class="pin">Recent farms opportunities <a href="/farm-opportunities"><small> See all farms > </small></a></h4>
             <div class="cards">
-                <div class="card card__full" v-for="listing in filteredListings">
+                <div class="card card__full" v-for="listing in filteredListings" :key="listing.id">
                     <farm-listing :farmCard="listing"></farm-listing>
                 </div>
             </div>
@@ -35,7 +35,7 @@
         <div class="grid-wrapper">
             <h4 class="pin">Recent farm seekers <a href="/farm-seekers"><small> See all farm seekers ></small></a></h4>
             <div class="cards">
-                <div class="card card__seeker" v-for="seeker in filteredSeekers">
+                <div class="card card__seeker" v-for="seeker in filteredSeekers" :key="seeker.id">
                     <farm-seeker :seekerCard="seeker"></farm-seeker>
                 </div>
 
@@ -43,7 +43,7 @@
         </div>
     </div>
 
-    <!-- REGISTER CTA -->
+    <!-- REGISTER CTA
    <div class="grid-wrapper" style="margin: 30px 0 30px 0;">
        <div class="ad-container" style="border-top: 2px dashed rgba(245,142,27, 1); border-radius: 50%; text-align: center; padding-top: 40px;">
             <h4>Register for $5/month and connect <br>with farmers and seekers.</h4>
@@ -51,44 +51,14 @@
             <img style="object-fit: cover;" src="/src/assets/images/bg-register.png">      
         </div>
     </div>
+    -->
 
-    <!-- REGION -->
+    <!-- REGION
     <div class="grid-wrapper">
         <h4 class="pin">Featured Regions <a href="/farm-regions"><small> See all regions > </small></a></h4>
         <farm-region></farm-region>
-    </div>
+    </div>-->
 
-    <!--FOOTER -->
-    <div class="container">
-        <div class="grid-wrapper">
-            <div>
-                <h6>Get in touch</h6>
-                <a href="mailto:info@farmlink.net">info@farmlink.net</a>
-            </div>
-            <div>
-                <h6>Get started</h6>
-                <ul>
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 1</a></li>
-                </ul>
-            </div>
-            <div>
-            <h6>About</h6>
-                <ul>
-                    <li><a href="#">Media</a></li>
-                    <li><a href="#">Terms</a></li>
-                    <li><a href="#">Conditions</a></li>
-                    <li><a href="#">Price</a></li>
-                </ul>
-            </div>
-        </div>
-        <img src="/src/assets/images/bg-footer.png">
-        <div style="height: 80px;">
-        </div>
-    </div>
 </div>
 </template>
 
@@ -141,12 +111,11 @@ export default {
     created() {
         this.$store.dispatch('moduleSeekers/getSeekers');
         this.$store.dispatch('moduleListings/getListings');
-        if (this.userCount.length == 0) {
-            this.endVal = 800;
-        } else {
-            this.endVal = this.userCount.length;
-        }
-        
+        let countSum = (
+            this.seekers.length +
+            this.listings.length
+        )
+        this.endVal = countSum
     }
 };
 </script>
