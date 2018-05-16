@@ -36,8 +36,8 @@
     </div>
     <div v-else class="loading-panel topography-background">
         <div>
-            <img src="https://parkpeople.ca/listings/custom/uploads/2018/01/birdflying_pp_small.gif">
-            <p>Loading...</p>
+            <!--<img src="https://parkpeople.ca/listings/custom/uploads/2018/01/birdflying_pp_small.gif">-->
+            <!--<p>Loading...</p>-->
         </div>
     </div>
 </template>

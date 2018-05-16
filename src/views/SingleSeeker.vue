@@ -59,7 +59,7 @@
                 <h3>About</h3>
                 <div class="inner-container">
                     <h4>Overview</h4>
-                    <p v-html="seeker.description"></p>
+                        <p v-html="seeker.description"></p>
                     <div v-if="seeker.meta.hasOwnProperty('_seeker_rel_experience')">
                         <h4>Experience</h4>
                         <p v-html="seeker.meta._seeker_rel_experience[0]"></p>
